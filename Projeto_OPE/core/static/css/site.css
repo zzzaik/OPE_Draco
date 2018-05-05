@@ -1,0 +1,122 @@
+/*base.html*/
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    font-family: Arial;
+}
+
+header {
+    height:50px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.containerMenu {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: min-content;
+    background-color: blue;
+}
+
+.itemMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 50px;
+    background-color: blue;
+}
+.itemMenu:hover{
+    background-color: #9f9fff;
+    transition: 0.5s;
+}
+
+
+.linkMenu{
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    width:100%;
+    text-align: center;
+}
+.itemMenu:hover .linkMenu{
+    color: blue;
+}
+
+/*index.html*/
+.containerCarousel {
+    display: flex;
+    justify-content: center;
+    width:80%;
+    height:fit-content;
+    margin-left: 10%;
+    border: 1px solid #a8a8a8;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    width:90%;
+    height:500px;
+}
+/* possibiliade de utilizar bootstrap plugin
+.selector{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+
+}
+
+.paginationDot{
+    background-color: #3a3a3a;
+    border-radius: 50%;
+    width:24px;
+    height:24px;
+}
+.paginationDot:active{
+    background-color: #262aff;
+}
+*/
+.top10 {
+    display: flex;
+    justify-content: center;
+    width:80%;
+    height:fit-content;
+    margin-top: 20px;
+    margin-left: 10%;
+    border: 1px solid #a8a8a8;
+}
+
+.gridTop10 {
+    display: grid;
+    grid-template-columns: 140px 140px 140px 140px 140px;
+    grid-template-rows: 140px 140px 140px 140px 140px;
+    grid-template-areas:
+        'highlight highlight highlight highlight'
+        'highlight highlight highlight highlight'
+        'highlight highlight highlight highlight'
+        'highlight highlight highlight highlight';
+    justify-content: center;
+    align-content: center;
+}
+
+.itemTop10 {
+    display: grid;
+    width: 120px;
+    height: 120px;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #a8a8a8;
+}
+.highlight{
+    grid-area: highlight;
+    width: 540px;
+    height: 540px;
+}

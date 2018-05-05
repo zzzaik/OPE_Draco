@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Home{% endblock %}
 {% block main %}
-    
+    <div class="containerCarousel" id="novas">
+        <div class="carousel">
+            <img src="{% static 'img/luoping.jpg' %}"/>
+        </div>
+    </div>
+    <div class="top10" id="top10">
+        <div class="gridTop10">
+            <!-- a class .highlight vai precisar de um script toggle onClick, que mude ela de div-->
+            <div class="itemTop10">1<img src="#"/></div>
+            <div class="itemTop10 highlight">2<img src="#"/></div>
+            <div class="itemTop10">3<img src="#"/></div>
+            <div class="itemTop10">4<img src="#"/></div>
+            <div class="itemTop10">5<img src="#"/></div>
+            <div class="itemTop10">6<img src="#"/></div>
+            <div class="itemTop10">7<img src="#"/></div>
+            <div class="itemTop10">8<img src="#"/></div>
+            <div class="itemTop10">9<img src="#"/></div>
+            <div class="itemTop10">10<img src="#"/></div>
+        </div>
+    </div>
 {% endblock %}

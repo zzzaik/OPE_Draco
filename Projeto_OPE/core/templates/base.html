@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width = device-width, initial-scale = 1.0"/>
+        <link rel="icon" href="{% static '/' %}img/icon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static '/' %}css/site.css" />
+        <script src="{% static '/' %}js/script.js"></script>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <nav class="containerMenu">
+                <div class="itemMenu"><a class="linkMenu" href="#novas">Novas</a></div>
+                <div class="itemMenu"><a class="linkMenu" href="#top10">Top 10</a></div>
+                <div class="itemMenu"><a class="linkMenu" href="#">Portifólio</a></div>
+                <div class="itemMenu"><a class="linkMenu" href="#">Sobre</a></div>
+            </nav>
+        </header>
+        <main class="main">{% block main %}{% endblock %}</main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
