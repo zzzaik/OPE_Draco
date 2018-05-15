@@ -16,12 +16,13 @@ main {
 }
 
 .containerMenu {
-    position: fixed;
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: min-content;
-    background-color: blue;
+    opacity: 0.7;
+    background-color: #555555;
 }
 
 .itemMenu {
@@ -30,13 +31,13 @@ main {
     align-items: center;
     width: 10%;
     height: 50px;
-    background-color: blue;
+    border: none;
+    background-color: #555555;
 }
 .itemMenu:hover{
-    background-color: #9f9fff;
+    background-color: #767676;
     transition: 0.5s;
 }
-
 
 .linkMenu{
     font-weight: bold;
@@ -46,5 +47,5 @@ main {
     text-align: center;
 }
 .itemMenu:hover .linkMenu{
-    color: blue;
+    color: black;
 }

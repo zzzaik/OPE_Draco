@@ -6,17 +6,21 @@
         <meta name="viewport" content="width = device-width, initial-scale = 1.0"/>
         <link rel="icon" href="{% static '/' %}img/icon.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="{% static '/' %}css/base.css" />
-        <link rel="stylesheet" href='{% block unic_style %}{% endblock %}'/>
+        <link rel="stylesheet" href="{% block unic_style %}{% endblock %}"/>
         <script src="{% static '/' %}js/script.js"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
         <header>
-            <nav class="containerMenu">
-                <div class="itemMenu"><a class="linkMenu" href="#novas">Novas</a></div>
-                <div class="itemMenu"><a class="linkMenu" href="#top10">Top 10</a></div>
-                <div class="itemMenu"><a class="linkMenu" href="#">Portifólio</a></div>
-                <div class="itemMenu"><a class="linkMenu" href="#">Sobre</a></div>
+            <div class="Loja">
+                <h1>Justino Art Tatoo</h1>
+            </div>
+            <nav class="containerMenu" id="topMenu">
+                <button class="itemMenu"><a class="linkMenu" href="{% url 'home' %}">Home</a></button>
+                <button class="itemMenu"><a class="linkMenu" href="{% url 'agenda' %}">Agenda</a></button>
+                <button class="itemMenu"><a class="linkMenu" href="{% url 'promocao' %}">Promoções</a></button>
+                <button class="itemMenu"><a class="linkMenu" href="{% url 'portfolio' %}">Portfólio</a></button>
+                <button class="itemMenu"><a class="linkMenu" href="{% url 'login' %}">Usuário</a></button>
             </nav>
         </header>
         <main class="main">{% block main %}{% endblock %}</main>

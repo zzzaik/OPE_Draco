@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls.static import static
-from core.views import index
+from core.views import index, agenda, promocao, portfolio, login
 
 urlpatterns = [
     url(r'admin/', admin.site.urls, name = 'admin'),
-    url(r'$', index, name = 'home')
+    url(r'$', index, name = 'home'),
+    url(r'agenda/', agenda, name = 'agenda'),
+    url(r'promocao/', promocao, name = 'promocao'),
+    url(r'portfolio/', portfolio, name = 'portfolio'),
+    url(r'login/', login, name = 'login'),
 ]
