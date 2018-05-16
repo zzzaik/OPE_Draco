@@ -16,14 +16,13 @@ function toggleImgSrc(x){
 };
 /*
 function fix_menu(){
-    var top
-    top = scrolltop()
-    document.write(top)
-    if (top < 0){
-        document.getElementById("topMenu").style.position = "fixed";
-        document.getElementById("topMenu").style.top = "0";
+    var top;
+    top = scrolltop()    
+    if (top > 100) {   
+      document.getElementById("topMenu").style.position = "fixed";    
+      document.getElementById("topMenu").style.top = "0";
     } else {
-        document.getElementById("topMenu").style.position = "relative";
-    };
+      document.getElementById("topMenu").style.position = "relative";
+    }
 };
 */

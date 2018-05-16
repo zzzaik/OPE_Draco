@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0px;
     font-family: Arial;
+    background-color: black;
 }
 
 header {
@@ -15,37 +16,49 @@ main {
     flex-direction: column;
 }
 
+.siteTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    color: white;
+}
+
 .containerMenu {
     position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: min-content;
-    opacity: 0.7;
-    background-color: #555555;
+    opacity: 1;
+    background-color: white;
 }
 
 .itemMenu {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10%;
+    width: 8.5em;
     height: 50px;
     border: none;
-    background-color: #555555;
+    background-color: white;
 }
 .itemMenu:hover{
     background-color: #767676;
     transition: 0.5s;
 }
 
+.itemMenu:hover .linkMenu{
+    background-color: #767676;
+    transition: 0.5s
+}
+
 .linkMenu{
     font-weight: bold;
-    color: #ffffff;
+    color: black;
+    background-color: white;
     text-decoration: none;
     width:100%;
     text-align: center;
-}
-.itemMenu:hover .linkMenu{
-    color: black;
 }

@@ -17,3 +17,5 @@ def portfolio(request):
 def login(request):
     return render(request, 'login.html')
 
+def catalogo(request):
+    return render(request, 'catalogo.html')

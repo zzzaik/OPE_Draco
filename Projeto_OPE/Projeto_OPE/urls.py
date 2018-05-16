@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.conf.urls.static import static
-from core.views import index, agenda, promocao, portfolio, login
+from core.views import index, agenda, promocao, portfolio, login, catalogo
 
 urlpatterns = [
     url(r'admin/', admin.site.urls, name = 'admin'),
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'promocao/', promocao, name = 'promocao'),
     url(r'portfolio/', portfolio, name = 'portfolio'),
     url(r'login/', login, name = 'login'),
+    url(r'catalogo/', catalogo, name = 'catalogo'),
 ]
