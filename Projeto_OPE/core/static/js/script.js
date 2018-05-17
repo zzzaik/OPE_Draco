@@ -34,3 +34,14 @@ function initMap() {
       map: map
     });
   }
+/*
+function urlinsta(){
+    var frm = document.getElementById("instagram");
+    frm.action = "https://api.instagram.com/oauth/access_token";
+    return true;
+}*/
+function testeInsta(){
+    var url
+    url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=3251373559.1556bce.467e8e9f0219425abf9915fa978bb275"
+    
+}

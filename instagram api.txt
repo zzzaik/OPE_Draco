@@ -1,0 +1,6 @@
+Client ID 1556bcee0d404812b34ad42d16c281f6
+Client Secret c2cd87fa8ce24799a77a8243044ddc29
+Authorization code f9db4b17b10d4dd09b051b24d3bebfcd
+Redirect URI http://127.0.0.1:80/
+
+access token privisório: 3251373559.1556bce.467e8e9f0219425abf9915fa978bb275

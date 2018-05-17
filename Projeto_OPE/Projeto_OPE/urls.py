@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
+from django.contrib.auth.models import User
 from django.conf.urls.static import static
 from core.views import index, agenda, promocao, portfolio, login, catalogo
 

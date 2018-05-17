@@ -1,0 +1,3 @@
+superuser:
+username: admin
+password: P@ssw0rd

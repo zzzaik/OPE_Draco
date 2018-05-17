@@ -4,6 +4,7 @@
     width:85%;
     height:fit-content;
     margin-left: 7%;
+    padding-top: 7em;
     border: 1px solid #a8a8a8;
     border-radius: 1em;
 }
@@ -67,4 +68,19 @@
     grid-area: highlight;
     width: 540px;
     height: 540px;
+}
+
+.imagensInsta{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.itemsInsta{
+    width: 6em;
+    height: 6em;
+}
+
+/*Label metodos instragram access token*/
+.label{
+    color: white;
 }

@@ -5,15 +5,24 @@
 {% block main %}
     <div class="containerCarousel" id="novas">
         <div class="carousel">
+            <p class="label">Metodo Implicito</p>
+            <a href="https://api.instagram.com/oauth/authorize/?client_id=1556bcee0d404812b34ad42d16c281f6&redirect_uri=http://127.0.0.1:80/&response_type=token">insta</a>
+            <p class="label">Metodo Explicito</p>
             <a href="https://api.instagram.com/oauth/authorize/?client_id=1556bcee0d404812b34ad42d16c281f6&redirect_uri=http://127.0.0.1:80/&response_type=code">insta</a>
             <form method="POST">
+                {% csrf_token %}
                 <input name="client_id" type="text"></br>
                 <input name="client_secret" type="text"></br>
                 <input name="grant_type" type="text"></br>
                 <input name="redirect_uri" type="text"></br>
                 <input name="code" type="text"></br>
-                <button type="submit"></button></br>
+                <button id="instagram" type="submit" action="https://api.instagram.com/oauth/access_token">so vai</button></br>
             </form>
+            <div class="ImagensInsta">
+            {% for foto in fotos %}
+            <img class="itemsInsta" src="{{ foto }}"/>
+            {% endfor %}
+            </div>
         </div>
     </div>
     <div class="top10" id="top10">
