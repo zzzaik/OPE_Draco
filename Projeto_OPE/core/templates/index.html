@@ -5,7 +5,15 @@
 {% block main %}
     <div class="containerCarousel" id="novas">
         <div class="carousel">
-            
+            <a href="https://api.instagram.com/oauth/authorize/?client_id=1556bcee0d404812b34ad42d16c281f6&redirect_uri=http://127.0.0.1:80/&response_type=code">insta</a>
+            <form method="POST">
+                <input name="client_id" type="text"></br>
+                <input name="client_secret" type="text"></br>
+                <input name="grant_type" type="text"></br>
+                <input name="redirect_uri" type="text"></br>
+                <input name="code" type="text"></br>
+                <button type="submit"></button></br>
+            </form>
         </div>
     </div>
     <div class="top10" id="top10">

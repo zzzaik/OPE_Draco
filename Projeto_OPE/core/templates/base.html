@@ -26,7 +26,31 @@
         </header>
         <main class="main">{% block main %}{% endblock %}</main>
         <footer>
-
+            <div class="footerTop">
+                <div id="map"></div>
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzucE-JUGcpuo0DecYx6Gbr1tVIE3GP1Q&callback=initMap">
+                </script>
+                <div class="dados">
+                    <p>Endereço: XXX</p>
+                    <p>Telefone: XXX</p>
+                    <p>E-mail: XXX</p>
+                    <div>
+                        <button>
+                            <a>Facebook</a>
+                        </button>
+                        <button>
+                            <a>Instagram</a>
+                        </button>
+                        <button>
+                            <a>Pinterest</a>
+                        </button>    
+                    </div>
+                </div>
+            </div>
+            <div class="direitos">
+                <p>copyright</p>
+            </div>
         </footer>
     </body>
 </html>
