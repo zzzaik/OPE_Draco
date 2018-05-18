@@ -1,56 +1,163 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width = device-width, initial-scale = 1.0"/>
-        <link rel="icon" href="{% static '/' %}img/icon.ico" type="image/x-icon"/>
-        <link rel="stylesheet" href="{% static '/' %}css/base.css" />
-        <link rel="stylesheet" href="{% block unic_style %}{% endblock %}"/>
-        <script src="{% static '/' %}js/script.js"></script>
-        <title>{% block title %}{% endblock %}</title>
-    </head>
-    <body>
-        <header>
-            <div class="siteTitle">
-                <h1 class="title">Justino Art Tattoo</h1>
-            </div>
-            <nav class="containerMenu" id="topMenu">
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'home' %}">Home</a></button>
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'agenda' %}">Agenda</a></button>
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'catalogo' %}">Catálogo</a></button>
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'promocao' %}">Promoções</a></button>
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'portfolio' %}">Portfólio</a></button>
-                <button class="itemMenu"><a class="linkMenu" href="{% url 'login' %}">Usuário</a></button>
-            </nav>
-        </header>
-        <main class="main">{% block main %}{% endblock %}</main>
-        <footer>
-            <div class="footerTop">
-                <div id="map"></div>
-                <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzucE-JUGcpuo0DecYx6Gbr1tVIE3GP1Q&callback=initMap">
-                </script>
-                <div class="dados">
-                    <p>Endereço: XXX</p>
-                    <p>Telefone: XXX</p>
-                    <p>E-mail: XXX</p>
-                    <div>
-                        <button>
-                            <a>Facebook</a>
-                        </button>
-                        <button>
-                            <a>Instagram</a>
-                        </button>
-                        <button>
-                            <a>Pinterest</a>
-                        </button>    
+
+<head>
+    <!--Nosso código-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
+    <link rel="icon" href="{% static '/' %}img/icon.ico" type="image/x-icon" />
+    <!--<link rel="stylesheet" href="{% static '/' %}css/base.css" />
+    <link rel="stylesheet" href="{% block unic_style %}{% endblock %}" />-->
+    <script src="{% static '/' %}js/script.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+
+    <!--Template-->
+    <!-- Favicons
+            ================================================== -->
+    <link rel="shortcut icon" href="{% static '/' %}img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static '/' %}img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static '/' %}img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static '/' %}img/apple-touch-icon-114x114.png">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static '/' %}css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{% static '/' %}fonts/font-awesome/css/font-awesome.css">
+
+    <!-- Stylesheet
+            ================================================== -->
+    <link rel="stylesheet" type="text/css" href="{% static '/' %}css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static '/' %}css/prettyPhoto.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="{% static '/' %}js/modernizr.custom.js"></script>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <header id="header">
+        <div class="intro">
+            <div class="container">
+                <div class="row">
+                    <div class="intro-text">
+                        <h1 class="nameEstudio">
+                            <span class="name">Justino</span> Art Tattoo</h1>
                     </div>
                 </div>
             </div>
-            <div class="direitos">
-                <p>copyright</p>
+        </div>
+    </header>
+    <!-- Navigation -->
+    <div id="nav">
+        <nav class="navbar navbar-custom">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="{% url 'home' %}">Justino</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'agenda' %}">Agenda</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'catalogo' %}">Catálogo</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'portfolio' %}">Portfólio</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'promocao' %}">Promoções</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'login' %}">Usuário</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </footer>
-    </body>
+        </nav>
+    </div>
+
+    <main class="main">{% block main %}{% endblock %}</main>
+    <footer>
+        <!-- Contact Section -->
+        <div id="contact" class="text-center">
+            <div class="container">
+                <div class="section-title center">
+                    <h2>Contato</h2>
+                    <hr>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-4">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                        <p>AV. M 'Boi Mirim Jardim Ângela N° 4533 (17,75 km)
+                            <br> 04948-030 São Paulo</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-envelope-o fa-2x"></i>
+                        <p>info@company.com</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fa fa-phone fa-2x"></i>
+                        <p> + 55 11 95950-2046</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="social">
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/justinoarttattoo/" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/justinoarttattoo/" target="_blank">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzucE-JUGcpuo0DecYx6Gbr1tVIE3GP1Q&callback=initMap">
+            </script>
+        <div id="footer">
+            <div class="container text-center">
+                <div class="fnav">
+                    <p>Copyright &copy; 2016 John Doe. Designed by
+                        <a href="http://www.templatewire.com" rel="nofollow">TemplateWire</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{% static '/' %}js/jquery.1.11.1.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/bootstrap.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/SmoothScroll.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/easypiechart.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/jquery.isotope.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/jquery.counterup.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/waypoints.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/jqBootstrapValidation.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/contact_me.js"></script>
+    <script type="text/javascript" src="{% static '/' %}js/main.js"></script>
+</body>
+
 </html>

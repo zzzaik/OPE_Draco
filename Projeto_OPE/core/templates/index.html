@@ -1,47 +1,58 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block unic_style %}{% static '/' %}css/index.css{% endblock %}
-{% block title %}Justino Art Tattoo{% endblock %}
+{% extends 'base.html' %} {% load static %} 
+{% block title%}Justino Art Tattoo{% endblock %}
 {% block main %}
-    <div class="containerCarousel" id="novas">
-        <div class="carousel">
-            <p class="label">Metodo Implicito</p>
-            <a href="https://api.instagram.com/oauth/authorize/?client_id=1556bcee0d404812b34ad42d16c281f6&redirect_uri=http://127.0.0.1:80/&response_type=token">insta</a>
-            <p class="label">Metodo Explicito</p>
-            <a href="https://api.instagram.com/oauth/authorize/?client_id=1556bcee0d404812b34ad42d16c281f6&redirect_uri=http://127.0.0.1:80/&response_type=code">insta</a>
-            <form method="POST">
-                {% csrf_token %}
-                <input name="client_id" type="text"></br>
-                <input name="client_secret" type="text"></br>
-                <input name="grant_type" type="text"></br>
-                <input name="redirect_uri" type="text"></br>
-                <input name="code" type="text"></br>
-                <button id="instagram" type="submit" action="https://api.instagram.com/oauth/access_token">so vai</button></br>
-            </form>
-            <div class="ImagensInsta">
-            {% for x, foto in fotos.items %}
-                <img class="itemsInsta" src="{{ foto }}"/>
-            {% endfor %}
+<!-- Portfolio Section -->
+<div>
+    <div class="container">
+        <div class="section-title text-center center">
+            <h2>Trabalhos Recentes</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="portfolio-items">
+                {% for index, img in fotos.items %}
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="portfolio-item">
+                        <div class="hover-bg">
+                            <a href="{{ img }}" rel="prettyPhoto">
+                                <div class="hover-text">
+                                </div>
+                                <img src="{{ img }}" class="img-responsive"> </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-    <div class="top10" id="top10">
-        <div class="gridTop10">
-            <!-- a class .highlight vai precisar de um script toggle onClick, que mude ela de div-->
-            <div class="itemTop10 highlight" >
-                <img src="{{ fotos.0 }}" class="imgTop10 imgHighlight" onclick="toggleHighlight2(1)"/>
+</div>
+<div>
+        <div class="container">
+            <div class="section-title text-center center">
+                <h2>Melhores Trabalhos</h2>
+                <hr>
             </div>
-            <div class="itemTop10">
-                <img class="imgTop10" onclick="toggleHighlight2(1)" src="{{ fotos.1 }}"/>
-            </div>
-            <div class="itemTop10">
-                <img class="imgTop10" onclick="toggleHighlight2(2)" src="{{ fotos.2 }}"/>
-            </div>
-            <div class="itemTop10">
-                <img class="imgTop10" onclick="toggleHighlight2(3)" src="{{ fotos.3 }}"/>
-            </div>
-            <div class="itemTop10">
-                <img class="imgTop10" onclick="toggleHighlight2(4)" src="{{ fotos.4 }}"/>
+            <div class="row">
+                <div class="top5" id="top5">
+                    <div class="gridtop5">
+                        <!-- a class .highlight vai precisar de um script toggle onClick, que mude ela de div-->
+                        <div class="itemtop5 highlight">
+                            <img src="{{ fotos.0 }}" class="imgtop5 imgHighlight" onclick="toggleHighlight2(0)" />
+                        </div>
+                        <div class="itemtop5">
+                            <img class="imgtop5" onclick="toggleHighlight2(1)" src="{{ fotos.1 }}" />
+                        </div>
+                        <div class="itemtop5">
+                            <img class="imgtop5" onclick="toggleHighlight2(2)" src="{{ fotos.2 }}" />
+                        </div>
+                        <div class="itemtop5">
+                            <img class="imgtop5" onclick="toggleHighlight2(3)" src="{{ fotos.3 }}" />
+                        </div>
+                        <div class="itemtop5">
+                            <img class="imgtop5" onclick="toggleHighlight2(4)" src="{{ fotos.4 }}" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

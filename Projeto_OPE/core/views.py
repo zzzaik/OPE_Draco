@@ -1,17 +1,12 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend import getPhoto
+from core.backend import alocarFotos
 
 def index(request):
-    fotos = {}
-    resp = getPhoto()
-    cont = 0
-    for elements in resp['data']:
-        fotos[cont] = elements['images']['standard_resolution']['url'] 
-        cont += 1
+    
     context = {
-        'fotos': fotos,
+        'fotos': alocarFotos(),
     }
     return render(request, 'index.html', context)
 

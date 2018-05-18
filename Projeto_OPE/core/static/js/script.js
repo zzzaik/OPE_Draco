@@ -17,7 +17,7 @@ function toggleImgSrc(x){
 
 
 /*var top5HL = document.getElementsByClassName("imgHighlight");
-var top5Urls = document.getElementsByClassName("imgTop10");
+var top5Urls = document.getElementsByClassName("imgtop5");
 
 function toggleHighlight(x){
     aux = top5Urls[x].src;
@@ -26,8 +26,8 @@ function toggleHighlight(x){
 };*/
 
 function toggleHighlight2(z){
-    var top5 = document.getElementsByClassName("itemTop10");
-    var img5 = document.getElementsByClassName("imgTop10");
+    var top5 = document.getElementsByClassName("itemtop5");
+    var img5 = document.getElementsByClassName("imgtop5");
     for(i=0;i<=4;i++){
         if(top5[i].classList.contains("highlight")){
             top5[i].classList.remove("highlight");
@@ -48,7 +48,7 @@ function toggleHighlight2(z){
     }
 }*/
 function initMap() {
-    var uluru = {lat: -23.68620668, lng: -46.77054162};
+    var uluru = {lat: -23.68625006, lng: -46.77043178};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 18,
       center: uluru
