@@ -33,20 +33,20 @@
     background-color: #262aff;
 }
 */
-.top10 {
+.top5 {
     display: flex;
-    justify-content: center;
+	justify-content: center;
+	align-content: center;
     width:80%;
-    height:fit-content;
-    margin-top: 20px;
-    margin-left: 10%;
-    border: 1px solid #a8a8a8;
+	height:fit-content;
+	margin-left: 10%;
+	margin-bottom: 10%; 
 }
 
-.gridTop10 {
+.gridtop5 {
     display: grid;
-    grid-template-columns: 140px 140px 140px 140px 140px;
-    grid-template-rows: 140px 140px 140px 140px 140px;
+    grid-template-columns: 9em 9em 9em 9em 9em;
+    grid-template-rows: 9em 9em 9em 9em;
     grid-template-areas:
         'highlight highlight highlight highlight'
         'highlight highlight highlight highlight'
@@ -56,25 +56,86 @@
     align-content: center;
 }
 
-.itemTop10 {
-    display: grid;
-    width: 120px;
-    height: 120px;
+.itemtop5 {
+    width: 8.2em;
+    height: 8.2em;
     margin-left: 10px;
     margin-top: 10px;
 }
-.imgTop10 {
-    width: 120px;
-    height: 120px;
+.imgtop5 {
+    width: 8.2em;
+	height: 8.2em;
+	border-radius: 1em;
+}
+.imgHighlight {
+    width: 35em;
+	height: 35em;
+	border-radius: 1em;
 }
 .highlight{
     grid-area: highlight;
-    width: 540px;
-    height: 540px;
+    width: 35em;
+    height: 35em;
 }
-.imgHighlight{
-    width: 540px;
-    height: 540px;
+
+@media screen and (max-width: 652px) {
+
+	.top5 {
+		margin-left: 12%;
+	}
+
+	.gridtop5 {
+		grid-template-columns: 7em 7em 7em 7em;
+		grid-template-rows: 7em 7em 7em 7em 7em;
+	}
+	
+	.itemtop5 {
+		width: 5.7em;
+		height: 5.7em;
+	}
+	.imgtop5 {
+		width: 5.7em;
+		height: 5.7em;
+	}
+	.imgHighlight {
+		width: 26.5em;
+		height: 26.5em;
+	}
+	.highlight{
+		width: 26.5em;
+		height: 26.5em;
+	}
+
+}
+
+@media screen and (max-width: 420px) {
+
+	.top5 {
+		margin-left: 10%;
+	}
+
+	.gridtop5 {
+		grid-template-columns: 5em 5em 5em 5em;
+		grid-template-rows: 5em 5em 5em 5em 5em;
+	}
+	
+	.itemtop5 {
+		width: 3.7em;
+		height: 3.7em;
+	}
+	.imgtop5 {
+		width: 3.7em;
+		height: 3.7em;
+	}
+	.imgHighlight {
+		width: 18.5em;
+		height: 18.5em;
+	}
+	.highlight{
+		width: 18.5em;
+		height: 18.5em;
+	}
+
 }
 .imagensInsta{
     display: flex;
