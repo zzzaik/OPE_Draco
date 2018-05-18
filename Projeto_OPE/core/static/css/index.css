@@ -62,14 +62,20 @@
     height: 120px;
     margin-left: 10px;
     margin-top: 10px;
-    background-color: #a8a8a8;
+}
+.imgTop10 {
+    width: 120px;
+    height: 120px;
 }
 .highlight{
     grid-area: highlight;
     width: 540px;
     height: 540px;
 }
-
+.imgHighlight{
+    width: 540px;
+    height: 540px;
+}
 .imagensInsta{
     display: flex;
     flex-flow: row wrap;

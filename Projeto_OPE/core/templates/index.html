@@ -19,8 +19,8 @@
                 <button id="instagram" type="submit" action="https://api.instagram.com/oauth/access_token">so vai</button></br>
             </form>
             <div class="ImagensInsta">
-            {% for foto in fotos %}
-            <img class="itemsInsta" src="{{ foto }}"/>
+            {% for x, foto in fotos.items %}
+                <img class="itemsInsta" src="{{ foto }}"/>
             {% endfor %}
             </div>
         </div>
@@ -28,16 +28,14 @@
     <div class="top10" id="top10">
         <div class="gridTop10">
             <!-- a class .highlight vai precisar de um script toggle onClick, que mude ela de div-->
-            <div class="itemTop10 highlight"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
-            <div class="itemTop10"></div>
+            <div class="itemTop10 highlight" >
+                <img src="{{ fotos.0 }}" class="imgHighlight"/>
+            </div>
+            {% for item in leng %}
+            <div class="itemTop10">
+                <img class="imgTop10" onclick="toggleHighlight(item)" src=""/>
+            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
