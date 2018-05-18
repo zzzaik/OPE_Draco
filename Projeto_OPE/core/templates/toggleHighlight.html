@@ -1,0 +1,10 @@
+<script>
+    top5HL = document.getElementsByClassName("imgHighlight")
+    top5Urls = document.getElementsByClassName("imgTop10")
+
+    function toggleHighlight(x){
+        aux = top5Urls[x].src
+        top5Urls[x].src = top5HL.src
+        top5HL.src = aux
+    }
+</script>

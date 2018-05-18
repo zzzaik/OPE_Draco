@@ -15,14 +15,28 @@ function toggleImgSrc(x){
     };
 };
 
-top5HL = document.getElementsByClassName("imgHighlight")
-top5Urls = document.getElementsByClassName("imgTop10")
+
+/*var top5HL = document.getElementsByClassName("imgHighlight");
+var top5Urls = document.getElementsByClassName("imgTop10");
 
 function toggleHighlight(x){
-    aux = top5Urls[x].src
-    top5Urls[x].src = top5HL.src
-    top5HL.src = aux
-}
+    aux = top5Urls[x].src;
+    top5Urls[x].src = top5HL.src;
+    top5HL.src = aux;
+};*/
+
+function toggleHighlight2(z){
+    var top5 = document.getElementsByClassName("itemTop10");
+    var img5 = document.getElementsByClassName("imgTop10");
+    for(i=0;i<=4;i++){
+        if(top5[i].classList.contains("highlight")){
+            top5[i].classList.remove("highlight");
+            img5[i].classList.remove("imgHighlight");
+        };
+    };
+    top5[z].classList.add("highlight");
+    img5[z].classList.add("imgHighlight");
+};
 
 /*function fix_menu(){
     var top
@@ -43,7 +57,7 @@ function initMap() {
       position: uluru,
       map: map
     });
-  }
+  };
 /*
 function urlinsta(){
     var frm = document.getElementById("instagram");
