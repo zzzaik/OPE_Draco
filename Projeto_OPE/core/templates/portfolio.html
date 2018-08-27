@@ -1,7 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Portfolio{% endblock %}
 {% block main %}
-    <h1>Em construção</h1>
+    <div class="sidebarFiltro">
+        <h4 class="whiteText">Categorias<h4>
+        <div class="categoriaFiltro">
+            <h5 class="whiteText">Estilo<h5>
+            <select name="Estilo" class="filtroDropDown">
+                <option value="tiny">Tiny</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>     
+        </div>
+        <div class="categoriaFiltro">
+            <h5 class="whiteText">Tamanho<h5>
+            <select name="Estilo" class="filtroDropDown">
+                <option value="tribal">Tribal</option>
+                <option value="name">Nome</option>
+                <option value="aqua">Aquarela</option>
+                <option value="realist">Realismo</option>
+            </select>     
+        </div>
+        <div class="categoriaFiltro">
+            <h5 class="whiteText">Cor<h5>
+            <select name="Cor" class="filtroDropDown">
+                <option value="preto">Preto</option>
+                <option value="monoCor">Uma cor</option>
+                <option value="multCor">Mais de Uma Cor</option>
+            </select>     
+        </div>
+        <div class="categoriaFiltro">
+            <h5 class="whiteText">Região<h5>
+            <select name="Regiao" class="filtroDropDown">
+                <option value="braco">Braço</option>
+                <option value="perna">Perna</option>
+                <option value="peito">Peito</option>
+                <option value="costas">Costas</option>
+                <option value="pescoco">Pescoço</option>
+                <option value="costela">Costela</option>
+                <option value="rosto">Rosto</option>
+            </select>     
+        </div>
+        <button type="button" class="btn btn-primary">Procurar</button>
+    </div>
+    <div class="gridContainer">
+            {% for portfolio, img in fotos.items %}
+            <div class="gridFoto">
+                <div class="portfolio-item">
+                    <div class="hover-bg">
+                        <a href="{{ img }}" rel="prettyPhoto">
+                        <div class="hover-text">
+                        </div>                                <img src="{{ img }}" class="img-responsive"> </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
 {% endblock %}

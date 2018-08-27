@@ -153,15 +153,15 @@ hr {
 }
 .btn-primary {
 	color: #fff;
-	background-color: #121d1f;
+	background-color: #23272B;
 	padding: 10px 20px;
-	border-color: #121d1f;
-	border-radius: 0;
+	border-color: #999C9F;
+	border-radius: 4px;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
 	color: #fff;
-	background-color: #7bc3d1;
-	border-color: #7bc3d1;
+	background-color: #343a40;
+	border-color: #999C9F;
 }
 .btn-primary i.fa {
 	margin-right: 10px;
@@ -171,7 +171,7 @@ hr {
 	font-family: 'Lobster Two', cursive;
 	display: table;
 	width: 100%;
-	height: auto;
+	height: 400px;
 	padding: 100px 0;
 	text-align: center;
 	color: rgb(0, 0, 0);
@@ -671,8 +671,8 @@ section {
 	padding: 120px 0;
 }
 header .intro-text {
-	padding-top: 300px;
-	padding-bottom: 200px;
+	padding-top: 150px;
+	padding-bottom: 50px;
 }
 .timeline:before {
 	left: 50%;
@@ -859,5 +859,45 @@ header .intro-text {
 		width: 18.5em;
 		height: 18.5em;
 	}
+}
 
+/*portfolio.css e catalogo.css*/
+
+.gridContainer {
+	display: inline-grid;
+	width:75%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+	grid-auto-rows: 280px;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	margin-bottom: 15px;
+}
+
+.gridFoto {
+	width:90%;
+}
+
+.sidebarFiltro {
+	display: inline-block;
+	width:23%;
+	height: auto;
+	position: sticky;
+	top: 72px;
+	z-index: 9990;
+	margin-left:10px;
+	border: 1px solid #121d1f;
+	border-bottom-right-radius: 6px;
+	padding-left: 5px;
+	background-color:#121d1f;
+}
+
+.filtroDropDown {
+	width: 85%;
+	border-radius: 2px;
+}
+
+.whiteText {
+	color: #fff;
 }

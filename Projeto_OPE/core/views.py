@@ -14,10 +14,15 @@ def agenda(request):
     return render(request, 'agenda.html')
 
 def promocao(request):
+
     return render(request, 'promocao.html')
 
 def portfolio(request):
-    return render(request, 'portfolio.html')
+    
+    context = {
+        'fotos': alocarFotos()
+    }
+    return render(request, 'portfolio.html', context)
 
 def login(request):
     return render(request, 'login.html')

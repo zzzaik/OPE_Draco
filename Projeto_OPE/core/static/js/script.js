@@ -64,3 +64,10 @@ function urlinsta(){
     frm.action = "https://api.instagram.com/oauth/access_token";
     return true;
 }*/
+
+	// affix the navbar after scroll below header
+    $('#sideFilter').affix({
+        offset: {
+          top: $('header').height()
+        }
+  });
