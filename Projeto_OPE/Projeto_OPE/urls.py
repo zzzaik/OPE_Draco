@@ -21,7 +21,7 @@ from core.views import index, agenda, promocao, portfolio, login, catalogo
 
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
-    path('home', index, name = 'home'),
+    path('', index, name = 'home'),
     path('agenda/', agenda, name = 'agenda'),
     path('promocao/', promocao, name = 'promocao'),
     path('portfolio/', portfolio, name = 'portfolio'),

@@ -15,6 +15,9 @@ function toggleImgSrc(x){
     };
 };
 
+function SubmitFormLogin(){
+    document.getElementById("formLogin").submit();
+}
 
 /*var top5HL = document.getElementsByClassName("imgHighlight");
 var top5Urls = document.getElementsByClassName("imgtop5");
