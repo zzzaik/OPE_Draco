@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend import alocarFotos
-import bcrypt
+from core.backend import alocarFotos, cript, compararSenha
 
 def index(request):
     
@@ -27,11 +26,9 @@ def portfolio(request):
 
 def login(request):
     if request.method == 'POST':
-        senha = request.POST["senha"]
-        salt = bcrypt.gensalt(8)
-        print(salt)
-        #teste = bcrypt.hashpw(senha, salt)
-        #print(teste)
+        infos = cript(request)
+        if compararSenha(infos):
+            return index(request)
     else:
         request.POST
     return render(request, 'login.html')
