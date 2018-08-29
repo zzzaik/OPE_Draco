@@ -3,13 +3,18 @@ import requests as req
 
 ############Criptografia##############
 import bcrypt
-def cript(request):
-    password = request.POST["senha"].encode('utf-8')
-    passwordHashed = bcrypt.hashpw(password, bcrypt.gensalt(8))
-    return passwordHashed, password
+def cript(password, nSalt):
+    passwordHashed = bcrypt.hashpw(password, bcrypt.gensalt(nSalt))
+    return passwordHashed
 
-def compararSenha(passwords):
-    if bcrypt.hashpw(passwords[1], passwords[0]) == passwords[0]:
+def compararSenha(password, passwordHashed):
+    if bcrypt.hashpw(password, passwordHashed) == passwordHashed:
+        return True
+    return False
+
+def compararLogin(login):
+    logins = [login]#Lista de logins do banco
+    if login in logins:
         return True
     return False
 ######################################
