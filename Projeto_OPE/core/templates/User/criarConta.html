@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block unic_style %}{% static '/' %}css/index.css{% endblock %}
+{% block title %}Criar Conta{% endblock %}
+{% block main %}
+    <form id="formCadastro" method="POST">
+        {% csrf_token %}
+        <div>
+            {% if login in logins %}
+                <h1 class="msg erro cadastro">Login indisponível</h1>
+            {% endif %}
+            <label name="login">Login:</label>
+            <input name="login" type="text" id="login" />
+        </div>
+        <div>
+            {% if passHash != re_passHash %}
+                <h1 class="msg erro cadastro">As senhas não batem</h1>
+            {% else %}
+                {{ funcionou }}
+            {% endif  %}
+            <label name="senha">Senha:</label>
+            <input name="senha" id="senha" type="password"/>
+        </div>
+        <div>
+            <label name="re_senha">Comfirme a senha:</label>
+            <input name="re_senha" id="re_senha" type="password"/>
+        </div>
+        <div class="button">
+            <button type="submit" form="formCadastro" value="Submit" onclick="SubmitFormCadastro()">Create</button>
+        </div>
+    </form>
+{% endblock %}

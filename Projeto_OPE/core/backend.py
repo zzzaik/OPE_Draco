@@ -1,4 +1,5 @@
 import requests as req
+from core.models import Users
 
 
 ############Criptografia##############
@@ -11,12 +12,10 @@ def compararSenha(password, passwordHashed):
     if bcrypt.hashpw(password, passwordHashed) == passwordHashed:
         return True
     return False
-
-def compararLogin(login):
-    logins = [login]#Lista de logins do banco
-    if login in logins:
-        return True
-    return False
+######################################
+#############Login/CreateUser#########
+def getLogins():
+    return []#Lista de logins do banco (usando a classe USERS do MODEL.py)
 ######################################
 #############Instagram################
 def getPhoto():
