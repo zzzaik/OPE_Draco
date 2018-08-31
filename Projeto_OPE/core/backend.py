@@ -16,6 +16,16 @@ def compararSenha(password, passwordHashed):
 #############Login/CreateUser#########
 def getLogins():
     return []#Lista de logins do banco (usando a classe USERS do MODEL.py)
+
+def verificaEmail(email):
+    '''
+    if login in logins:
+        return 
+    '''
+    pass
+def virificaSenha(password, passswordHashad):
+    pass
+
 ######################################
 #############Instagram################
 def getPhoto():

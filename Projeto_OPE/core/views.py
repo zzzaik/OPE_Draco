@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend import alocarFotos, cript, compararSenha, getLogins
+from core.backend import alocarFotos, cript, compararSenha, getEmails, verificaEmail, verificaSenha
 
 def index(request):
     
@@ -39,22 +39,23 @@ def catalogo(request):
 
 def criarConta(request):
     if request.method == 'POST':
-        login = request.POST["login"].encode('utf-8')
+        email = request.POST["email"].encode('utf-8')
         password = request.POST["senha"].encode('utf-8')
         re_password = request.POST["re_senha"].encode('utf-8')
         nSalt = 8
         passwordHashed = cript(password, nSalt)
         re_passwordHashed = cript(re_password, nSalt)
-        context = {
-            'passHash':passwordHashed,
-            'rePassHash':re_passwordHashed,
-            'login':login,
-            'logins':getLogins(),
-            'funcionou':False,
-        }
-        if context['funcionou']:
-            return index(request)
+        msgEmail = verificaEmail(email)
+        msgSenha = verificaSenha(passwordHashed, re_passwordHashed)
+        if msgSenha:
+            context = {
+                'msgE':msgEmail,
+            }
+        return login(request)
+        
     else:
         request.POST
-        context = {}
+        context = {
+            'msgE':'',
+        }
     return render(request, 'User/criarConta.html', context)
