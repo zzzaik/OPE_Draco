@@ -35,7 +35,11 @@ def login(request):
     return render(request, 'User/login.html')
 
 def catalogo(request):
-    return render(request, 'catalogo.html')
+
+    context = {
+        'fotos': alocarFotos()
+    }
+    return render(request, 'catalogo.html',context)
 
 def criarConta(request):
     if request.method == 'POST':
@@ -45,8 +49,8 @@ def criarConta(request):
         nSalt = 8
         passwordHashed = cript(password, nSalt)
         re_passwordHashed = cript(re_password, nSalt)
-        msgEmail = verificaEmail(email)
-        msgSenha = verificaSenha(passwordHashed, re_passwordHashed)
+        #msgEmail = verificaEmail(email)
+        #msgSenha = verificaSenha(passwordHashed, re_passwordHashed)
         if msgSenha:
             context = {
                 'msgE':msgEmail,
