@@ -6,15 +6,13 @@
     <form id="formCadastro" method="POST">
         {% csrf_token %}
         <div>
-            <label name="email">E-Mail:</label>
-            <input name="email" type="text" id="email" />
+            {% if msgE != '' or msgS != '' %}
+                <h6 class="msgErroForm">{{ msgE }} {{ msgS }}</h6>
+            {% endif %}
+            <label name="email">E-mail:</label>
+            <input name="email" type="mail" id="email" />
         </div>
         <div>
-            {% if passHash != re_passHash %}
-                <h1 class="msg erro cadastro">As senhas não batem</h1>
-            {% else %}
-                {{ funcionou }}
-            {% endif  %}
             <label name="senha">Senha:</label>
             <input name="senha" id="senha" type="password"/>
         </div>

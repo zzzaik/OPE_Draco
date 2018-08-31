@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend import alocarFotos, cript, compararSenha, getEmails, verificaEmail, verificaSenha
+from core.templatestag.Backend.criptografia import cript, compararSenha
+from core.templatestag.Backend.instaAPI import alocarFotos
+from core.templatestag.Backend.createUser import verificaEmail, verificaSenha, gravaUsuario
+from core.templatestag.Backend.login import verificarLogin
 
 def index(request):
     
@@ -29,7 +32,8 @@ def login(request):
         password = request.POST["senha"].encode('utf-8')
         passwordHashed = cript(password, 8)
         if compararSenha(password, passwordHashed): #and compararLogin(request.POST["login"].encode('utf-8'))
-            return index(request)
+            pass
+            #return index(request)
     else:
         request.POST
     return render(request, 'User/login.html')
@@ -49,17 +53,20 @@ def criarConta(request):
         nSalt = 8
         passwordHashed = cript(password, nSalt)
         re_passwordHashed = cript(re_password, nSalt)
-        #msgEmail = verificaEmail(email)
-        #msgSenha = verificaSenha(passwordHashed, re_passwordHashed)
-        if msgSenha:
-            context = {
-                'msgE':msgEmail,
+        mensagenEmail = verificaEmail(email)
+        mensagenSenha = verificaSenha(password, re_passwordHashed)
+        if mensagenEmail == '' and mensagenSenha == '':
+            gravaUsuario(email, passwordHashed)
+            return login(request)
+        context = {
+            'msgE':mensagenEmail,
+            'msgS':mensagenSenha
             }
-        return login(request)
-        
+        return render(request, 'User/criarConta.html', context)
     else:
         request.POST
         context = {
             'msgE':'',
+            'msgS':''
         }
     return render(request, 'User/criarConta.html', context)
