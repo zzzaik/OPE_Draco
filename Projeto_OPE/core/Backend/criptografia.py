@@ -1,4 +1,5 @@
 import bcrypt
+
 def cript(password, nSalt):
     passwordHashed = bcrypt.hashpw(password, bcrypt.gensalt(nSalt))
     return passwordHashed

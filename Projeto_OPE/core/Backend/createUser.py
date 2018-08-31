@@ -1,4 +1,4 @@
-from core.templatestag.Backend.criptografia import compararSenha
+from core.Backend.criptografia import compararSenha
 from core.models import Users
 
 def getEmails():

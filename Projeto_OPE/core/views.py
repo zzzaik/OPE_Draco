@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.templatestag.Backend.criptografia import cript, compararSenha
-from core.templatestag.Backend.instaAPI import alocarFotos
-from core.templatestag.Backend.createUser import verificaEmail, verificaSenha, gravaUsuario
-from core.templatestag.Backend.login import verificarLogin
+from core.Backend.criptografia import cript, compararSenha
+from core.Backend.instaAPI import alocarFotos
+from core.Backend.createUser import verificaEmail, verificaSenha, gravaUsuario
+from core.Backend.login import verificaLogin
 
 def index(request):
     
