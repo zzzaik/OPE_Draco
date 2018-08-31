@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.models import User
 from django.conf.urls.static import static
-from core.views import index, agenda, promocao, portfolio, login, catalogo
+from core.views import index, agenda, promocao, portfolio, login, catalogo, criarConta
 
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('agenda/', agenda, name = 'agenda'),
     path('promocao/', promocao, name = 'promocao'),
     path('portfolio/', portfolio, name = 'portfolio'),
-    path('login/', login, name = 'login'),
+    path('User/login/', login, name = 'login'),
+    path('User/criarConta/', criarConta, name = 'criarConta'),
     path('catalogo/', catalogo, name = 'catalogo'),
 ]

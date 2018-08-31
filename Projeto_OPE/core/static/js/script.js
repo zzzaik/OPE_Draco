@@ -15,6 +15,13 @@ function toggleImgSrc(x){
     };
 };
 
+function SubmitFormLogin(){
+    document.getElementById("formLogin").submit();
+}
+
+function SubmitFormCadastro(){
+    document.getElementById("formCadastro").submit();
+}
 
 /*var top5HL = document.getElementsByClassName("imgHighlight");
 var top5Urls = document.getElementsByClassName("imgtop5");
