@@ -11,8 +11,8 @@ def verificaEmail(email):
     return "Email já registrado!"
 
 
-def verificaSenha(password, re_passwordHashad):
-    if compararSenha(password, re_passwordHashad):
+def verificaSenha(password, re_passwordHashed):
+    if compararSenha(password, re_passwordHashed):
         return ''
     return "As senhas não batem!"
 

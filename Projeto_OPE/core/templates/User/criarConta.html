@@ -3,25 +3,33 @@
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Criar Conta{% endblock %}
 {% block main %}
-    <form id="formCadastro" method="POST">
-        {% csrf_token %}
-        <div>
-            {% if msgE != '' or msgS != '' %}
-                <h6 class="msgErroForm">{{ msgE }} {{ msgS }}</h6>
-            {% endif %}
-            <label name="email">E-mail:</label>
-            <input name="email" type="mail" id="email" />
-        </div>
-        <div>
-            <label name="senha">Senha:</label>
-            <input name="senha" id="senha" type="password"/>
-        </div>
-        <div>
-            <label name="re_senha">Comfirme a senha:</label>
-            <input name="re_senha" id="re_senha" type="password"/>
-        </div>
-        <div class="button">
-            <button type="submit" form="formCadastro" value="Submit" onclick="SubmitFormCadastro()">Create</button>
-        </div>
-    </form>
+    <div class='container spaceUp spaceDown'>
+        <form id="formCadastro" method="POST" class='form-horizontal'>
+            {% csrf_token %}
+            <div class="form-group row">
+                {% if msgE != '' or msgS != '' %}
+                    <h6 class="msgErroForm">{{ msgE }} {{ msgS }}</h6>
+                {% endif %}
+                <label name="email" class='control-label col-lg-2'>E-mail:</label>
+                <div class="col-lg-3">
+                    <input name="email" type="mail" id="email" class="form-control"/>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <label name="senha" class='control-label col-lg-2'>Senha:</label>
+                <div class="col-lg-3">
+                    <input name="senha" id="senha" type="password" class="form-control"/>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <label name="re_senha" class='control-label col-lg-2'>Comfirme a senha:</label>
+                <div class="col-lg-3">
+                    <input name="re_senha" id="re_senha" type="password" class="form-control"/>
+                </div>
+            </div>
+            <div class="row col-lg-offset-2">
+                <button type="submit" form="formCadastro" value="Submit" onclick="SubmitFormCadastro()" class='btn btn-primary'>Create</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

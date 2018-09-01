@@ -1,40 +1,30 @@
-imgSrc = [
-    {"imgNumber":"1","source":"{% static 'img/luoping.jpg' %}"},
-    {"imgNumber":"2","source":"{% static 'img/planalto putorana-russia.jpg' %}"},
-    {"imgNumber":"3","source":"{% static 'img/planalto putorana-russia2.jpg' %}"},
-    {"imgNumber":"4","source":"{% static 'img/planalto putorana-russia3.jpg' %}"},
-    {"imgNumber":"5","source":"{% static 'img/praia do silencio - espanha.jpg' %}"},
-];
-
-
-function toggleImgSrc(x){
-    for(i=1;i<=5;i++){
-        if(i == imgSrc[i]["imgNumber"]){
-            Document.getElementById("carousel").src = imgSrc["source"];
-        };
-    };
-};
-
 function SubmitFormLogin(){
     document.getElementById("formLogin").submit();
+    toggleDisplayNone();
 }
 
 function SubmitFormCadastro(){
     document.getElementById("formCadastro").submit();
 }
 
-/*var top5HL = document.getElementsByClassName("imgHighlight");
-var top5Urls = document.getElementsByClassName("imgtop5");
 
-function toggleHighlight(x){
-    aux = top5Urls[x].src;
-    top5Urls[x].src = top5HL.src;
-    top5HL.src = aux;
-};*/
+function SubmitFormInfoUser(){
+    let text = document.getElementById("btn1");
+    text.innerHTML='Disabled';
+}
+
+function toggleDisplayNone() {
+    let div = document.getElementById("clientPage");
+    let login = document.getElementById("loginDiv");
+    if (div.classList.contains("displayNone")) {
+        div.classList.remove("displayNone");
+        login.classList.add("displayNone");
+    }
+}
 
 function toggleHighlight2(z){
-    var top5 = document.getElementsByClassName("itemtop5");
-    var img5 = document.getElementsByClassName("imgtop5");
+    let top5 = document.getElementsByClassName("itemtop5");
+    let img5 = document.getElementsByClassName("imgtop5");
     for(i=0;i<=4;i++){
         if(top5[i].classList.contains("highlight")){
             top5[i].classList.remove("highlight");
@@ -45,15 +35,6 @@ function toggleHighlight2(z){
     img5[z].classList.add("imgHighlight");
 };
 
-/*function fix_menu(){
-    var top
-    top = scrolltop()
-    if (top < 0){
-        document.getElementById("topMenu").style.position = "fixed";
-    } else {
-        document.getElementById("topMenu").style.position = "relative";
-    }
-}*/
 function initMap() {
     var uluru = {lat: -23.68625006, lng: -46.77043178};
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -71,10 +52,3 @@ function urlinsta(){
     frm.action = "https://api.instagram.com/oauth/access_token";
     return true;
 }*/
-
-	// affix the navbar after scroll below header
-    $('#sideFilter').affix({
-        offset: {
-          top: $('header').height()
-        }
-  });

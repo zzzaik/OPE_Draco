@@ -750,6 +750,20 @@ header .intro-text {
 	padding: 10px 100px 20px 20px;
 }
 }
+/* General Formating */
+.spaceUp {
+	margin-top: 10px;
+}
+.spaceDown {
+	margin-bottom: 10px;
+}
+.moveLeft30 {
+	margin-left: 30px;
+}
+.displayNone {
+	display: none;
+}
+
 /*base.css*/
 #map{
     height: 20em;
@@ -901,3 +915,5 @@ header .intro-text {
 .whiteText {
 	color: #fff;
 }
+
+/* Usuario.css */
