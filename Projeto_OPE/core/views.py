@@ -57,7 +57,7 @@ def criarConta(request):
         mensagenSenha = verificaSenha(password, re_passwordHashed)
         if mensagenEmail == '' and mensagenSenha == '':
             gravaUsuario(email, passwordHashed)
-            return login(request)
+            return render(request, 'User/login.html')
         context = {
             'msgE':mensagenEmail,
             'msgS':mensagenSenha
