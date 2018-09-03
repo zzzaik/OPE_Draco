@@ -25,7 +25,7 @@ SECRET_KEY = '(8z^-4hs16edq0u+6&j$1xd!&d653&1_mf)714^d3x9uik#g1+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["zzzaik.pythonanywhere.com"]
 
 
 # Application definition
@@ -77,9 +77,18 @@ WSGI_APPLICATION = 'Projeto_OPE.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'zzzaik$JustinoTattooDB',
+        'USER': 'zzzaik',
+        'PASSWORD': 'P@ssw0rd_OPEDraco',
+        'HOST': 'mysql.server',
+        'PORT': '3306',
     }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
 }
 
 
