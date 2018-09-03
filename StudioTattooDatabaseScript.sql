@@ -1,5 +1,5 @@
 create table Tatuador (
-	idTatuador Serial,
+	idTatuador AUTO_INCREMENT NOT NULL,
 	nomeTatuador VARCHAR,
 	loginTatuador VARCHAR,
 	senhaTatuador VARCHAR,
@@ -8,7 +8,7 @@ create table Tatuador (
 )
 
 create table Cliente (
-	idCliente Serial,
+	idCliente AUTO_INCREMENT NOT NULL,
 	nomeCliente VARCHAR,
 	loginCliente VARCHAR,
 	senhaCliente VARCHAR,
@@ -18,41 +18,41 @@ create table Cliente (
 
 
 create table Agenda (
-	idAgenda Serial,
+	idAgenda AUTO_INCREMENT NOT NULL,
 	dataAgenda DATE,
 	horarioAgenda TIME,
 	CONSTRAINT pk_Agenda PRIMARY KEY (idAgenda)
 )
 
 create table Estilos (
-	idEstilo Serial,
+	idEstilo AUTO_INCREMENT NOT NULL,
 	estilo VARCHAR,
 	CONSTRAINT pk_Estilos PRIMARY KEY (idEstilo)
 )
 
 create table Regiao(
-	idRegiao SERIAL,
+	idRegiao AUTO_INCREMENT NOT NULL,
 	regiaoDoCorpo VARCHAR,
 	faixaValor REAL,
 	CONSTRAINT pk_Regiao PRIMARY KEY (idRegiao)
 )
 
 create table Cor (
-	idCor Serial,
+	idCor AUTO_INCREMENT NOT NULL,
 	colorido BOOL,
 	faixaValor REAL,
 	CONSTRAINT pk_Cor PRIMARY KEY (idCor)
 )
 
 create table Tamanho (
-	idTamanho Serial,
+	idTamanho AUTO_INCREMENT NOT NULL,
 	tamanho VARCHAR,
 	faixaValor REAL,
 	CONSTRAINT pk_Tamanho PRIMARY KEY (idTamanho)
 )
 
 create table TelefoneCliente (
-	idTelefone Serial,
+	idTelefone AUTO_INCREMENT NOT NULL,
 	idCliente INT,
 	numeroTelefone VARCHAR,
 	CONSTRAINT pk_TelefoneCliente PRIMARY KEY (idTelefone),
@@ -60,7 +60,7 @@ create table TelefoneCliente (
 )
 
 create table EmailCliente (
-	idEmail Serial,
+	idEmail AUTO_INCREMENT NOT NULL,
 	idCliente INT,
 	enderecoEmail VARCHAR,
 	CONSTRAINT pk_EmailCliente PRIMARY KEY (idEmail),
@@ -68,7 +68,7 @@ create table EmailCliente (
 )
 
 create table Imagens (
-	idImagem Serial,
+	idImagem AUTO_INCREMENT NOT NULL,
 	urlImagem VARCHAR,
 	ratins INT,
 	idEstilo INT,
@@ -77,21 +77,21 @@ create table Imagens (
 )
 
 create table Portifolio (
-	idPortifolio Serial,
+	idPortifolio AUTO_INCREMENT NOT NULL,
 	idImagem INT,
 	CONSTRAINT pk_Portifolio PRIMARY KEY (idPortifolio),
 	CONSTRAINT fk_ImagemPortifolio FOREIGN KEY (idImagem) REFERENCES Imagens(idImagem)
 )
 
 create table Catalogo (
-	idCatalogo Serial,
+	idCatalogo AUTO_INCREMENT NOT NULL,
 	idImagem INT,
 	CONSTRAINT pk_Catalogo PRIMARY KEY (idCatalogo),
 	CONSTRAINT fk_ImagemCatalogo FOREIGN KEY (idImagem) REFERENCES Imagens(idImagem)
 )
 
 create table Servicos (
-	idServico Serial,
+	idServico AUTO_INCREMENT NOT NULL,
 	idCliente INT,
 	idImagem INT,
 	idCor INT,
@@ -108,7 +108,7 @@ create table Servicos (
 )
 
 create table Sessao (
-	idSessao Serial,
+	idSessao AUTO_INCREMENT NOT NULL,
 	idAgenda INT,
 	idServico INT,
 	CONSTRAINT pk_Sessao PRIMARY KEY (idSessao),
