@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'zzzaik$JustinoTattooDB',
         'USER': 'zzzaik',
         'PASSWORD': 'P@ssw0rd_OPEDraco',
-        'HOST': 'mysql.server',
+        'HOST': 'zzzaik.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
     #'default': {
