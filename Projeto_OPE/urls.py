@@ -25,7 +25,7 @@ urlpatterns = [
     path('agenda/', agenda, name = 'agenda'),
     path('promocao/', promocao, name = 'promocao'),
     path('portfolio/', portfolio, name = 'portfolio'),
-    path('User/login/', login, name = 'login'),
-    path('User/criarConta/', criarConta, name = 'criarConta'),
+    path('user/login/', login, name = 'login'),
+    path('user/criarConta/', criarConta, name = 'criarConta'),
     path('catalogo/', catalogo, name = 'catalogo'),
 ]

@@ -2,14 +2,14 @@ create table Usuario (
     idUsuario INT AUTO_INCREMENT,
     loginUsuario VARCHAR(120),
     senhaUsuario VARCHAR(500),
-    Tipo CHAR(2),
+    tipoUsuario CHAR(2),
     CONSTRAINT pk_Usuario PRIMARY KEY (idUsuario)
 );
 
 create table Tatuador (
 	idTatuador INT AUTO_INCREMENT,
 	nomeTatuador VARCHAR(120),
-	loginTatuador INT,
+	loginTatuador INT NOT NULL,
 	apiTokens VARCHAR(350) NULL,
 	CONSTRAINT pk_Tatuador PRIMARY KEY (idTatuador),
 	CONSTRAINT fk_LoginTatuador FOREIGN KEY (loginTatuador) REFERENCES Usuario(idUsuario)
@@ -18,7 +18,7 @@ create table Tatuador (
 create table Cliente (
 	idCliente INT AUTO_INCREMENT,
 	nomeCliente VARCHAR(120),
-	loginCliente INT,
+	loginCliente INT NOT NULL,
 	assiduidade BOOL NULL,
 	CONSTRAINT pk_Cliente PRIMARY KEY (idCliente),
 	CONSTRAINT fk_LoginCliente FOREIGN KEY (loginCliente) REFERENCES Usuario(idUsuario)
@@ -61,7 +61,7 @@ create table Tamanho (
 
 create table TelefoneCliente (
 	idTelefone INT AUTO_INCREMENT,
-	idCliente INT,
+	idCliente INT NOT NULL,
 	numeroTelefone VARCHAR(15),
 	CONSTRAINT pk_TelefoneCliente PRIMARY KEY (idTelefone),
 	CONSTRAINT fk_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
@@ -69,7 +69,7 @@ create table TelefoneCliente (
 
 create table EmailCliente (
 	idEmail INT AUTO_INCREMENT,
-	idCliente INT,
+	idCliente INT NOT NULL,
 	enderecoEmail VARCHAR(100),
 	CONSTRAINT pk_EmailCliente PRIMARY KEY (idEmail),
 	CONSTRAINT fk_ClienteTelefone FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
@@ -78,33 +78,33 @@ create table EmailCliente (
 create table Imagens (
 	idImagem INT AUTO_INCREMENT,
 	urlImagem VARCHAR(350),
-	ratins INT,
-	idEstilo INT,
+	ratins INT NOT NULL,
+	idEstilo INT NOT NULL,
 	CONSTRAINT pk_Imagem PRIMARY KEY (idImagem),
 	CONSTRAINT fk_Estilo FOREIGN KEY (idEstilo) REFERENCES Estilos(idEstilo)
 );
 
 create table Portifolio (
 	idPortifolio INT AUTO_INCREMENT,
-	idImagem INT,
+	idImagem INT NOT NULL,
 	CONSTRAINT pk_Portifolio PRIMARY KEY (idPortifolio),
 	CONSTRAINT fk_ImagemPortifolio FOREIGN KEY (idImagem) REFERENCES Imagens(idImagem)
 );
 
 create table Catalogo (
 	idCatalogo INT AUTO_INCREMENT,
-	idImagem INT,
+	idImagem INT NOT NULL,
 	CONSTRAINT pk_Catalogo PRIMARY KEY (idCatalogo),
 	CONSTRAINT fk_ImagemCatalogo FOREIGN KEY (idImagem) REFERENCES Imagens(idImagem)
 );
 
 create table Servicos (
 	idServico INT AUTO_INCREMENT,
-	idCliente INT,
-	idImagem INT,
-	idCor INT,
-	idTamanho INT,
-	idRegiao INT,
+	idCliente INT NOT NULL,
+	idImagem INT NOT NULL,
+	idCor INT NOT NULL,
+	idTamanho INT NOT NULL,
+	idRegiao INT NOT NULL,
 	servicoDesconto REAL,
 	servicoFinalizado BOOL,
 	CONSTRAINT pk_Servico PRIMARY KEY (idServico),
@@ -117,8 +117,8 @@ create table Servicos (
 
 create table Sessao (
 	idSessao INT AUTO_INCREMENT,
-	idAgenda INT,
-	idServico INT,
+	idAgenda INT NOT NULL,
+	idServico INT NOT NULL,
 	CONSTRAINT pk_Sessao PRIMARY KEY (idSessao),
 	CONSTRAINT fk_AgendaSessao FOREIGN KEY (idAgenda) REFERENCES Agenda(idAgenda),
 	CONSTRAINT fk_ServicoSessao FOREIGN KEY (idServico) REFERENCES Servicos(idServico)

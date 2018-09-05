@@ -3,6 +3,7 @@
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Usuário{% endblock %}
 {% block main %}
+    {{ ret }}
     <div id='loginDiv' class='container spaceUp spaceDown'>
         <form id="formLogin" method="POST" class='form-horizontal'>
             {% csrf_token %}

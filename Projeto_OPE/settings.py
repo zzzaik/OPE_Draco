@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(8z^-4hs16edq0u+6&j$1xd!&d653&1_mf)714^d3x9uik#g1+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["zzzaik.pythonanywhere.com"]
 
@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'zzzaik$JustinoTattooDB',
+        'NAME': 'zzzaik$JustinoTattooDB', #default
         'USER': 'zzzaik',
         'PASSWORD': 'P@ssw0rd_OPEDraco',
         'HOST': 'zzzaik.mysql.pythonanywhere-services.com',

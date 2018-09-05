@@ -1,21 +1,32 @@
 from core.Backend.criptografia import compararSenha
 from core.models import Usuario
 
-def getLogins(self):
-    logins = {}
-    for (id, login, tipo) in Usuario.objects.raw('SELECT idUsuario, loginUsuario, Tipo FROM Usuarios'):
-        logins[id] = {
-            'login':login,
-            'tipo':tipo
-        }
-    return logins #Lista de logins do banco (usando a classe USERS do MODEL.py)
+from django.db import connection#, transaction
+
+
+def getLogins():
+    #cursor = connection.cursor()
+    #cursor.execute('SELECT idUsuario, loginUsuario, tipoUsuario FROM Usuario')
+    #logins = cursor.fetchone()
+    #logins = {}
+    #for (id, login, tipo) in Usuario.objects.raw('SELECT idUsuario, loginUsuario, tipoUsuario FROM Usuario'):
+    #    logins[id] = {
+    #        'login':login,
+    #        'tipo':tipo
+    #    }
+    #return logins #Lista de logins do banco (usando a classe USERS do MODEL.py)
+    return Usuario.objects.all()
 
 
 def verificaLogin(login, password, passowordHashed):
     logins = getLogins()
-    for x in logins:
-        print(x)
     if login in logins and compararSenha(password, passowordHashed):
         pass
+    return logins
+'''
+def getLogins():
+    pass
 
-
+def verificaLogin():
+    pass
+'''

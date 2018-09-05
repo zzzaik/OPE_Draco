@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from core.Backend.criptografia import cript, compararSenha
 from core.Backend.instaAPI import alocarFotos
 from core.Backend.createUser import verificaLogin, verificaSenha, gravaUsuario
-#from core.Backend.login import verificaLogin
+from core.Backend.login import verificaLogin
 
 def index(request):
 
@@ -29,14 +29,15 @@ def portfolio(request):
 
 def login(request):
     if request.method == 'POST':
-        password = request.POST["senha"].encode('utf-8')
+        login = request.POST['login']
+        password = request.POST['senha'].encode('utf-8')
         passwordHashed = cript(password, 8)
-        if compararSenha(password, passwordHashed): #and compararLogin(request.POST["login"].encode('utf-8'))
-            pass
-            #return index(request)
+        ret = verificaLogin(login, password, passwordHashed)
+        #return index(request)
     else:
         request.POST
-    return render(request, 'User/login.html')
+        ret = 'teste'
+    return render(request, 'user/login.html', context={'ret':ret})
 
 def catalogo(request):
 
@@ -57,16 +58,16 @@ def criarConta(request):
         mensagenSenha = verificaSenha(password, re_passwordHashed)
         if mensagenLogin == '' and mensagenSenha == '':
             gravaUsuario(login, passwordHashed)
-            return render(request, 'User/login.html')
+            #return render(request, 'user/login.html')
         context = {
             'msgE':mensagenLogin,
             'msgS':mensagenSenha
             }
-        return render(request, 'User/criarConta.html', context)
+        return render(request, 'user/criarConta.html', context)
     else:
         request.POST
         context = {
             'msgE':'',
             'msgS':''
         }
-    return render(request, 'User/criarConta.html', context)
+    return render(request, 'user/criarConta.html', context)
