@@ -3,11 +3,11 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.Backend.criptografia import cript, compararSenha
 from core.Backend.instaAPI import alocarFotos
-from core.Backend.createUser import verificaEmail, verificaSenha, gravaUsuario
-from core.Backend.login import verificaLogin
+from core.Backend.createUser import verificaLogin, verificaSenha, gravaUsuario
+#from core.Backend.login import verificaLogin
 
 def index(request):
-    
+
     context = {
         'fotos': alocarFotos(),
     }
@@ -21,7 +21,7 @@ def promocao(request):
     return render(request, 'promocao.html')
 
 def portfolio(request):
-    
+
     context = {
         'fotos': alocarFotos()
     }
@@ -47,19 +47,19 @@ def catalogo(request):
 
 def criarConta(request):
     if request.method == 'POST':
-        email = request.POST["email"].encode('utf-8')
+        login = request.POST["login"].encode('utf-8')
         password = request.POST["senha"].encode('utf-8')
         re_password = request.POST["re_senha"].encode('utf-8')
         nSalt = 8
         passwordHashed = cript(password, nSalt)
         re_passwordHashed = cript(re_password, nSalt)
-        mensagenEmail = verificaEmail(email)
+        mensagenLogin = verificaLogin(login)
         mensagenSenha = verificaSenha(password, re_passwordHashed)
-        if mensagenEmail == '' and mensagenSenha == '':
-            gravaUsuario(email, passwordHashed)
+        if mensagenLogin == '' and mensagenSenha == '':
+            gravaUsuario(login, passwordHashed)
             return render(request, 'User/login.html')
         context = {
-            'msgE':mensagenEmail,
+            'msgE':mensagenLogin,
             'msgS':mensagenSenha
             }
         return render(request, 'User/criarConta.html', context)

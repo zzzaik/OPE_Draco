@@ -1,14 +1,14 @@
 from core.Backend.criptografia import compararSenha
-from core.models import Users
+#from coneccaoBanco import getLogins
 
-def getEmails():
+def getLogins():
     return {b'123': b'$2b$08$qK1TxrDh9z9df3DqEi2HyeLHm/58grEkOutD/dK7I38.WDw.24xum'}#Lista de logins do banco (usando a classe USERS do MODEL.py)
 
-def verificaEmail(email):
-    emails = getEmails()
-    if email not in emails:
+def verificaLogin(login):
+    logins = getLogins()
+    if login not in logins:
         return ''
-    return "Email já registrado!"
+    return "Login já registrado!"
 
 
 def verificaSenha(password, re_passwordHashed):
@@ -16,10 +16,10 @@ def verificaSenha(password, re_passwordHashed):
         return ''
     return "As senhas não batem!"
 
-def gravaUsuario(email, passwordHashed):
+def gravaUsuario(login, passwordHashed):
     try:
-        emails = getEmails()
-        emails[email] = passwordHashed
-        print(emails)
+        logins = getLogins()
+        logins[login] = passwordHashed
+        print(logins)
     except:
         return False
