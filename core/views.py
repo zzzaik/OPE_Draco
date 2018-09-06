@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.Backend.criptografia import cript, compararSenha
 from core.Backend.instaAPI import alocarFotos
-from core.Backend.createUser import verificaLogin, verificaSenha, gravaUsuario
+from core.Backend.createUser import verificarLogin, verificarSenha, gravaUsuario
 from core.Backend.login import verificaLogin
 
 def index(request):
@@ -29,10 +29,10 @@ def portfolio(request):
 
 def login(request):
     if request.method == 'POST':
-        login = request.POST['login']
+        login = request.POST['login'].encode('utf-8')
         password = request.POST['senha'].encode('utf-8')
-        passwordHashed = cript(password, 8)
-        ret = verificaLogin(login, password, passwordHashed)
+        #passwordHashed = cript(password, 8)
+        ret = verificaLogin(login, password)
         #return index(request)
     else:
         request.POST
@@ -54,8 +54,8 @@ def criarConta(request):
         nSalt = 8
         passwordHashed = cript(password, nSalt)
         re_passwordHashed = cript(re_password, nSalt)
-        mensagenLogin = verificaLogin(login)
-        mensagenSenha = verificaSenha(password, re_passwordHashed)
+        mensagenLogin = verificarLogin(login)
+        mensagenSenha = verificarSenha(password, re_passwordHashed)
         if mensagenLogin == '' and mensagenSenha == '':
             gravaUsuario(login, passwordHashed)
             #return render(request, 'user/login.html')

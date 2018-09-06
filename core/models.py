@@ -18,7 +18,7 @@ class Usuario(models.Model):
         db_table = 'Usuario'
 
     def __str__(self):
-        return "id: %s login: %s senha: %s tipo: %s" %(self.idusuario, self.loginusuario, self.senhausuario, self.tipousuario)
+        return "%s,%s,%s,%s" %(self.idusuario, self.loginusuario, self.senhausuario, self.tipousuario)
 
 class Cliente(models.Model):
     idcliente = models.AutoField(db_column='idCliente', primary_key=True)  # Field name made lowercase.
