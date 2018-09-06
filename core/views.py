@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.Backend.criptografia import cript, compararSenha
+from django.http import HttpResponse
 from core.Backend.instaAPI import alocarFotos
-from core.Backend.createUser import verificarLogin, verificarSenha, gravaUsuario
-from core.Backend.login import verificaLogin
+from core.Backend.createUser import salvaUsuario
+from core.Backend.login import logar, getUsuarios
+from core.models import Usuario
 
 def index(request):
-
     context = {
         'fotos': alocarFotos(),
     }
@@ -29,15 +29,14 @@ def portfolio(request):
 
 def login(request):
     if request.method == 'POST':
-        login = request.POST['login'].encode('utf-8')
-        password = request.POST['senha'].encode('utf-8')
-        #passwordHashed = cript(password, 8)
-        ret = verificaLogin(login, password)
-        #return index(request)
+        login = request.POST['login']
+        password = request.POST['senha']
+        if logar(login, password):
+            return index(request)
+        return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123' %(getUsuarios())})
     else:
         request.POST
-        ret = 'teste'
-    return render(request, 'user/login.html', context={'ret':ret})
+    return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123' %(getUsuarios())})
 
 def catalogo(request):
 
@@ -48,26 +47,23 @@ def catalogo(request):
 
 def criarConta(request):
     if request.method == 'POST':
-        login = request.POST["login"].encode('utf-8')
-        password = request.POST["senha"].encode('utf-8')
-        re_password = request.POST["re_senha"].encode('utf-8')
+        login = request.POST["login"]
+        password = request.POST["senha"]
+        re_password = request.POST["re_senha"]
         nSalt = 8
-        passwordHashed = cript(password, nSalt)
-        re_passwordHashed = cript(re_password, nSalt)
-        mensagenLogin = verificarLogin(login)
-        mensagenSenha = verificarSenha(password, re_passwordHashed)
-        if mensagenLogin == '' and mensagenSenha == '':
-            gravaUsuario(login, passwordHashed)
-            #return render(request, 'user/login.html')
-        context = {
-            'msgE':mensagenLogin,
-            'msgS':mensagenSenha
+        mensagens = salvaUsuario(login, password, re_password, nSalt, "c")
+        if mensagens != True:
+            context = {
+                'msgs':mensagens
             }
-        return render(request, 'user/criarConta.html', context)
+            return render(request, 'user/criarConta.html', context)
+        context = {
+            'msgs':''
+        }
+        return index(request)
     else:
         request.POST
         context = {
-            'msgE':'',
-            'msgS':''
+            'msgs':''
         }
     return render(request, 'user/criarConta.html', context)

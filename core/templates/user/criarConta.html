@@ -7,8 +7,8 @@
         <form id="formCadastro" method="POST" class='form-horizontal'>
             {% csrf_token %}
             <div class="form-group row">
-                {% if msgE != '' or msgS != '' %}
-                    <h6 class="msgErroForm">{{ msgE }} {{ msgS }}</h6>
+                {% if msgs != ''%}
+                    <h6 class="msgErroForm">{{ msgs }}</h6>
                 {% endif %}
                 <label name="login" class='control-label col-lg-2'>E-mail:</label>
                 <div class="col-lg-3">
