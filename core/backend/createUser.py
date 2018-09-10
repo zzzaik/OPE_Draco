@@ -1,11 +1,18 @@
 from core.backend.criptografia import compararSenha, cript
 from core.models import Usuario
+import re
+
+def verifyEmail(email):
+    return not re.match(r"^([a-zA-Z0-9._-])+@(([a-zA-Z.-])+.)+([a-zA-Z0-9]{2,4})+$", email)
+
 
 def salvaUsuario(login, password, re_password, salt, tipo):
     user = Usuario.objects.filter(loginusuario=login)
     msg = ''
     if user:
         msg += "Login já registrado! "
+    elif verifyEmail(login):
+        msg += "Digite um e-mail válido! "
     else:
         if password == re_password and compararSenha(password, cript(re_password, salt)):
             user = Usuario.objects.create(loginusuario=login, senhausuario=cript(password, salt), tipousuario=tipo, econfiavel=False)

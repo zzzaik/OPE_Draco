@@ -130,6 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 try:
    from local_settings import *

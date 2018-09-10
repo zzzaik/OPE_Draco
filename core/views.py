@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos
@@ -14,6 +15,7 @@ def verifySession(request):
 
 def index(request):
     #Usuario.objects.create(loginusuario="tatuador@tattoo.com", senhausuario="$2y$08$0X2GdkM5nBuiL4Dh.Igw6enQ/yegLU866sj7RekUJfH.w6564okSq", tipousuario=True, econfiavel=True)
+    #Usuario.objects.create(loginusuario="zzzaik21@gmail.com", senhausuario="$2y$08$Ve0m4XPT8SM5YaR07wFUi.1JMPbvHfPq4xJOs62IzhaLrqk8vM0M2", tipousuario=True, econfiavel=False)
     context = {
         'fotos': alocarFotos(),
         'resp': verifySession(request)
@@ -52,7 +54,7 @@ def isLogged(request):
 
 def login(request):
     if isLogged(request):
-        return index(request)
+        return HttpResponseRedirect('/')
     if request.method == 'POST':
         login = request.POST['login']
         password = request.POST['senha']
@@ -64,24 +66,26 @@ def login(request):
                 'type':Returnlogar[1],
                 'auth':True
             }
-            return index(request)
+            return HttpResponseRedirect('/user/cadastra_dados/')
         request.session['user']['auth'] = False
-        return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios())})
+        return render(request, 'user/login.html', {'ret':'//## Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador ##//' %(getUsuarios()), 'msg':Returnlogar[2]})
     request.POST
     return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios())})
 
+def redefinirSenha(request):
+    pass
 
 def sair(request):
     try:
         del request.session['user']
     except KeyError:
         pass
-    return index(request)
+    return HttpResponseRedirect('/')
 
 
 def criarConta(request):
     if isLogged(request):
-        return index(request)
+        return HttpResponseRedirect('/')
     if request.method == 'POST':
         login = request.POST["login"]
         password = request.POST["senha"]
@@ -96,7 +100,7 @@ def criarConta(request):
         context = {
             'msgs':''
         }
-        return index(request)
+        return HttpResponseRedirect('/')
     request.POST
     context = {
         'msgs':''
@@ -105,7 +109,7 @@ def criarConta(request):
 
 def cadastraDados(request):
     if not isLogged(request):
-        return index(request)
+        return HttpResponseRedirect('/')
     if request.method == 'POST':
         context = {
             'resp':request.POST

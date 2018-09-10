@@ -6,10 +6,10 @@ from core.models import Usuario
 def logar(login, password):
     user = Usuario.objects.filter(loginusuario=login)
     if not user:
-        return [False, False]
+        return [False, False, 'E-mail ou senha incorretos!']
     if compararSenha(password, user[0].senhausuario):
-        return [True, user[0].tipousuario]
-    return [False, False]
+        return [True, user[0].tipousuario, '']
+    return [False, False, 'E-mail ou senha incorretos!']
 
 def getUsuarios(): #se for usar o raw sem models usar (campo, valor)
     values_list = Usuario.objects.values_list('idusuario', 'loginusuario', 'senhausuario', 'tipousuario') #para chamar so 1 valor usar flat=True
