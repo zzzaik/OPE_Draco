@@ -27,7 +27,7 @@ urlpatterns = [
     path('portfolio/', portfolio, name = 'portfolio'),
     path('user/login/', login, name = 'login'),
     path('user/criar_conta/', criarConta, name = 'criarConta'),
-    path('user/sair', sair, name='sair'),
+    path('user/sair/', sair, name='sair'),
     path('user/cadastra_dados/', cadastraDados, name = 'cadastraDados'),
     path('catalogo/', catalogo, name = 'catalogo'),
 ]

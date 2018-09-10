@@ -47,7 +47,7 @@ def catalogo(request):
 
 def isLogged(request):
     verifySession(request)
-    return request.session['user']['auth']
+    return request.session['user']['auth'] #retorna True quando o usuario está autentucado e False quando não está
 
 
 def login(request):
@@ -80,6 +80,8 @@ def sair(request):
 
 
 def criarConta(request):
+    if isLogged(request):
+        return index(request)
     if request.method == 'POST':
         login = request.POST["login"]
         password = request.POST["senha"]
@@ -102,6 +104,8 @@ def criarConta(request):
     return render(request, 'user/criarConta.html', context)
 
 def cadastraDados(request):
+    if not isLogged(request):
+        return index(request)
     if request.method == 'POST':
         context = {
             'resp':request.POST
