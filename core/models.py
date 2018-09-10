@@ -7,44 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-class Usuario(models.Model):
-    idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
-    loginusuario = models.CharField(db_column='loginUsuario', max_length=120, blank=True, null=True)  # Field name made lowercase.
-    senhausuario = models.CharField(db_column='senhaUsuario', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    tipousuario = models.CharField(db_column='tipoUsuario', max_length=2, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Usuario'
-
-    def __str__(self):
-        return "%s,%s,%s,%s" %(self.idusuario, self.loginusuario, self.senhausuario, self.tipousuario)
-
-class Cliente(models.Model):
-    idcliente = models.AutoField(db_column='idCliente', primary_key=True)  # Field name made lowercase.
-    nomecliente = models.CharField(db_column='nomeCliente', max_length=120, blank=True, null=True)  # Field name made lowercase.
-    logincliente = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='loginCliente', blank=True, null=False)  # Field name made lowercase.
-    assiduidade = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'Cliente'
-
-    def __str__(self):
-        return "id: %s nome: %s login: %s assiduidade: %s" %(self.idcliente, self.nomecliente, self.logincliente, self.assiduidade)
-
-class Tatuador(models.Model):
-    idtatuador = models.AutoField(db_column='idTatuador', primary_key=True)  # Field name made lowercase.
-    nometatuador = models.CharField(db_column='nomeTatuador', max_length=120, blank=True, null=True)  # Field name made lowercase.
-    logintatuador = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='loginTatuador', blank=True, null=False)  # Field name made lowercase.
-    apitokens = models.CharField(db_column='apiTokens', max_length=350, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Tatuador'
-
-    def __str__(self):
-        return "id: %s nome: %s login: %s tokens: %s" %(self.idtatuador, self.nometatuador, self.logintatuador, self.apitokens)
 
 class Agenda(models.Model):
     idagenda = models.AutoField(db_column='idAgenda', primary_key=True)  # Field name made lowercase.
@@ -55,8 +17,46 @@ class Agenda(models.Model):
         managed = False
         db_table = 'Agenda'
 
-    def __str__(self):
-        return "id: %s data: %s horario: %s" %(self.idagenda, self.dataagenda, self.horarioagenda)
+
+class Catalogo(models.Model):
+    idcatalogo = models.AutoField(db_column='idCatalogo', primary_key=True)  # Field name made lowercase.
+    idimagem = models.ForeignKey('Imagens', models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Catalogo'
+
+
+class Cliente(models.Model):
+    idcliente = models.AutoField(db_column='idCliente', primary_key=True)  # Field name made lowercase.
+    nomecliente = models.CharField(db_column='nomeCliente', max_length=120, blank=True, null=True)  # Field name made lowercase.
+    logincliente = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='loginCliente')  # Field name made lowercase.
+    assiduidade = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Cliente'
+
+
+class Cor(models.Model):
+    idcor = models.AutoField(db_column='idCor', primary_key=True)  # Field name made lowercase.
+    colorido = models.IntegerField(blank=True, null=True)
+    faixavalor = models.FloatField(db_column='faixaValor', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Cor'
+
+
+class Emailcliente(models.Model):
+    idemail = models.AutoField(db_column='idEmail', primary_key=True)  # Field name made lowercase.
+    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente')  # Field name made lowercase.
+    enderecoemail = models.CharField(db_column='enderecoEmail', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'EmailCliente'
+
 
 class Estilos(models.Model):
     idestilo = models.AutoField(db_column='idEstilo', primary_key=True)  # Field name made lowercase.
@@ -65,6 +65,27 @@ class Estilos(models.Model):
     class Meta:
         managed = False
         db_table = 'Estilos'
+
+
+class Imagens(models.Model):
+    idimagem = models.AutoField(db_column='idImagem', primary_key=True)  # Field name made lowercase.
+    urlimagem = models.CharField(db_column='urlImagem', max_length=350, blank=True, null=True)  # Field name made lowercase.
+    ratins = models.IntegerField()
+    idestilo = models.ForeignKey(Estilos, models.DO_NOTHING, db_column='idEstilo')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Imagens'
+
+
+class Portifolio(models.Model):
+    idportifolio = models.AutoField(db_column='idPortifolio', primary_key=True)  # Field name made lowercase.
+    idimagem = models.ForeignKey(Imagens, models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Portifolio'
+
 
 class Regiao(models.Model):
     idregiao = models.AutoField(db_column='idRegiao', primary_key=True)  # Field name made lowercase.
@@ -75,14 +96,31 @@ class Regiao(models.Model):
         managed = False
         db_table = 'Regiao'
 
-class Cor(models.Model):
-    idcor = models.AutoField(db_column='idCor', primary_key=True)  # Field name made lowercase.
-    colorido = models.IntegerField(blank=True, null=True)
-    faixavalor = models.FloatField(db_column='faixaValor', blank=True, null=True)  # Field name made lowercase.
+
+class Servicos(models.Model):
+    idservico = models.AutoField(db_column='idServico', primary_key=True)  # Field name made lowercase.
+    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente')  # Field name made lowercase.
+    idimagem = models.ForeignKey(Imagens, models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
+    idcor = models.ForeignKey(Cor, models.DO_NOTHING, db_column='idCor')  # Field name made lowercase.
+    idtamanho = models.ForeignKey('Tamanho', models.DO_NOTHING, db_column='idTamanho')  # Field name made lowercase.
+    idregiao = models.ForeignKey(Regiao, models.DO_NOTHING, db_column='idRegiao')  # Field name made lowercase.
+    servicodesconto = models.FloatField(db_column='servicoDesconto', blank=True, null=True)  # Field name made lowercase.
+    servicofinalizado = models.IntegerField(db_column='servicoFinalizado', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'Cor'
+        db_table = 'Servicos'
+
+
+class Sessao(models.Model):
+    idsessao = models.AutoField(db_column='idSessao', primary_key=True)  # Field name made lowercase.
+    idagenda = models.ForeignKey(Agenda, models.DO_NOTHING, db_column='idAgenda')  # Field name made lowercase.
+    idservico = models.ForeignKey(Servicos, models.DO_NOTHING, db_column='idServico')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Sessao'
+
 
 class Tamanho(models.Model):
     idtamanho = models.AutoField(db_column='idTamanho', primary_key=True)  # Field name made lowercase.
@@ -94,72 +132,47 @@ class Tamanho(models.Model):
         db_table = 'Tamanho'
 
 
+class Tatuador(models.Model):
+    idtatuador = models.AutoField(db_column='idTatuador', primary_key=True)  # Field name made lowercase.
+    nometatuador = models.CharField(db_column='nomeTatuador', max_length=120, blank=True, null=True)  # Field name made lowercase.
+    logintatuador = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='loginTatuador')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Tatuador'
+
+
 class Telefonecliente(models.Model):
     idtelefone = models.AutoField(db_column='idTelefone', primary_key=True)  # Field name made lowercase.
-    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente', blank=True, null=False)  # Field name made lowercase.
+    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente')  # Field name made lowercase.
     numerotelefone = models.CharField(db_column='numeroTelefone', max_length=15, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'TelefoneCliente'
 
-class Emailcliente(models.Model):
-    idemail = models.AutoField(db_column='idEmail', primary_key=True)  # Field name made lowercase.
-    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente', blank=True, null=False)  # Field name made lowercase.
-    enderecoemail = models.CharField(db_column='enderecoEmail', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+class Usuario(models.Model):
+    idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
+    loginusuario = models.CharField(db_column='loginUsuario', max_length=120)  # Field name made lowercase.
+    senhausuario = models.CharField(db_column='senhaUsuario', max_length=500)  # Field name made lowercase.
+    tipousuario = models.IntegerField(db_column='tipoUsuario')  # Field name made lowercase.
+    econfiavel = models.IntegerField(db_column='eConfiavel')  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'EmailCliente'
+        db_table = 'Usuario'
 
-class Imagens(models.Model):
-    idimagem = models.AutoField(db_column='idImagem', primary_key=True)  # Field name made lowercase.
-    urlimagem = models.CharField(db_column='urlImagem', max_length=350, blank=True, null=True)  # Field name made lowercase.
-    ratins = models.IntegerField(blank=True, null=True)
-    idestilo = models.ForeignKey(Estilos, models.DO_NOTHING, db_column='idEstilo', blank=True, null=False)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'Imagens'
-
-class Portifolio(models.Model):
-    idportifolio = models.AutoField(db_column='idPortifolio', primary_key=True)  # Field name made lowercase.
-    idimagem = models.ForeignKey(Imagens, models.DO_NOTHING, db_column='idImagem', blank=True, null=False)  # Field name made lowercase.
+class Apitokens(models.Model):
+    idapitokens = models.AutoField(db_column='idApiTokens', primary_key=True)  # Field name made lowercase.
+    tatuador = models.ForeignKey(Tatuador, models.DO_NOTHING, db_column='Tatuador')  # Field name made lowercase.
+    nomeapi = models.CharField(db_column='nomeApi', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    token = models.CharField(max_length=350, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'Portifolio'
-
-class Catalogo(models.Model):
-    idcatalogo = models.AutoField(db_column='idCatalogo', primary_key=True)  # Field name made lowercase.
-    idimagem = models.ForeignKey('Imagens', models.DO_NOTHING, db_column='idImagem', blank=True, null=False)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Catalogo'
-
-class Servicos(models.Model):
-    idservico = models.AutoField(db_column='idServico', primary_key=True)  # Field name made lowercase.
-    idcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='idCliente', blank=True, null=False)  # Field name made lowercase.
-    idimagem = models.ForeignKey(Imagens, models.DO_NOTHING, db_column='idImagem', blank=True, null=False)  # Field name made lowercase.
-    idcor = models.ForeignKey(Cor, models.DO_NOTHING, db_column='idCor', blank=True, null=False)  # Field name made lowercase.
-    idtamanho = models.ForeignKey('Tamanho', models.DO_NOTHING, db_column='idTamanho', blank=True, null=False)  # Field name made lowercase.
-    idregiao = models.ForeignKey(Regiao, models.DO_NOTHING, db_column='idRegiao', blank=True, null=False)  # Field name made lowercase.
-    servicodesconto = models.FloatField(db_column='servicoDesconto', blank=True, null=True)  # Field name made lowercase.
-    servicofinalizado = models.IntegerField(db_column='servicoFinalizado', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Servicos'
-
-class Sessao(models.Model):
-    idsessao = models.AutoField(db_column='idSessao', primary_key=True)  # Field name made lowercase.
-    idagenda = models.ForeignKey(Agenda, models.DO_NOTHING, db_column='idAgenda', blank=True, null=False)  # Field name made lowercase.
-    idservico = models.ForeignKey(Servicos, models.DO_NOTHING, db_column='idServico', blank=True, null=False)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Sessao'
+        db_table = 'apiTokens'
 
 
 class AuthGroup(models.Model):
@@ -270,3 +283,6 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+    def __str__():
+        return "%s, %s, %s" %(self.session_key, self.session_data, self.expire_date)

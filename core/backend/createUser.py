@@ -1,4 +1,4 @@
-from core.Backend.criptografia import compararSenha, cript
+from core.backend.criptografia import compararSenha, cript
 from core.models import Usuario
 
 def salvaUsuario(login, password, re_password, salt, tipo):
@@ -8,7 +8,7 @@ def salvaUsuario(login, password, re_password, salt, tipo):
         msg += "Login já registrado! "
     else:
         if password == re_password and compararSenha(password, cript(re_password, salt)):
-            user = Usuario.objects.create(loginusuario=login, senhausuario=cript(password, salt), tipousuario=tipo)
+            user = Usuario.objects.create(loginusuario=login, senhausuario=cript(password, salt), tipousuario=tipo, econfiavel=False)
             user.save()
             return True
         else:

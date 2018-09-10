@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% load static %}
 {% block title%}Justino Art Tattoo{% endblock %}
 {% block main %}
+{{ resp }}
+<a href="{% url 'sair' %}">Sair</a>
 <!-- Portfolio Section -->
-<a href="https://api.pinterest.com/oauth/?response_type=code&redirect_uri=https://zzzaik.pythonanywhere.com&client_id=4987027583347471180&scope=read_public,write_public&state=1">Pinterest1</a></a>
-<a href="https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code&client_id=4987027583347471180&client_secret=e88c0c44d55b40592e4d1ca116ccc7524004c37f5b46cb853e9eb5e9af5dfc6f&code=48576f5ad4821178">Pinterest2</a>
 <div>
     <div class="container">
         <div class="section-title text-center center">

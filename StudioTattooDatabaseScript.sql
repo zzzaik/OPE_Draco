@@ -1,8 +1,9 @@
 create table Usuario (
     idUsuario INT AUTO_INCREMENT,
-    loginUsuario VARCHAR(120),
-    senhaUsuario VARCHAR(500),
-    tipoUsuario CHAR(2),
+    loginUsuario VARCHAR(120) NOT NULL,
+    senhaUsuario VARCHAR(500) NOT NULL,
+    tipoUsuario BOOLEAN DEFAULT FALSE NOT NULL,
+    eConfiavel BOOLEAN DEFAULT FALSE NOT NULL,
     CONSTRAINT pk_Usuario PRIMARY KEY (idUsuario)
 );
 
@@ -10,9 +11,17 @@ create table Tatuador (
 	idTatuador INT AUTO_INCREMENT,
 	nomeTatuador VARCHAR(120),
 	loginTatuador INT NOT NULL,
-	apiTokens VARCHAR(350) NULL,
 	CONSTRAINT pk_Tatuador PRIMARY KEY (idTatuador),
 	CONSTRAINT fk_LoginTatuador FOREIGN KEY (loginTatuador) REFERENCES Usuario(idUsuario)
+);
+
+create table apiTokens  (
+    idApiTokens INT AUTO_INCREMENT,
+    Tatuador INT NOT NULL,
+    nomeApi VARCHAR(50),
+    token VARCHAR(350),
+    CONSTRAINT pk_apiTokens PRIMARY KEY (idApiTokens),
+    CONSTRAINT fk_Tatuador FOREIGN KEY (Tatuador) REFERENCES Tatuador(idTatuador)
 );
 
 create table Cliente (

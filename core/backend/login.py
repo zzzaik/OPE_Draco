@@ -1,4 +1,4 @@
-from core.Backend.criptografia import compararSenha
+from core.backend.criptografia import compararSenha
 from core.models import Usuario
 
 #from django.db import connection, transaction
@@ -6,10 +6,10 @@ from core.models import Usuario
 def logar(login, password):
     user = Usuario.objects.filter(loginusuario=login)
     if not user:
-        return False
+        return [False, False]
     if compararSenha(password, user[0].senhausuario):
-        return True
-    return False
+        return [True, user[0].tipousuario]
+    return [False, False]
 
 def getUsuarios(): #se for usar o raw sem models usar (campo, valor)
     values_list = Usuario.objects.values_list('idusuario', 'loginusuario', 'senhausuario', 'tipousuario') #para chamar so 1 valor usar flat=True
