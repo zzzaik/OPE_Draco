@@ -1,7 +1,3 @@
-function logout(val){
-    val.submit();
-}
-
 function SubmitFormLogin(){
     document.getElementById("formLogin").submit();
     toggleDisplayNone();

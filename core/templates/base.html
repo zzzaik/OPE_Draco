@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-    </header>   
+    </header>
     <!-- Navigation -->
     <div id="nav">
         <nav class="navbar navbar-custom">
@@ -77,9 +77,15 @@
                         <li>
                             <a class="page-scroll" href="{% url 'promocao' %}">Promoções</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="{% url 'login' %}">Usuário</a>
-                        </li>
+                        {% if resp.auth %}
+                            <li>
+                                <a class="page-scroll" href="{% url 'cadastraDados' %}">Dados</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="page-scroll" href="{% url 'login' %}">Usuário</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
