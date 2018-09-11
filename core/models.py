@@ -152,6 +152,16 @@ class Telefonecliente(models.Model):
         db_table = 'TelefoneCliente'
 
 
+class Token(models.Model):
+    idtoken = models.AutoField(db_column='idToken', primary_key=True)  # Field name made lowercase.
+    idusuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='idUsuario')  # Field name made lowercase.
+    token = models.CharField(max_length=350)
+
+    class Meta:
+        managed = False
+        db_table = 'Token'
+
+
 class Usuario(models.Model):
     idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
     loginusuario = models.CharField(db_column='loginUsuario', max_length=120)  # Field name made lowercase.
@@ -283,6 +293,3 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-
-    def __str__():
-        return "%s, %s, %s" %(self.session_key, self.session_data, self.expire_date)

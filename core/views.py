@@ -6,12 +6,12 @@ from core.backend.instaAPI import alocarFotos
 from core.backend.pinterAPI import pins
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar, getUsuarios
+from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession
+#from core.backend.enviaConfirmacao import *
+from core.backend.redefinicaoSenha import enviarToken, verificarToken, alterarSenha
 #from core.models import Usuario
 
-def verifySession(request):
-    if request.session.get('user') is None:
-        request.session['user'] = {'username':'','name':'','type':'','auth':False}
-    return request.session.get('user')
+
 
 def index(request):
     #Usuario.objects.create(loginusuario="tatuador@tattoo.com", senhausuario="$2y$08$0X2GdkM5nBuiL4Dh.Igw6enQ/yegLU866sj7RekUJfH.w6564okSq", tipousuario=True, econfiavel=True)
@@ -23,34 +23,33 @@ def index(request):
     return render(request, 'index.html', context)
 
 def agenda(request):
-    verifySession(request)
-    return render(request, 'agenda.html')
+    context = {
+        'resp': verifySession(request)
+    }
+    return render(request, 'agenda.html', context)
 
 def promocao(request):
-    verifySession(request)
-    return render(request, 'promocao.html')
+    context = {
+        'resp': verifySession(request)
+    }
+    return render(request, 'promocao.html', context)
 
 def portfolio(request):
-    verifySession(request)
     context = {
-        'fotos': alocarFotos()
+        'fotos': alocarFotos(),
+        'resp': verifySession(request)
     }
     return render(request, 'portfolio.html', context)
 
 def catalogo(request):
-    verifySession(request)
     context = {
-        'pins': pins()
+        'pins': pins(),
+        'resp': verifySession(request)
     }
     return render(request, 'catalogo.html',context)
 
 
 ##############################################   Usuario ##################################################
-
-def isLogged(request):
-    verifySession(request)
-    return request.session['user']['auth'] #retorna True quando o usuario está autentucado e False quando não está
-
 
 def login(request):
     if isLogged(request):
@@ -73,7 +72,33 @@ def login(request):
     return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios())})
 
 def redefinirSenha(request):
-    pass
+    msg = ''
+    salt = 8
+    if not isLogged(request):
+        if request.method == 'POST':
+            try:
+                login = request.POST['email']
+                msg += enviarToken(login)
+                redefSenhaSession(request, login)
+                context = {'ret':True, 'mail':True, 'msg':msg}
+            except:
+                login = request.session.get('login')
+                msg += verificarToken(login, request.POST['token'])
+                msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'], salt)
+            context = {'ret':True, 'mail':True, 'msg':msg}
+        else:
+            context = {'ret':True, 'mail':False, 'msg':msg}
+        return render(request, 'user/redefinirSenha.html', context)
+    context = {'ret':False}
+    return render(request, 'user/redefinirSenha.html', context)
+
+def configsConta(request):
+    if not isLogged(request):
+        return HttpResponseRedirect('/')
+    if request.method == 'POST':
+        context = {'ret':request.POST}
+    context = {'ret':request.POST}
+    return render(request, 'user/configsConta.html', context)
 
 def sair(request):
     try:

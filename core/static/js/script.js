@@ -1,6 +1,14 @@
+function SubmitFormEnviarToken(){
+    document.getElementById("formEnviarToken").submit();
+}
+
+function SubmitFormReSenha(){
+    document.getElementById("formReSenha").submit();
+}
+
 function SubmitFormLogin(){
     document.getElementById("formLogin").submit();
-    toggleDisplayNone();
+    //toggleDisplayNone();
 }
 
 function SubmitFormCadastro(){

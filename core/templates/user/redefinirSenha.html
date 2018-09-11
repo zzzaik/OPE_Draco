@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% load static %}
+{% block title%}Justino Art Tattoo{% endblock %}
+{% block main %}
+{{ ret }}
+{{ mail }}
+<div id='loginDiv' class='container spaceUp spaceDown'>
+
+    {% if mail %}
+        <form id="formReSenha" method="POST" class='form-horizontal'>
+            {% csrf_token %}
+            <div class='form-group row'>
+                {% if msg != '' %}
+                    <h6 class="msgErroForm">{{ msg }}</h6>
+                {% endif %}
+                {% if ret %}
+                    <label name="token" class='control-label col-lg-2'>Código:</label>
+                    <div class="col-lg-3">
+                        <input name="token" type="text" id="token" class="form-control"/>
+                    </div>
+                {% else %}
+                    <label name="senha_antiga" class='control-label col-lg-2'>Senha antiga:</label>
+                    <div class="col-lg-3">
+                        <input name="senha_antiga" type="password" id="senha_antiga" class="form-control"/>
+                    </div>
+                {% endif %}
+            </div>
+            <div class='form-group row'>
+                <label name="senha" class='control-label col-lg-2'>Nova senha:</label>
+                <div class="col-lg-3">
+                    <input name="senha" id="senha" type="password" class="form-control"/>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <label name="re_senha" class='control-label col-lg-2'>Reescreva a nova senha:</label>
+                <div class="col-lg-3">
+                    <input name="re_senha" id="re_senha" type="password" class="form-control"/>
+                </div>
+            </div>
+            <div class="row col-lg-offset-2">
+                <button type="submit" form="formReSenha" value="Submit" onclick="SubmitFormReSenha()" class='btn btn-primary'>Alerar Senha</button>
+            </div>
+        </form>
+    {% else %}
+        <form id="formEnviarToken" method="POST" class='form-horizontal'>
+            {% csrf_token %}
+            <div class='form-group row'>
+                {% if msg != '' %}
+                    <h6 class="msgErroForm">{{ msg }}</h6>
+                {% endif %}
+                <label name="email" class='control-label col-lg-2'>Login:</label>
+                <div class="col-lg-3">
+                    <input name="email" type="mail" id="email" class="form-control"/>
+                </div>
+            <div class="row col-lg-offset-2">
+                <button type="submit" form="formEnviarToken" value="Submit" onclick="SubmitFormEnviarToken()" class='btn btn-primary'>Enviar Código</button>
+            </div>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

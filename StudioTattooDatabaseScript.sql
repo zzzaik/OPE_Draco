@@ -7,6 +7,14 @@ create table Usuario (
     CONSTRAINT pk_Usuario PRIMARY KEY (idUsuario)
 );
 
+create table Token (
+    idTokens INT AUTO_INCREMENT,
+    idUsuario INT NOT NULL,
+    token VARCHAR(350) NOT NULL,
+    CONSTRAINT pk_Token PRIMARY KEY (idToken),
+    CONSTRAINT fk_TokenUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+);
+
 create table Tatuador (
 	idTatuador INT AUTO_INCREMENT,
 	nomeTatuador VARCHAR(120),
