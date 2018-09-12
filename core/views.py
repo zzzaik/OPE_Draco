@@ -30,7 +30,8 @@ def agenda(request):
 
 def promocao(request):
     context = {
-        'resp': verifySession(request)
+        'resp': verifySession(request),
+        'fotos': alocarFotos()
     }
     return render(request, 'promocao.html', context)
 
