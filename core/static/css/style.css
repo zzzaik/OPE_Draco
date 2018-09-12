@@ -764,6 +764,7 @@ header .intro-text {
 	display: none;
 }
 
+
 /*base.css*/
 #map{
     height: 20em;
@@ -919,7 +920,7 @@ header .intro-text {
 /* Promocoes.css */
 .gridPromos {
 	display: inline-grid;
-	width:90%;
+	width:60%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 280px 280px;
 	grid-auto-rows: 280px;
@@ -927,6 +928,7 @@ header .intro-text {
 	justify-items: center;
 	align-content: center;
 	margin-bottom: 15px;
+	margin-left: 20%;
 }
 
 .promoTag {
@@ -951,5 +953,20 @@ header .intro-text {
 .pacoteContainer {
 	display: flex;
 	flex-flow: row;
-	align-content: space-around;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.infoPacote {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.infoPacote.precoNovo {
+	color: rgb(0,255,13);
+}
+
+.infoPacote.precoAntigo {
+	color: rgb(255, 0, 0);
 }
