@@ -916,4 +916,40 @@ header .intro-text {
 	color: #fff;
 }
 
-/* Usuario.css */
+/* Promocoes.css */
+.gridPromos {
+	display: inline-grid;
+	width:90%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px 280px;
+	grid-auto-rows: 280px;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	margin-bottom: 15px;
+}
+
+.promoTag {
+	position: absolute;
+	top:0px;
+	right:0px;
+	width:20px;
+	height:10px;
+	background-color: rgb(0, 255, 13);
+	color: #fff;
+}
+
+.gridPacotes {
+	display: inline-grid;
+	width:90%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 280px 280px;
+	grid-auto-rows: 280px;
+	margin-bottom: 15px;
+}
+
+.pacoteContainer {
+	display: flex;
+	flex-flow: row;
+	align-content: space-around;
+}

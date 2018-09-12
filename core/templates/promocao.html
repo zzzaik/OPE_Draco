@@ -3,5 +3,52 @@
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Promoções{% endblock %}
 {% block main %}
-    <h1>Em construção</h1>
+<div class="container">
+    <div class="section-title text-center center">
+        <h2>Promoções do Dia</h2>
+        <hr>
+    </div>
+    <div class="gridPromos">
+        {% for promocao, img in fotos.items %}
+        <div class="gridFoto">
+            <div class="portfolio-item">
+                <div class="hover-bg">
+                    <a href="{{ img }}" rel="prettyPhoto">
+                        <div class="hover-text"></div>
+                        <img src="{{ img }}" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section-title text-center center">
+        <h2>Pacotes</h2>
+        <hr>
+    </div>
+    <div class="gridPacotes">
+    {% for pacotes, img in fotos.items %}
+        <div class="pacoteContainer">
+            <div class="infoPacote">
+                <p>Algum Item</p>
+                <p>Mais um Item</p>
+                <p>Outro Item</p>
+                <span>Preço Antigo</span>
+                <span>Preço Novo</span>
+            </div>
+            <div class="gridFoto">
+                <div class="portfolio-item">
+                    <div class="hover-bg">
+                        <a href="{{ img }}" rel="prettyPhoto">
+                            <div class="hover-text"></div>
+                            <img src="{{ img }}" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
