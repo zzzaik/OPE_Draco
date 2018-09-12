@@ -892,6 +892,7 @@ header .intro-text {
 
 .gridFoto {
 	width:90%;
+	overflow: hidden;
 }
 
 .sidebarFiltro {
@@ -963,10 +964,10 @@ header .intro-text {
 	font-weight: bold;
 }
 
-.infoPacote.precoNovo {
+.infoPacote .precoNovo {
 	color: rgb(0,255,13);
 }
 
-.infoPacote.precoAntigo {
+.infoPacote .precoAntigo {
 	color: rgb(255, 0, 0);
 }
