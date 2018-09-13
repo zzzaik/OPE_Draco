@@ -34,9 +34,9 @@ def verificarToken(login, token):
     return 'Código incorreto! '
 
 def alterarSenha(login, password, re_password, salt):
-    user = Usuario.objects.get(loginusuario=login)
+    user = Usuario.objects.filter(loginusuario=login)
     if password == re_password and compararSenha(password, cript(re_password, salt)):
-        user.senhausuario = cript(password, salt)
+        user.update(senhausuario=cript(password, salt))
         return ''
     return 'As senhas não batem! '
 
