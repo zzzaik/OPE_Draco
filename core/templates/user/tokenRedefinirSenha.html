@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %}
+{% block title%}Justino Art Tattoo{% endblock %}
+{% block main %}
+{{ ret }}
+{{ mail }}
+<div id='loginDiv' class='container spaceUp spaceDown'>
+    <form id="formEnviarToken" method="POST" class='form-horizontal'>
+        {% csrf_token %}
+        <div class='form-group row'>
+            {% if msg != '' %}
+                <h6 class="msgErroForm">{{ msg }}</h6>
+            {% endif %}
+            <label name="email" class='control-label col-lg-2'>Login:</label>
+            <div class="col-lg-3">
+                <input name="email" type="mail" id="email" class="form-control"/>
+            </div>
+        <div class="row col-lg-offset-2">
+            <button type="submit" form="formEnviarToken" value="Submit" onclick="SubmitFormEnviarToken()" class='btn btn-primary'>Enviar Código</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

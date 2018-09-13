@@ -161,6 +161,9 @@ class Token(models.Model):
         managed = False
         db_table = 'Token'
 
+    def __str__(self):
+        return str(self.token)
+
 
 class Usuario(models.Model):
     idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.

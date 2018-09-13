@@ -62,7 +62,7 @@ def login(request):
         Returnlogar = logar(login, password)
         if Returnlogar[0]:
             request.session['user'] = {
-                'username':login,
+                'login':login,
                 'name':'',
                 'type':Returnlogar[1],
                 'auth':True
@@ -73,26 +73,35 @@ def login(request):
     request.POST
     return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios())})
 
+def tokenRedefinirSenha(request):
+    if isLogged(request):
+        return HttpResponseRedirect('/user/redefinir_senha/')
+    if request.method == 'POST':
+        login = request.POST['email']
+        msg = enviarToken(login)
+        redefSenhaSession(request, login)
+        if msg != True:
+            return render(request, 'user/tokenRedefinirSenha.html', {'msg':msg})
+        return HttpResponseRedirect('/user/redefinir_senha/')
+    return render(request, 'user/tokenRedefinirSenha.html')
+
 def redefinirSenha(request):
     msg = ''
     salt = 8
+    ret = False
     if not isLogged(request):
-        if request.method == 'POST':
-            try:
-                login = request.POST['email']
-                msg += enviarToken(login)
-                redefSenhaSession(request, login)
-                context = {'ret':True, 'mail':True, 'msg':msg}
-            except:
-                login = request.session.get('login')
-                msg += verificarToken(login, request.POST['token'])
-                msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'], salt)
-            context = {'ret':True, 'mail':True, 'msg':msg}
-        else:
-            context = {'ret':True, 'mail':False, 'msg':msg}
-        return render(request, 'user/redefinirSenha.html', context)
-    context = {'ret':False}
-    return render(request, 'user/redefinirSenha.html', context)
+        pass
+    if request.method == 'POST':
+        login = request.session['login']
+        if login is None:
+            ret = True
+            login = request.session['user']['login']
+        msg += verificarToken(login, request.POST['token'])
+        msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'], salt)
+        if msg != '':
+            return render(request, 'user/redefinirSenha.html', {'msg':msg, 'ret':ret})
+        return render(request, 'user/redefinirSenha.html', {'msg':'Senha alterada com sucesso', 'ret':ret})
+    return render(request, 'user/redefinirSenha.html', {'msg':msg, 'ret':ret})
 
 def configsConta(request):
     if not isLogged(request):

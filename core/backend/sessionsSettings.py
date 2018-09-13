@@ -1,6 +1,6 @@
 def verifySession(request):
     if request.session.get('user') is None:
-        request.session['user'] = {'username':'','name':'','type':'','auth':False}
+        request.session['user'] = {'login':'','name':'','type':'','auth':False}
     return request.session.get('user')
 
 def isLogged(request):

@@ -17,7 +17,7 @@ Including another URLconf
 #from django.contrib.auth.models import User
 #from django.conf.urls.static import static
 from django.urls import path#, include
-from core.views import index, agenda, promocao, portfolio, catalogo, login, criarConta, sair, cadastraDados, redefinirSenha, configsConta
+from core.views import index, agenda, promocao, portfolio, catalogo, login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta
 
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
@@ -30,8 +30,9 @@ urlpatterns = [
     path('user/login/', login, name = 'login'),
     path('user/criar_conta/', criarConta, name = 'criarConta'),
     path('user/sair/', sair, name='sair'),
-    path('user/redefinir_senha', redefinirSenha, name = 'redefinirSenha'),
-    path('user/configuracao_conta', configsConta, name = 'configsConta'),
+    path('user/redefinir_senha/', redefinirSenha, name = 'redefinirSenha'),
+    path('user/token_redefinir_senha/', tokenRedefinirSenha, name = 'tokenRedefinirSenha'),
+    path('user/configuracao_conta/', configsConta, name = 'configsConta'),
     path('user/cadastra_dados/', cadastraDados, name = 'cadastraDados'),
     ##############################
 ]
