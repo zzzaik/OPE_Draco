@@ -9,15 +9,15 @@
             {% if msg != '' %}
                 <h6 class="msgErroForm">{{ msg }}</h6>
             {% endif %}
-            {% if not ret %}
-                <label name="token" class='control-label col-lg-2'>Código:</label>
-                <div class="col-lg-3">
-                    <input name="token" type="text" id="token" class="form-control"/>
-                </div>
-            {% else %}
+            {% if ret %}
                 <label name="senha_antiga" class='control-label col-lg-2'>Senha antiga:</label>
                 <div class="col-lg-3">
                     <input name="senha_antiga" type="password" id="senha_antiga" class="form-control"/>
+                </div>
+            {% else %}
+                <label name="token" class='control-label col-lg-2'>Código:</label>
+                <div class="col-lg-3">
+                    <input name="token" type="text" id="token" class="form-control"/>
                 </div>
             {% endif %}
         </div>

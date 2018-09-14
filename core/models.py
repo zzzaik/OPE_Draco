@@ -156,13 +156,12 @@ class Token(models.Model):
     idtoken = models.AutoField(db_column='idToken', primary_key=True)  # Field name made lowercase.
     idusuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='idUsuario')  # Field name made lowercase.
     token = models.CharField(max_length=350)
+    ativo = models.IntegerField()
+    tipo = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'Token'
-
-    def __str__(self):
-        return str(self.token)
 
 
 class Usuario(models.Model):

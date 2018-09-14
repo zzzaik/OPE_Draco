@@ -6,9 +6,10 @@ from core.backend.instaAPI import alocarFotos
 from core.backend.pinterAPI import pins
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar, getUsuarios
-from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession
+from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession, killSession
 #from core.backend.enviaConfirmacao import *
-from core.backend.redefinicaoSenha import enviarToken, verificarToken, alterarSenha
+from core.backend.redefinicaoSenha import alterarSenha
+from core.backend.token import enviarToken, verificarToken
 #from core.models import Usuario
 
 
@@ -78,7 +79,7 @@ def tokenRedefinirSenha(request):
         return HttpResponseRedirect('/user/redefinir_senha/')
     if request.method == 'POST':
         login = request.POST['email']
-        msg = enviarToken(login)
+        msg = enviarToken(login, 0)
         redefSenhaSession(request, login)
         if msg != True:
             return render(request, 'user/tokenRedefinirSenha.html', {'msg':msg})
@@ -96,12 +97,33 @@ def redefinirSenha(request):
         if login is None:
             ret = True
             login = request.session['user']['login']
-        msg += verificarToken(login, request.POST['token'])
-        msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'], salt)
-        if msg != '':
-            return render(request, 'user/redefinirSenha.html', {'msg':msg, 'ret':ret})
-        return render(request, 'user/redefinirSenha.html', {'msg':'Senha alterada com sucesso', 'ret':ret})
+        try:
+            msg += verificarToken(login, request.POST['token'])
+        except:
+            pass
+        if msg == '':
+            msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'], salt)
+            if msg == '':
+                try:
+                    killSession(request, login)
+                except:
+                    pass
+                return render(request, 'user/redefinirSenha.html', {'msg':'Senha alterada com sucesso', 'ret':ret})
+        return render(request, 'user/redefinirSenha.html', {'msg':msg, 'ret':ret})
+    ret = True
     return render(request, 'user/redefinirSenha.html', {'msg':msg, 'ret':ret})
+
+def confirmEmail(request):
+    ret = False
+    if not isLogged(request):
+        return HttpResponseRedirect('/')
+    if request.method == 'POST':
+        msg = verificarToken(request.session['user']['login'], request.POST['token'])
+        if msg != '':
+            return render(request, 'user/confirmar_email.html', {'msg':msg, 'ret':ret})
+        ret = True
+        return render(request, 'user/confirmar_email.html', {'ret':ret})
+    return render(request, 'user/confirmar_email.html', {'ret':ret})
 
 def configsConta(request):
     if not isLogged(request):
@@ -129,19 +151,12 @@ def criarConta(request):
         nSalt = 8
         mensagens = salvaUsuario(login, password, re_password, nSalt, False)
         if mensagens != True:
-            context = {
-                'msgs':mensagens
-            }
-            return render(request, 'user/criarConta.html', context)
-        context = {
-            'msgs':''
-        }
+            return render(request, 'user/criarConta.html', {'msgs':mensagens})
+        token = enviarToken(login, 1)
+        if token != '':
+            return render(request, 'user/criarConta.html', {'msgs':token})
         return HttpResponseRedirect('/')
-    request.POST
-    context = {
-        'msgs':''
-    }
-    return render(request, 'user/criarConta.html', context)
+    return render(request, 'user/criarConta.html', {'msgs':''})
 
 def cadastraDados(request):
     if not isLogged(request):

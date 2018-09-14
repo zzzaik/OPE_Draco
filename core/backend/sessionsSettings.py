@@ -11,3 +11,7 @@ def redefSenhaSession(request, login):
     if request.session.get('login') is None:
         request.session['login'] = login
     return request.session.get('login')
+
+def killSession(request, session):
+    if request.session.get(session) is not None:
+        del request.session[session]
