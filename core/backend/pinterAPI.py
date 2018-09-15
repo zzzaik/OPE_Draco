@@ -15,12 +15,22 @@ def getMyBoards():
     ret = req.api.get(url).json()
     return ret
 
-def pins():
+def pins(imgs=0):
     pins = {}
     resp = getImages()
     cont = 0
-    for elements in resp['data']['pins']:
-        pins[cont] = elements['images']['237x']['url']
-        cont += 1
-    return pins
+    if imgs == 0:
+        for elements in resp['data']['pins']:
+            pins[cont] = elements['images']['237x']['url']
+            cont += 1
+        return pins
+    else:
+        while cont < imgs:
+            print(resp['data']['pins'])
+            pins[cont] = resp['images']['237x']['url']
+            cont += 1
+        return pins
+
+print(pins())
+print(pins(4))
 
