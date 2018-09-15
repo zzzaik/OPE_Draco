@@ -23,7 +23,7 @@ function SubmitFormInfoUser(){
     let formUser = document.getElementById("formInfoUser").children;
     for (child in formUser) {
         if (child.disabled == false) {
-            child.disabled == true;
+            child.disabled = true;
         }
     }
     if (!btnSave.classList.contains("displayNone")) {
@@ -35,7 +35,7 @@ function AtualizarFormInfoUser(){
     let formUser = document.getElementById("formInfoUser").children;
     for (child in formUser) {
         if (child.disabled == true) {
-            child.disabled == false;
+            child.disabled = false;
         }
     }
     let btnSave = document.getElementById("btnSalvarFormUser");
