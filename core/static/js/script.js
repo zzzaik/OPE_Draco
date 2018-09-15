@@ -21,7 +21,7 @@ function SubmitFormInfoUser(){
     text.innerHTML='Disabled';
     
     let btnSave = document.getElementById("btnSalvarFormUser");
-    let formUser = document.getElementById("formInfoUser").children;
+    let formUser = document.getElementsByTagName("input");
     for (child in formUser) {
         if (child.disabled == false) {
             child.disabled = true;
@@ -33,7 +33,7 @@ function SubmitFormInfoUser(){
 }
 
 function AtualizarFormInfoUser(){
-    let formUser = document.getElementById("formInfoUser").children;
+    let formUser = document.getElementsByTagName("input");
     for (child in formUser) {
         if (child.disabled == true) {
             child.disabled = false;
