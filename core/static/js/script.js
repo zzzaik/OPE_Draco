@@ -20,6 +20,7 @@ function SubmitFormInfoUser(){
     let text = document.getElementById("btnSalvarFormUser");
     text.innerHTML='Disabled';
     
+    let btnSave = document.getElementById("btnSalvarFormUser");
     let formUser = document.getElementById("formInfoUser").children;
     for (child in formUser) {
         if (child.disabled == false) {
