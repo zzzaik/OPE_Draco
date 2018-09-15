@@ -23,14 +23,11 @@ def pins(imgs=0):
         for elements in resp['data']['pins']:
             pins[cont] = elements['images']['237x']['url']
             cont += 1
-        return pins
+            return pins
     else:
+        elements = resp['data']['pins']
         while cont < imgs:
-            print(resp['data']['pins'])
-            pins[cont] = resp['images']['237x']['url']
+            pins[cont] = elements[cont]['images']['237x']['url']
             cont += 1
         return pins
-
-print(pins())
-print(pins(4))
 

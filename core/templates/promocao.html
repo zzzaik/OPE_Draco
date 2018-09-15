@@ -8,7 +8,7 @@
         <h2>Promoções do Dia</h2>
         <hr>
     </div>
-    <div class="gridPromos">
+    <div class="gridPromos" id="gridPromos">
         {% for index, img in fotos.items %}
         <div class="gridFoto">
             <div class="portfolio-item">
@@ -21,13 +21,14 @@
             </div>
         </div>
         {% endfor %}
+        <button type="button" class="btn btn-link">Ver Mais</button>
     </div>
 
     <div class="section-title text-center center">
         <h2>Pacotes</h2>
         <hr>
     </div>
-    <div class="gridPacotes">
+    <div class="gridPacotes" id="gridPacotes">
     {% for indice, img in pins.items %}
         <div class="pacoteContainer">
             <div class="infoPacote">
@@ -49,6 +50,7 @@
             </div>
         </div>
         {% endfor %}
+        <button type="button" class="btn btn-link">Ver Mais</button>
     </div>
 </div>
 {% endblock %}

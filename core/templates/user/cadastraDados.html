@@ -4,15 +4,9 @@
 {% block title %}Dados{% endblock %}
 {% block main %}
     {{ resp }}
-    <div id='clientPage' class='container spaceDown'>
+    <div id='clientPage' class='container spaceUp spaceDown'>
         <form id="formInfoUser" method="POST">
             {% csrf_token %}
-            <div class='form-group row'>
-                    <label class='control-label col-lg-1'>Nome:</label>
-                    <div class="col-lg-4">
-                        <input name="nome" type="text" id="nome" class="form-control" disabled/>
-                    </div>
-                </div>
             <div class='form-group row'>
                 <label name="login" class='control-label col-lg-1'>E-mail:</label>
                 <div class="col-lg-4">
@@ -22,36 +16,37 @@
             <div class='form-group row'>
                 <label name="CPF" class='control-label col-lg-1'>CPF:</label>
                 <div class="col-lg-4">
-                    <input name="CPF" id="CPF" type="text" class="form-control"/>
+                    <input name="CPF" id="CPF" type="text" class="form-control" disabled/>
                 </div>
             </div>
             <div class='form-group row'>
                 <label name="celular" class='control-label col-lg-1'>Celular:</label>
                 <div class="col-lg-4">
-                    <input name="celular" id="celular" type="number" class="form-control"/>
+                    <input name="celular" id="celular" type="number" class="form-control" disabled/>
                 </div>
             </div>
             <div class='form-group row'>
                     <label name="restricoes" class='control-label col-lg-1'>Restrições:</label>
                     <div class="col-lg-4 row moveLeft30">
                         <div class='checkbox row'>
-                            <label><input type="checkbox" value=''> Restrição 1</label>
+                            <label><input type="checkbox" value='' disabled> Restrição 1</label>
                         </div>
                         <div class='checkbox row'>
-                            <label><input type="checkbox" value=''> Restrição 2</label>
+                            <label><input type="checkbox" value='' disabled> Restrição 2</label>
                         </div>
                         <div class='checkbox row'>
-                            <label><input type="checkbox" value=''> Restrição 3</label>
+                            <label><input type="checkbox" value='' disabled> Restrição 3</label>
                         </div>
                         <div class='checkbox row'>
-                            <label><input type="checkbox" value=''> Restrição 4</label>
+                            <label><input type="checkbox" value='' disabled> Restrição 4</label>
                         </div>
                         <label for='outrasRestricoes'>Outras:</label>
-                        <textarea class='form-control' id="outrasRestricoes" rows='5'></textarea>
+                        <textarea class='form-control' id="outrasRestricoes" rows='5' disabled></textarea>
                     </div>
                 </div>
             <div class="row col-lg-offset-2">
-                <button type="submit" form="formInfoUser" value="Submit" id='btn1' onclick="SubmitFormInfoUser()" class='btn btn-primary'>Atualizar</button>
+                    <button type="button" id='btnAtualizarFormUser' onclick="AtualizarFormInfoUser()" class='btn btn-primary'>Atualizar</button>
+                <button type="submit" form="formInfoUser" value="Submit" id='btnSalvarFormUser' onclick="SubmitFormInfoUser()" class='btn btn-primary displayNone'>Salvar</button>
             </div>
         </form>
     </div>

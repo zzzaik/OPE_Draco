@@ -17,8 +17,40 @@ function SubmitFormCadastro(){
 
 
 function SubmitFormInfoUser(){
-    let text = document.getElementById("btn1");
+    let text = document.getElementById("btnSalvarFormUser");
     text.innerHTML='Disabled';
+    
+    let formUser = document.getElementById("formInfoUser").children;
+    for (child in formUser) {
+        if (child.disabled == false) {
+            child.disabled == true;
+        }
+    }
+    if (!btnSave.classList.contains("displayNone")) {
+        btnSave.classList.add("displayNone");
+    }
+}
+
+function AtualizarFormInfoUser(){
+    let formUser = document.getElementById("formInfoUser").children;
+    for (child in formUser) {
+        if (child.disabled == true) {
+            child.disabled == false;
+        }
+    }
+    let btnSave = document.getElementById("btnSalvarFormUser");
+    if (btnSave.classList.contains("displayNone")) {
+        btnSave.classList.remove("displayNone")
+    }
+}
+
+function showMore(id) {
+    let displayElements = document.getElementById(id).children
+    for (let i=0;i<displayElements.length;i++) {
+        if (displayElements.classList.contains("displayNone")) {
+            displayElements.classList.remove("displayNone")
+        }
+    }
 }
 
 function toggleDisplayNone() {

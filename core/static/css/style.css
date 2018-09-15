@@ -151,21 +151,7 @@ hr {
 	background-color: #121d1f;
 	border-color: #121d1f;
 }
-.btn-primary {
-	color: #fff;
-	background-color: #23272B;
-	padding: 10px 20px;
-	border-color: #999C9F;
-	border-radius: 4px;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-	color: #fff;
-	background-color: #343a40;
-	border-color: #999C9F;
-}
-.btn-primary i.fa {
-	margin-right: 10px;
-}
+
 /* Home Section */
 .intro {
 	font-family: 'Lobster Two', cursive;

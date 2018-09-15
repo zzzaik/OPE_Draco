@@ -5,11 +5,18 @@ def getPhoto():
     ret = req.api.get(url).json()
     return ret
 
-def alocarFotos():
+def alocarFotos(imgs=0):
     fotos = {}
     resp = getPhoto()
     cont = 0
-    for elements in resp['data']:
-        fotos[cont] = elements['images']['standard_resolution']['url']
-        cont += 1
-    return fotos
+    if imgs == 0:
+        for elements in resp['data']:
+            fotos[cont] = elements['images']['standard_resolution']['url']
+            cont += 1
+        return fotos
+    else:
+        elements = resp['data']
+        while cont < imgs:
+            fotos[cont] = elements[cont]['images']['standard_resolution']['url']
+            cont += 1
+        return fotos
