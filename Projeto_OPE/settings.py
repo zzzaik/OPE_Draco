@@ -81,7 +81,7 @@ DATABASES = {
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'zzzaik$JustinoTattooDB', #default
         'USER': 'zzzaik',
-        'PASSWORD': 'P@ssw0rd_OPEDraco',
+        'PASSWORD': 'S&nh@Just1n0ArtTattoo',
         'HOST': 'zzzaik.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
