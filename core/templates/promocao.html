@@ -12,11 +12,11 @@
         {% for index, img in fotos.items %}
         <div class="gridFoto">
             <div class="portfolio-item">
-                <span class="promoTag">{{ img['desconto'] }}</span>
+                <span class="promoTag">{{ fotos.items[img]['desconto'] }}</span>
                 <div class="hover-bg">
-                    <a href="{{ img['url'] }}" rel="prettyPhoto">
+                    <a href="{{ fotos.items[img]['url'] }}" rel="prettyPhoto">
                         <div class="hover-text"></div>
-                        <img src="{{ img['url'] }}" class="img-responsive">
+                        <img src="{{ fotos.items[img]['url'] }}" class="img-responsive">
                     </a>
                 </div>
             </div>
