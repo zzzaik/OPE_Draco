@@ -33,7 +33,7 @@ function SubmitFormInfoUser(){
 }
 
 function AtualizarFormInfoUser(){
-    let inputs = document.getElementsByTagName("input");
+    let inputs = document.getElementsByTagName("input textarea");
     for (let i=0; i<inputs.length;i++) {
         if (inputs[i].disabled) {
             inputs[i].disabled = false;
