@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos
 from core.backend.pinterAPI import pins
+from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar, getUsuarios
 from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession, killSession
@@ -31,9 +32,9 @@ def agenda(request):
 
 def promocao(request):
     context = {
-        'fotos': alocarFotos(),
+        'fotos': getPromos(),
         'pins': pins(),
-        'resp': verifySession(request)
+        'resp': verifySession(request),
     }
     return render(request, 'promocao.html', context)
 
