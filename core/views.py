@@ -32,7 +32,7 @@ def agenda(request):
 
 def promocao(request):
     context = {
-        'fotos': getPromos(),
+        'fotos': alocarFotos(),
         'pins': pins(),
         'resp': verifySession(request),
     }
