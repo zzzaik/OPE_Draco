@@ -957,3 +957,9 @@ header .intro-text {
 .infoPacote .precoAntigo {
 	color: rgb(255, 0, 0);
 }
+
+/* cadastraDados.html */
+.textBox {
+	resize: none;
+	overflow: auto;
+}

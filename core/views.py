@@ -51,6 +51,12 @@ def catalogo(request):
     }
     return render(request, 'catalogo.html',context)
 
+def contato(request):
+    context = {
+        'resp': verifySession(request)
+    }
+    return render(request, 'contato.html', context)
+
 
 ##############################################   Usuario ##################################################
 

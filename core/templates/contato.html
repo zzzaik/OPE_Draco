@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contato{% endblock %}
+{% block main %}
+    <!-- Contact Section -->
+    <div id="contact" class="text-center">
+        <div class="container">
+            <div class="section-title center">
+                <h2>Contato</h2>
+                <hr>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-4">
+                    <i class="fa fa-map-marker fa-2x"></i>
+                    <p>AV. M 'Boi Mirim Jardim Ângela N° 4533 (17,75 km)
+                        <br> 04948-030 São Paulo</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-envelope-o fa-2x"></i>
+                    <p>a.justino.s@hotmail.com</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-phone fa-2x"></i>
+                    <p> + 55 11 95950-2046</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="social">
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/justinoarttattoo/" target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/justinoarttattoo/" target="_blank">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://br.pinterest.com/Justinotattoo/?eq=justinotattoo&etslf=13946" target="_blank">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzucE-JUGcpuo0DecYx6Gbr1tVIE3GP1Q&callback=initMap">
+        </script>
+    <div id="footer">
+        <div class="container text-center">
+            <div class="fnav">
+                <p>Copyright &copy; 2016 John Doe. Designed by
+                    <a href="http://www.templatewire.com" rel="nofollow">TemplateWire</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
