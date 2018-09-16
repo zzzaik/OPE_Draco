@@ -22,9 +22,9 @@ function SubmitFormInfoUser(){
     
     let btnSave = document.getElementById("btnSalvarFormUser");
     let inputs = document.getElementsByTagName("input");
-    for (field of inputs) {
-        if (!field.disabled) {
-            field.disabled = true;
+    for (let i=0; i<inputs.length;i++) {
+        if (!inputs[i].disabled) {
+            inputs[i].disabled = true;
         }
     }
     if (!btnSave.classList.contains("displayNone")) {
@@ -34,9 +34,9 @@ function SubmitFormInfoUser(){
 
 function AtualizarFormInfoUser(){
     let inputs = document.getElementsByTagName("input");
-    for (field of inputs) {
-        if (field.disabled) {
-            field.disabled = false;
+    for (let i=0; i<inputs.length;i++) {
+        if (inputs[i].disabled) {
+            inputs[i].disabled = false;
         }
     }
     let btnSave = document.getElementById("btnSalvarFormUser");
