@@ -34,7 +34,7 @@ function SubmitFormInfoUser(){
 
 function AtualizarFormInfoUser(){
     let formUser = document.getElementsByClassName("form-control");
-    for (child in formUser) {
+    for (child. in formUser) {
         if (child.disabled == true) {
             child.disabled = false;
         }
