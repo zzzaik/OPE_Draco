@@ -27,7 +27,7 @@ function SubmitFormInfoUser(){
             inputs[i].disabled = true;
         }
     }
-    document.getElementsByTagName("input").disabled = true;
+    document.getElementsByTagName("textarea").disabled = true;
     if (!btnSave.classList.contains("displayNone")) {
         btnSave.classList.add("displayNone");
     }
@@ -40,7 +40,7 @@ function AtualizarFormInfoUser(){
             inputs[i].disabled = false;
         }
     }
-    document.getElementsByTagName("input").disabled = false;
+    document.getElementsByTagName("textarea").disabled = false;
     let btnSave = document.getElementById("btnSalvarFormUser");
     if (btnSave.classList.contains("displayNone")) {
         btnSave.classList.remove("displayNone")
