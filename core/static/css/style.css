@@ -749,9 +749,12 @@ header .intro-text {
 .displayNone {
 	display: none;
 }
+.titleWhite {
+	color:#fff;
+}
 
 
-/*base.css*/
+/*contato.css*/
 #map{
     height: 20em;
     width: 100%;
