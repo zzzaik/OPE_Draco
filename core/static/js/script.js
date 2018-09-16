@@ -21,10 +21,10 @@ function SubmitFormInfoUser(){
     text.innerHTML='Disabled';
     
     let btnSave = document.getElementById("btnSalvarFormUser");
-    let formUser = document.getElementsByClassName("form-control");
-    for (child in formUser) {
-        if (child.disabled == false) {
-            child.disabled = true;
+    let inputs = document.getElementsByTagName("input");
+    for (field of inputs) {
+        if (!field.disabled) {
+            field.disabled = true;
         }
     }
     if (!btnSave.classList.contains("displayNone")) {
@@ -33,10 +33,10 @@ function SubmitFormInfoUser(){
 }
 
 function AtualizarFormInfoUser(){
-    let formUser = document.getElementsByClassName("form-control");
-    for (child. in formUser) {
-        if (child.disabled == true) {
-            child.disabled = false;
+    let inputs = document.getElementsByTagName("input");
+    for (field of inputs) {
+        if (field.disabled) {
+            field.disabled = false;
         }
     }
     let btnSave = document.getElementById("btnSalvarFormUser");
