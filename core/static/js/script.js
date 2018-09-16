@@ -27,18 +27,20 @@ function SubmitFormInfoUser(){
             inputs[i].disabled = true;
         }
     }
+    document.getElementsByTagName("input").disabled = true;
     if (!btnSave.classList.contains("displayNone")) {
         btnSave.classList.add("displayNone");
     }
 }
 
 function AtualizarFormInfoUser(){
-    let inputs = document.getElementsByTagName("input textarea");
+    let inputs = document.getElementsByTagName("input");
     for (let i=0; i<inputs.length;i++) {
         if (inputs[i].disabled) {
             inputs[i].disabled = false;
         }
     }
+    document.getElementsByTagName("input").disabled = false;
     let btnSave = document.getElementById("btnSalvarFormUser");
     if (btnSave.classList.contains("displayNone")) {
         btnSave.classList.remove("displayNone")
