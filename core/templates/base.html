@@ -77,6 +77,9 @@
                         <li>
                             <a class="page-scroll" href="{% url 'promocao' %}">Promoções</a>
                         </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'contato' %}">Contato</a>
+                        </li>
                         {% if resp.auth %}
                             <li>
                                 <a class="page-scroll" href="{% url 'cadastraDados' %}">Dados</a>
@@ -95,7 +98,7 @@
     <main class="main">{% block main %}{% endblock %}</main>
     <footer>
         <div id="footer">
-            <div class="container text-center">
+            <div class="text-center">
                 <p>Grupo Draco - 2018</p>
             </div>
         </div>
