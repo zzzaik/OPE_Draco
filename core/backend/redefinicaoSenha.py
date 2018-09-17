@@ -1,5 +1,6 @@
-from core.models import Token, Usuario
+from core.models import Usuario
 from core.backend.criptografia import cript, compararSenha
+from core.backend.token import excluirToken
 
 def alterarSenha(login, password, re_password, salt):
     user = Usuario.objects.filter(loginusuario=login)
@@ -7,8 +8,7 @@ def alterarSenha(login, password, re_password, salt):
         return 'Você não confirmou o e-mail, não pode alterar a senha!'
     if password == re_password and compararSenha(password, cript(re_password, salt)):
         user.update(senhausuario=cript(password, salt))
-        token = Token.objects.filter(idusuario=user[0].idusuario)
-        token.update(ativo=0)
+        excluirToken(login)
         return ''
     return 'As senhas não batem!'
 

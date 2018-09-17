@@ -1,10 +1,13 @@
 {% extends 'base.html' %} {% load static %}
 {% block title%}Justino Art Tattoo{% endblock %}
 {% block main %}
-{{ resp }}
+{{ user }}
 <a href="{% url 'sair' %}">Logout</a>
 <a href="{% url 'tokenRedefinirSenha' %}">Alterar Senha / Esqueceu senha</a>
 <a href="{% url 'configsConta' %}">Configurações da conta</a>
+{% if user.confiavel == 0 %}
+    <a href="{% url 'confirmEmail' %}">Confirmar e-mail</a>
+{% endif %}
 <!-- Portfolio Section -->
 <div>
     <div class="container">

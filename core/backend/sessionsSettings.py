@@ -1,6 +1,6 @@
 def verifySession(request):
     if request.session.get('user') is None:
-        request.session['user'] = {'login':'','name':'','type':'','auth':False}
+        request.session['user'] = {'login':'','nome':'','tipo':'', 'confiavel':'','auth':False}
     return request.session.get('user')
 
 def isLogged(request):
@@ -15,3 +15,6 @@ def redefSenhaSession(request, login):
 def killSession(request, session):
     if request.session.get(session) is not None:
         del request.session[session]
+
+def atualuzarUserSession(request, session, campoSession, valor):
+    request.session[session][campoSession] = valor

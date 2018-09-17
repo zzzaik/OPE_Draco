@@ -80,7 +80,7 @@
                         <li>
                             <a class="page-scroll" href="{% url 'contato' %}">Contato</a>
                         </li>
-                        {% if resp.auth %}
+                        {% if user.auth %}
                             <li>
                                 <a class="page-scroll" href="{% url 'cadastraDados' %}">Dados</a>
                             </li>

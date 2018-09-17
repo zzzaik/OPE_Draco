@@ -11,7 +11,6 @@ create table Token (
     idTokens INT AUTO_INCREMENT,
     idUsuario INT NOT NULL,
     token VARCHAR(350) NOT NULL,
-    ativo BOOLEAN NOT NULL,
     tipo BOOLEAN NOT NULL,
     CONSTRAINT pk_Token PRIMARY KEY (idToken),
     CONSTRAINT fk_TokenUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
