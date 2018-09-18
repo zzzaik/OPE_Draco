@@ -4,7 +4,7 @@ from django.urls import reverse
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos
-from core.backend.pinterAPI import pins
+from core.backend.pinterAPI import pins, getMyPins
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
@@ -36,7 +36,8 @@ def index(request):
     #Usuario.objects.create(loginusuario="zzzaik21@gmail.com", senhausuario="$2y$08$Ve0m4XPT8SM5YaR07wFUi.1JMPbvHfPq4xJOs62IzhaLrqk8vM0M2", tipousuario=True, econfiavel=False)
     context = {
         'user':verifySession(request),
-        'fotos':alocarFotos()
+        'fotos':alocarFotos(),
+        'teste':getMyPins()
     }
     return render(request, 'index.html', context)
 
