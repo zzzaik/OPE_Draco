@@ -8,7 +8,10 @@ def getImages(): #Usando a api v3 em beta provavalmete teremos que atualizar dep
 def getMyPins():
     url = "https://api.pinterest.com/v1/me/pins/?access_token=AqWjsuMFTl7lLNgJMAx16tNZruZuFVLHC7vvSIBFNXsqJoAzTAgKgDAAAUufRTl10J_gNhwAAAAA&fields=board%2Cimage%2Cid%2Ccounts%2Cmetadata%2Cnote%2Curl"
     ret = req.api.get(url).json()
-    return ret['data']
+    try:
+        return ret['data']
+    except:
+        return ''
 
 def getMyBoards():
     url = "https://api.pinterest.com/v1/me/boards/?access_token=AqWjsuMFTl7lLNgJMAx16tNZruZuFVLHC7vvSIBFNXsqJoAzTAgKgDAAAUufRTl10J_gNhwAAAAA"
@@ -18,6 +21,8 @@ def getMyBoards():
 def pins(imgs=0):
     pins = {}
     resp = getMyPins()
+    if resp == '': #Verificação para quando a api dar maxRequestReached
+        return resp
     cont = 0
     if imgs == 0:
         for elements in resp:

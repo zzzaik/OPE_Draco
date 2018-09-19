@@ -45,16 +45,21 @@
         <button type="button" class="btn btn-primary">Procurar</button>
     </div>
     <div class="gridContainer">
-        {% for indice, img in pins.items %}
-            <div class="gridFoto">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="{{ img }}" rel="prettyPhoto">
-                        <div class="hover-text">
-                        </div><img src="{{ img }}" class="img-responsive"> </a>
+        {% if pins != '' %}
+            {% for indice, img in pins.items %}
+                <div class="gridFoto">
+                    <div class="portfolio-item">
+                        <div class="hover-bg">
+                            <a href="{{ img }}" rel="prettyPhoto">
+                            <div class="hover-text"></div>
+                            <img src="{{ img }}" class="img-responsive"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
+        {% else %}
+            <h1>Estamos com um problema interno!</h1><br/>
+            <img src="{% static '/' %}img/imgNotFound.jpg" class="img-responsive">
+        {% endif %}
     </div>
 {% endblock %}

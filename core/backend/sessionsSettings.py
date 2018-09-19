@@ -15,6 +15,3 @@ def redefSenhaSession(request, login):
 def killSession(request, session):
     if request.session.get(session) is not None:
         del request.session[session]
-
-def atualuzarUserSession(request, session, campoSession, valor):
-    request.session[session][campoSession] = valor

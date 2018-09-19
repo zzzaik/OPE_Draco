@@ -18,7 +18,7 @@ Including another URLconf
 #from django.conf.urls.static import static
 from django.urls import path#, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
-from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail
+from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail
 from core.views import gestaoClientes
 from core.views import reset
 
@@ -43,6 +43,7 @@ urlpatterns = [
     path('user/configuracao_conta/', configsConta, name = 'configsConta'),
     path('user/cadastra_dados/', cadastraDados, name = 'cadastraDados'),
     path('user/confirmar_email/', confirmEmail, name = 'confirmEmail'),
+    path('user/reenviar_confirmacao_email', reenviarConfirmarEmail, name = 'reenviarConfirmarEmail'),
     ##############################
 
     ########## clientes ########## Páginas exclusivas dos clientes

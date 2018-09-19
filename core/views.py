@@ -4,11 +4,11 @@ from django.urls import reverse
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos
-from core.backend.pinterAPI import pins, getMyPins
+from core.backend.pinterAPI import pins
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
-from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession, killSession, atualuzarUserSession
+from core.backend.sessionsSettings import verifySession, isLogged, redefSenhaSession, killSession
 #from core.backend.enviaConfirmacao import *
 from core.backend.redefinicaoSenha import alterarSenha
 from core.backend.token import enviarToken, verificarToken
@@ -36,8 +36,7 @@ def index(request):
     #Usuario.objects.create(loginusuario="zzzaik21@gmail.com", senhausuario="$2y$08$Ve0m4XPT8SM5YaR07wFUi.1JMPbvHfPq4xJOs62IzhaLrqk8vM0M2", tipousuario=True, econfiavel=False)
     context = {
         'user':verifySession(request),
-        'fotos':alocarFotos(),
-        'teste':getMyPins()
+        'fotos':alocarFotos()
     }
     return render(request, 'index.html', context)
 
@@ -78,6 +77,12 @@ def contato(request):
 
 ############################################# Usuario ##################################################
 
+def reenviarConfirmarEmail(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    enviarToken(request.session['user']['login'], 1)
+    return redirect(reverse('confirmEmail'))
+
 def confirmEmail(request):
     if not isLogged(request):
         return redirect(reverse('home'))
@@ -87,7 +92,8 @@ def confirmEmail(request):
         if msg != '':
             return render(request, 'user/confirmarEmail.html', {'msg':msg, 'user':verifySession(request)})
         tornarConfiavel(login)
-        atualuzarUserSession(request, 'user', 'confiavel', Usuario.objects.get(loginusuario=login).econfiavel)
+        user = Usuario.objects.get(loginusuario=login)
+        request.session['user'] = {'login':user.loginusuario, 'nome':'', 'tipo':user.tipousuario, 'confiavel':user.econfiavel, 'auth':True}
         return render(request, 'user/confirmarEmail.html', {'msg':'E-mail confirmado!', 'user':verifySession(request)})
     return render(request, 'user/confirmarEmail.html', {'user':verifySession(request)})
 

@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% load static %}
 {% block title%}Justino Art Tattoo{% endblock %}
 {% block main %}
-{{ ret }}
 <div id='loginDiv' class='container spaceUp spaceDown'>
     <form id="formEnviarToken" method="POST" class='form-horizontal'>
         {% csrf_token %}
@@ -10,6 +9,9 @@
                 <h6 class="msgErroForm">{{ msg }}</h6>
             {% endif %}
             {% if user.confiavel == 0 %}
+                <div class="row col-lg-offset-2">
+                    <button type="button" class='btn btn-link'><a href="{% url 'reenviarConfirmarEmail' %}">Reenviar Código</a></button>
+                </div>
                 <label name="token" class='control-label col-lg-2'>Código:</label>
                 <div class="col-lg-3">
                     <input name="token" type="text" id="token" class="form-control"/>
