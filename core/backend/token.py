@@ -19,17 +19,24 @@ def enviarToken(login, tipo):
     email = EmailMessage(subject, mensagem, from_mail, [login])
     email.send()
     user = Usuario.objects.only('idusuario').filter(loginusuario=login)
+    token = Token.objects.filter(idusuario=user[0])
     if not user:
         return 'Usuário não encontrado!'
     if tipo == 0:
         if user[0].econfiavel == 0:
             return 'Você não confirmou o e-mail, não pode alterar a senha!'
         if user:
-            t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
-            t.save()
+            if token:
+                token.update(token=codigo)
+            else:
+                t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
+                t.save()
             return ''
-    t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
-    t.save()
+    if token:
+        token.update(token=codigo)
+    else:
+        t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
+        t.save()
     return ''
 
 def verificarToken(login, token):

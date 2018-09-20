@@ -1,6 +1,6 @@
 import bcrypt
 
-def cript(password, nSalt):
+def cript(password, nSalt=8):
     passwordHashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(nSalt))
     return passwordHashed.decode('utf-8')
 

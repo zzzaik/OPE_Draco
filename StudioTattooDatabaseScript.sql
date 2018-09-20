@@ -93,13 +93,28 @@ create table EmailCliente (
 	CONSTRAINT fk_ClienteTelefone FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
 );
 
-create table Imagens (
+create table Imagem (
 	idImagem INT AUTO_INCREMENT,
 	urlImagem VARCHAR(350),
 	ratins INT NOT NULL,
 	idEstilo INT NOT NULL,
 	CONSTRAINT pk_Imagem PRIMARY KEY (idImagem),
 	CONSTRAINT fk_Estilo FOREIGN KEY (idEstilo) REFERENCES Estilos(idEstilo)
+);
+
+create table Tag (
+    idTag INT AUTO_INCREMENT,
+    tag VARCHAR(50),
+    CONSTRAINT pk_Tag PRIMARY KEY (idTag)
+);
+
+create table ImagemTag (
+    idImagemTag INT AUTO_INCREMENT,
+    idImagem INT NOT NULL,
+    idTag INT NOT NULL,
+    CONSTRAINT pk_ImagemTag PRIMARY KEY (idImagemTag),
+    CONSTRAINT fk_Imagem FOREIGN KEY (idImagem) REFERENCES Imagem(idImagem),
+    CONSTRAINT fk_Tag FOREIGN KEY (idTag) REFERENCES Tag(idTag)
 );
 
 create table Portifolio (

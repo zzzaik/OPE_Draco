@@ -18,9 +18,9 @@ Including another URLconf
 #from django.conf.urls.static import static
 from django.urls import path#, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
-from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail
+from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
 from core.views import gestaoClientes
-from core.views import reset
+from core.views import reset, alimentarJson
 
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
@@ -44,6 +44,7 @@ urlpatterns = [
     path('user/cadastra_dados/', cadastraDados, name = 'cadastraDados'),
     path('user/confirmar_email/', confirmEmail, name = 'confirmEmail'),
     path('user/reenviar_confirmacao_email', reenviarConfirmarEmail, name = 'reenviarConfirmarEmail'),
+    path('user/reenviar_redefinir_senha', reenviarRedefinirSenha, name = 'reenviarRedefinirSenha'),
     ##############################
 
     ########## clientes ########## Páginas exclusivas dos clientes
@@ -55,5 +56,6 @@ urlpatterns = [
 
     ########## Admins ############ Páginas com o proposito de desenvolvimento
     path('adm/reset/', reset, name = 'reset'),
+    path('adm/alimentarJson', alimentarJson, name = 'alimentarJson')
     ##############################
 ]
