@@ -19,7 +19,7 @@ function SubmitFormCadastro(){
 function SubmitFormInfoUser(){
     let text = document.getElementById("btnSalvarFormUser");
     text.innerHTML='Disabled';
-    
+
     let btnSave = document.getElementById("btnSalvarFormUser");
     let inputs = document.getElementsByTagName("input");
     for (let i=0; i<inputs.length;i++) {

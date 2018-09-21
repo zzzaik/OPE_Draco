@@ -8,8 +8,8 @@ from core.backend.pinterAPI import pins
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
-from core.backend.sessionsSettings import verifyUserSession, isLogged, redefSenhaSession, killSession, createSession#, alterSession
-from core.backend.redefinicaoSenha import alterarSenha
+from core.backend.sessionsSettings import verifyUserSession, isLogged, redefSenhaSession, killSession, createSession, alterSession
+from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
@@ -31,6 +31,7 @@ def reset(request):
 
 def alimentarJson(request):
     fillJson()
+    alterSession(request, 'firstRun', False)
     return redirect(reverse('home'))
 
 ################################################################################
@@ -43,7 +44,7 @@ def index(request):
     #    return redirect(reverse('alimentarJson'))
     context = {
         'user':verifyUserSession(request),
-        'fotos':alocarFotos()
+        'fotos':alocarFotos(),
     }
     return render(request, 'index.html', context)
 
@@ -87,7 +88,7 @@ def contato(request):
 def reenviarConfirmarEmail(request):
     if not isLogged(request):
         return redirect(reverse('home'))
-    enviarToken(request.session['user']['login'], 1)
+    enviarToken(request, request.session['user']['login'], 1)
     return redirect(reverse('confirmEmail'))
 
 def confirmEmail(request):
@@ -109,7 +110,7 @@ def tokenRedefinirSenha(request):
         return redirect(reverse('redefinirSenha'))
     if request.method == 'POST':
         login = request.POST['email']
-        msg = enviarToken(login, 0)
+        msg = enviarToken(request, login, 0)
         redefSenhaSession(request, login)
         if msg != '':
             return render(request, 'user/tokenRedefinirSenha.html', {'msg':msg, 'user':verifyUserSession(request)})
@@ -118,14 +119,16 @@ def tokenRedefinirSenha(request):
 
 def reenviarRedefinirSenha(request):
     if not isLogged(request):
-        enviarToken(request.session['login'], 0)
+        enviarToken(request, request.session['login'], 0)
         return redirect(reverse('redefinirSenha'))
-    enviarToken(request.session['user']['login'], 0)
+    enviarToken(request, request.session['user']['login'], 0)
     return redirect(reverse('redefinirSenha'))
 
 def redefinirSenha(request):
     msg = ''
     ret = request.session['user']['auth']
+    if request.session.get('login') is None and not request.session['user']['auth']:
+        return redirect(reverse('tokenRedefinirSenha'))
     if request.method == 'POST':
         login = request.session.get('login')
         if login is None:
@@ -135,7 +138,7 @@ def redefinirSenha(request):
         try:
             msg += verificarToken(login, request.POST['token'])
         except:
-            pass
+            msg += verificarSenha(login, request.POST['senha_antiga'])
         if msg == '':
             msg += alterarSenha(login, request.POST['senha'], request.POST['re_senha'])
             if msg == '':
@@ -175,7 +178,7 @@ def criarConta(request):
         mensagens = salvaUsuario(login, password, re_password)
         if mensagens != True:
             return render(request, 'user/criarConta.html', {'msgs':mensagens})
-        token = enviarToken(login, 1)
+        token = enviarToken(request, login, 1)
         if token != '':
             return render(request, 'user/criarConta.html', {'msgs':token})
         return redirect(reverse('login'))
@@ -197,13 +200,14 @@ def login(request):
             request.session['user'] = {'login':login, 'nome':nome, 'tipo':user.tipousuario, 'confiavel':user.econfiavel, 'auth':True}
             return redirect(reverse('cadastraDados'))
         request.session['user']['auth'] = False
-        return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'msg':returnLogar, 'user':verifyUserSession(request)})
+        return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 12345678 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'msg':returnLogar, 'user':verifyUserSession(request)})
     request.POST
-    return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 123 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'user':verifyUserSession(request)})
+    return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 12345678 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'user':verifyUserSession(request)})
 
 def sair(request):
     killSession(request, 'user')
-    return redirect(reverse('reset'))
+    verifyUserSession(request)
+    return redirect(reverse('login'))
 
 #############################################################################################################
 

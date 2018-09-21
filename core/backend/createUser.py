@@ -14,7 +14,9 @@ def salvaUsuario(login, password, re_password, salt=8, tipo=False):
     elif verifyEmail(login):
         msg += "Digite um e-mail válido! "
     else:
-        if password == re_password and compararSenha(password, cript(re_password)):
+        if len(password) < 8:
+            msg += 'A senha deve ter no minimo 8 caracteres! '
+        elif password == re_password and compararSenha(password, cript(re_password)):
             user = Usuario.objects.create(loginusuario=login, senhausuario=cript(password), tipousuario=tipo, econfiavel=False)
             user.save()
             return True
