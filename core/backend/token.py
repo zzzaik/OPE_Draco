@@ -3,8 +3,6 @@ import string
 from django.core.mail import EmailMessage
 from core.models import Token, Usuario
 import re
-from core.backend.dataHora import getDatetimeWithMinDelay#, getDateTimeAtual
-from core.backend.sessionsSettings import createSession
 
 def verifyEmail(email):
     return not re.match(r"^([a-zA-Z0-9._-])+@(([a-zA-Z.-])+.)+([a-zA-Z0-9]{2,4})+$", email)
@@ -17,12 +15,11 @@ def randomTokenGenerator(size=10, chars=string.ascii_uppercase + string.digits):
 def enviarToken(request, login, tipo):
     if verifyEmail(login):
         return 'Digite um e-mail válido! '
-    user = Usuario.objects.only('idusuario').filter(loginusuario=login)
+    user = Usuario.objects.only('idu suario').filter(loginusuario=login)
     if not user:
         return 'E-mail não encontrado! '
     codigo = randomTokenGenerator()
-    mensagem = """Seu código é: %s
-Este código expirará em 10 minutos!"""  %(codigo)
+    mensagem = "Seu código é: %s"  %(codigo)
     from_mail = 'testejira0@gmail.com'
     if tipo == 0:
         subject = 'Código para redefinição de senha'
@@ -36,20 +33,16 @@ Este código expirará em 10 minutos!"""  %(codigo)
             return 'Você não confirmou o e-mail, não pode alterar a senha!'
         if user:
             if token:
-                token.update(token=codigo, tokenexpiration=getDatetimeWithMinDelay())
+                token.update(token=codigo)
             else:
-                t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo, tokenexpiration=getDatetimeWithMinDelay())
+                t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
                 t.save()
-            request.session.set_expiry(600)
-            createSession(request, 'token', True)
             return ''
     if token:
-        token.update(token=codigo, tokenexpiration=getDatetimeWithMinDelay())
+        token.update(token=codigo)
     else:
-        t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo, tokenexpiration=getDatetimeWithMinDelay())
+        t = Token.objects.create(idusuario=user[0], token=codigo, tipo=tipo)
         t.save()
-    request.session.set_expiry(600)
-    createSession(request, 'token', True)
     return ''
 
 def verificarToken(login, token):

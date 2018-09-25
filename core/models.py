@@ -176,7 +176,6 @@ class Token(models.Model):
     idusuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='idUsuario')  # Field name made lowercase.
     token = models.CharField(max_length=350)
     tipo = models.IntegerField()
-    tokenexpiration = models.DateTimeField(db_column='tokenExpiration')  # Field name made lowercase.
 
     class Meta:
         managed = False
