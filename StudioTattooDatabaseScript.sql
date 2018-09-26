@@ -98,6 +98,7 @@ create table Imagem (
 	urlImagem VARCHAR(350),
 	ratins INT NOT NULL,
 	idEstilo INT NOT NULL,
+	fonteDaImagem BOOLEAN NOT NULL,
 	CONSTRAINT pk_Imagem PRIMARY KEY (idImagem),
 	CONSTRAINT fk_Estilo FOREIGN KEY (idEstilo) REFERENCES Estilos(idEstilo)
 );

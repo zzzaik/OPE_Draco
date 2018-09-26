@@ -69,9 +69,10 @@ class Estilo(models.Model):
 
 class Imagem(models.Model):
     idimagem = models.AutoField(db_column='idImagem', primary_key=True)  # Field name made lowercase.
-    urlimagem = models.CharField(db_column='urlImagem', max_length=350, blank=True, null=True)  # Field name made lowercase.
+    urlimagem = models.CharField(db_column='urlImagem', unique=True, max_length=255)  # Field name made lowercase.
     ratins = models.IntegerField()
     idestilo = models.ForeignKey(Estilo, models.DO_NOTHING, db_column='idEstilo')  # Field name made lowercase.
+    fontedaimagem = models.IntegerField(db_column='fonteDaImagem')  # Field name made lowercase.
 
     class Meta:
         managed = False

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect as redirect
 from django.urls import reverse
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos
+from core.backend.instaAPI import alocarFotos, getPhoto
 from core.backend.pinterAPI import pins
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
@@ -44,13 +44,14 @@ def index(request):
     #    return redirect(reverse('alimentarJson'))
     context = {
         'user':verifyUserSession(request),
-        'fotos':alocarFotos(),
+        'fotos':alocarFotos()
     }
     return render(request, 'index.html', context)
 
 def agenda(request):
     context = {
-        'user': verifyUserSession(request)
+        'user': verifyUserSession(request),
+        'test':getPhoto()
     }
     return render(request, 'agenda.html', context)
 
