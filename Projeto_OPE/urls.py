@@ -19,7 +19,7 @@ Including another URLconf
 from django.urls import path#, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
-from core.views import gestaoClientes
+from core.views import gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos
 from core.views import reset, alimentarJson
 
 urlpatterns = [
@@ -52,6 +52,10 @@ urlpatterns = [
 
     ########## tatuador ########## Páginas exclusivas dos tatuadores
     path('tatuador/clientes/', gestaoClientes, name = 'gestaoClientes'),
+    path('tatuador/gestaoCatalogo/', gestaoCatalogo, name = 'gestaoCatalogo'),
+    path('tatuador/gestaoPortfolio/', gestaoPortfolio, name = 'gestaoPortfolio'),
+    path('tatuador/gestaoAgenda/', gestaoAgenda, name = 'gestaoAgenda'),
+    path('tatuador/gestaoPromos/', gestaoPromos, name = 'gestaoPromos'),
     ##############################
 
     ########## Admins ############ Páginas com o proposito de desenvolvimento

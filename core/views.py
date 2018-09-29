@@ -221,4 +221,33 @@ def gestaoClientes(request):
         return redirect(reverse('home'))
     return render(request, 'tatuador/gestaoClientes.html', {'user':verifyUserSession(request)})
 
+def gestaoCatalogo(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    return render(request, 'tatuador/gestaoClientes.html', {'user':verifyUserSession(request)})
+
+def gestaoPortfolio(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    return render(request, 'tatuador/gestaoPortfolio.html', {'user':verifyUserSession(request)})
+
+def gestaoAgenda(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    return render(request, 'tatuador/gestaoAgenda.html', {'user':verifyUserSession(request)})
+
+def gestaoPromos(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    return render(request, 'tatuador/gestaoPromos.html', {'user':verifyUserSession(request)})
+
+
 #############################################################################################################
