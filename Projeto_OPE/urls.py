@@ -51,11 +51,11 @@ urlpatterns = [
     ##############################
 
     ########## tatuador ########## Páginas exclusivas dos tatuadores
-    path('tatuador/clientes/', gestaoClientes, name = 'gestaoClientes'),
-    path('tatuador/gestaoCatalogo/', gestaoCatalogo, name = 'gestaoCatalogo'),
-    path('tatuador/gestaoPortfolio/', gestaoPortfolio, name = 'gestaoPortfolio'),
-    path('tatuador/gestaoAgenda/', gestaoAgenda, name = 'gestaoAgenda'),
-    path('tatuador/gestaoPromos/', gestaoPromos, name = 'gestaoPromos'),
+    path('tatuador/clientes', gestaoClientes, name = 'gestaoClientes'),
+    path('tatuador/gestaoCatalogo', gestaoCatalogo, name = 'gestaoCatalogo'),
+    path('tatuador/gestaoPortfolio', gestaoPortfolio, name = 'gestaoPortfolio'),
+    path('tatuador/gestaoAgenda', gestaoAgenda, name = 'gestaoAgenda'),
+    path('tatuador/gestaoPromos', gestaoPromos, name = 'gestaoPromos'),
     ##############################
 
     ########## Admins ############ Páginas com o proposito de desenvolvimento
