@@ -72,7 +72,7 @@ class Imagem(models.Model):
     urlimagem = models.CharField(db_column='urlImagem', unique=True, max_length=255)  # Field name made lowercase.
     ratins = models.IntegerField()
     idestilo = models.ForeignKey(Estilo, models.DO_NOTHING, db_column='idEstilo')  # Field name made lowercase.
-    fontedaimagem = models.IntegerField(db_column='fonteDaImagem')  # Field name made lowercase.
+    fonteimagem = models.IntegerField(db_column='fonteImagem')  # Field name made lowercase.
 
     class Meta:
         managed = False

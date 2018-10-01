@@ -1,20 +1,38 @@
 import requests as req
-from core.models import Imagem, Tag, Imagemtag
+from core.models import Imagem, Tag, Imagemtag, Estilo
 
-def getPhoto():
+def getFoto():
     url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=3251373559.1556bce.467e8e9f0219425abf9915fa978bb275"
     ret = req.api.get(url).json()
     return ret
-'''
-def savePhoto()
-    fotos = getPhoto()
+
+def salvarFoto(estiloEscolhido):
+    fotos = getFoto()
+    msg = ''
     for foto in fotos['data']:
-        img = Imagens.objects.create(urlimagem=foto['images']['standard_resolution']['url'], )
+        imagem = foto['images']['standard_resolution']['url']
+        likes = foto['likes']['count']
+        est = Estilo.objects.only('idestilo').get(estilo=estiloEscolhido)
+        if est:
+            try:
+                img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=est, fonteimagem=True)
+                img.save()
+                msg += ''
+            except:
+                msg += 'Imagem já salva! '
+        else:
+            msg += 'Estilo não encontrado! '
+    return msg
+
+'''
+def alterarEstilo(imagem, estilo):
+    img = Imagem.objects.filter(idimagem=imagem)
+    img.update(estilo=Estilo.objects.only('idestilo').get(estilo=estilo))
 '''
 
 def alocarFotos(imgs=0):
     fotos = {}
-    resp = getPhoto()
+    resp = getFoto()
     cont = 0
     if imgs == 0:
         for elements in resp['data']:
