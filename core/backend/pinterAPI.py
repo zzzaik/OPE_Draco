@@ -1,10 +1,11 @@
 import requests as req
-
+from core.models import Imagem
+'''
 def getImages(): #Usando a api v3 em beta provavalmete teremos que atualizar depois
     url = "https://api.pinterest.com/v3/pidgets/users/justinotattoo/pins/"
     ret = req.api.get(url).json()
     return ret
-
+'''
 def getMyPins():
     url = "https://api.pinterest.com/v1/me/pins/?access_token=AqWjsuMFTl7lLNgJMAx16tNZruZuFVLHC7vvSIBFNXsqJoAzTAgKgDAAAUufRTl10J_gNhwAAAAA&fields=board%2Cimage%2Cid%2Ccounts%2Cmetadata%2Cnote%2Curl"
     ret = req.api.get(url).json()
@@ -17,6 +18,23 @@ def getMyBoards():
     url = "https://api.pinterest.com/v1/me/boards/?access_token=AqWjsuMFTl7lLNgJMAx16tNZruZuFVLHC7vvSIBFNXsqJoAzTAgKgDAAAUufRTl10J_gNhwAAAAA"
     ret = req.api.get(url).json()
     return ret
+
+
+#fonteimagem = True(Instagram) / False(Pinterest)
+def salvarPins():
+    pins = getMyPins()
+    msg = ''
+    if pins == '': #Verificação para quando a api dar maxRequestReached
+        return pins
+    for pin in pins:
+        imagem = pin['image']['original']['url']
+        try:
+            img = Imagem.objects.create(urlimagem=imagem, ratins=None, idestilo=None, fonteimagem=False)
+            img.save()
+            msg += ''
+        except:
+            msg += 'Imagem já salva! '
+    return msg
 
 def pins(imgs=0):
     pins = {}

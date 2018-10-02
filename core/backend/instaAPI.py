@@ -6,7 +6,7 @@ def getFoto():
     ret = req.api.get(url).json()
     return ret
 
-def salvarFoto(estiloEscolhido):
+def salvarFoto(estiloEscolhido=None):
     fotos = getFoto()
     msg = ''
     for foto in fotos['data']:

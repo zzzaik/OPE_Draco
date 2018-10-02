@@ -96,7 +96,7 @@ create table EmailCliente (
 create table Imagem (
 	idImagem INT AUTO_INCREMENT,
 	urlImagem VARCHAR(350),
-	ratins INT NOT NULL,
+	ratins INT,
 	idEstilo INT NOT NULL,
 	fonteDaImagem BOOLEAN NOT NULL,
 	CONSTRAINT pk_Imagem PRIMARY KEY (idImagem),
