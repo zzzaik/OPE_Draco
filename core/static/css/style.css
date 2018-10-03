@@ -1014,6 +1014,18 @@ header .intro-text {
 	height:100%;
 }
 
-.gestaoDropDown {
+.selectorGroup {
+	display: flex;
+	width: 400px;
+	height:100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	flex-flow: row wrap;
+	justify-content: space-evenly;
+	align-content: space-between;
+}
 
+.selectorContainer {
+	display: flex;
+	flex-flow: row nowrap;
 }
