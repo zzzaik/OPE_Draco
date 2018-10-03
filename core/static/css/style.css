@@ -746,12 +746,16 @@ header .intro-text {
 .moveLeft30 {
 	margin-left: 30px;
 }
+.moveTop80 {
+	margin-top:80px;
+}
 .displayNone {
 	display: none;
 }
 .titleWhite {
 	color:#fff;
 }
+
 
 
 /*contato.css*/
@@ -999,6 +1003,7 @@ header .intro-text {
 }
 
 .gridItemGestao {
+	display: flex;
 	width: 95%;
 	height: 110px;
 }
@@ -1028,4 +1033,11 @@ header .intro-text {
 .selectorContainer {
 	display: flex;
 	flex-flow: row nowrap;
+	width: 200px;
+	justify-content: space-between;
+}
+
+.selectorContainer>h5, .selectorContainer>select {
+	width: 98px;
+	margin: 0px;
 }
