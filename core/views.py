@@ -215,6 +215,13 @@ def sair(request):
 
 ############################################### Tatuador ####################################################
 
+def main(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    return render(request, 'tatuador/main.html', {'user':verifyUserSession(request)})
+
 def gestaoClientes(request):
     if not isLogged(request):
         return redirect(reverse('home'))
