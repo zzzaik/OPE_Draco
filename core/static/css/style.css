@@ -770,7 +770,7 @@ header .intro-text {
 	justify-content: flex-end;
 }
 
-.subnavLink .subnavLink:visited {
+.subnavLink, .subnavLink:visited {
 	height: 20px;
 	margin-left: 5px;
 	margin-right: 5px;

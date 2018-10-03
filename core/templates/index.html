@@ -8,7 +8,7 @@
     {% if user.confiavel == 0 %}
         <a href="{% url 'confirmEmail' %}" class="subnavLink">Confirmar e-mail</a>
     {% endif %}
-    {% if user.type == 1 %}
+    {% if user.tipo == 1 %}
         <a href="{% url 'main' %}" class="subnavLink">Gestão</a>
     {% endif %}
 </div>
