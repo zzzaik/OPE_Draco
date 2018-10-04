@@ -29,7 +29,7 @@ def selectFotos(estilo=None,tamanho=None,cor=None,regiao=None):
     img = Imagem.objects.all()
 
     for foto in img:
-        fotos.append(foto)
+        fotos.append({'url':foto.urlimagem,'estilo':foto.idestilo})
 
     return fotos
 
