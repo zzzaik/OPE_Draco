@@ -71,15 +71,7 @@
                         <li>
                             <a class="page-scroll" href="{% url 'gestaoPromos' %}">Promoções</a>
                         </li>
-                        {% if user.auth %}
-                            <li>
-                                <a class="page-scroll" href="{% url 'cadastraDados' %}">Dados</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a class="page-scroll" href="{% url 'login' %}">Usuário</a>
-                            </li>
-                        {% endif %}
+                        
                     </ul>
                 </div>
             </div>

@@ -24,6 +24,15 @@ def salvarFoto(estiloEscolhido=None):
             msg += 'Estilo não encontrado! '
     return msg
 
+def selectFotos(estilo=None,tamanho=None,cor=None,regiao=None):
+    fotos = []
+    img = Imagem.objects.all()
+
+    for foto in img:
+        fotos.append(foto)
+
+    return fotos
+
 '''
 def alterarEstilo(imagem, estilo):
     img = Imagem.objects.filter(idimagem=imagem)

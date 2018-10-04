@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect as redirect
 from django.urls import reverse
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto
+from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
 from core.backend.pinterAPI import pins
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
@@ -234,7 +234,13 @@ def gestaoCatalogo(request):
         return redirect(reverse('home'))
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
-    return render(request, 'tatuador/gestaoCatalogo.html', {'user':verifyUserSession(request)})
+    
+    context = {
+        'data':selectFotos(),
+        'user':verifyUserSession(request)
+    }
+
+    return render(request, 'tatuador/gestaoCatalogo.html', context)
 
 def gestaoPortfolio(request):
     if not isLogged(request):
