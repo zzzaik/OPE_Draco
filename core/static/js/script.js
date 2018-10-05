@@ -1,3 +1,7 @@
+console.log($.getJSON('core/backend/dataJson.py', function(json) {
+    result = json
+}));
+
 function SubmitFormEnviarToken(){
     document.getElementById("formEnviarToken").submit();
 }
@@ -91,6 +95,10 @@ function initMap() {
       map: map
     });
   };
+
+function loadClassificacao() {
+    
+}
 /*
 function urlinsta(){
     var frm = document.getElementById("instagram");
