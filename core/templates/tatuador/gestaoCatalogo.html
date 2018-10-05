@@ -4,9 +4,10 @@
 <div class="container moveTop80">
     <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
         <div><!-- Coluna não Classificados -->
+            {% for item in data.foto %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
-                    <img class="miniFoto">
+                    <img src="{{ item.url }}" class="miniFoto">
                 </div>
                 <div class="selectorGroup">
                     <div class="selectorContainer"><!-- Container Seletor -->
@@ -43,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
         <div><!-- Coluna Classificados -->
@@ -94,6 +96,6 @@
     </div>
 </div>
 
-{{ data }}
+{{ data.foto }}
 
 {% endblock %}
