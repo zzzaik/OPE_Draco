@@ -4,7 +4,7 @@
 <div class="container moveTop80">
     <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
         <div><!-- Coluna não Classificados -->
-            {% for item in data.foto %}
+            {% for item in data %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src="{{ item['url'] }}" class="miniFoto">
@@ -96,6 +96,6 @@
     </div>
 </div>
 
-{{ data.foto }}
+{{ data['url'] }}
 
 {% endblock %}
