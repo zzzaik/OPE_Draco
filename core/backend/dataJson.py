@@ -24,7 +24,7 @@ def getClassificacoes():
         data['regiao'].append({'id':item.idRegiao,'desc':item.regiaodocorpo})
     for item in Tamanho.objects.all():
         data['regiao'].append({'id':item.idRegiao,'desc':item.regiaodocorpo})
-
+    
     return HttpResponse(json.dumps(data), content_type="application/json")
 
 def fillJson():

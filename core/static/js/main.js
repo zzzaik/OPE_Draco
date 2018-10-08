@@ -10,7 +10,7 @@ $("#btnTest").click( function() {
     }
     jsonObject = $.getJSON('core/backend/dataJson.py', function(json) {
         return json});
-    for (let item=0;item<jsonObject.estilos.length; item++){
+    /*for (let item = 0; item < jsonObject.estilos.length; item++) {
         data['estilos'].push(jsonObject.estilos[item])
     }
     for (let item=0;item<jsonObject.cores.length; item++){
@@ -21,9 +21,10 @@ $("#btnTest").click( function() {
     }
     for (let item=0;item<jsonObject.regiao.length; item++){
         data['regiao'].push(jsonObject.regiao[item])
-    }
+    }*/
+    teste = jsonObject
 
-    $("#testeJSON").text(data);
+    $("#testeJSON").text(teste);
 
     });
 
