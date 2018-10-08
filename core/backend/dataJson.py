@@ -1,5 +1,5 @@
 import json
-from django import HttpResponse
+from django.http import HttpResponse
 from core.models import Imagem, Estilo, Cor, Regiao, Tamanho
 
 images = Imagem.objects.all()
@@ -14,7 +14,7 @@ def getClassificacoes():
         'cores':[],
         'regiao':[],
         'tamanho':[]
-    } 
+    }
 
     for item in Estilo.objects.all():
         data['estilos'].append({'id':item.idEstilo,'desc':item.estilo})
@@ -24,7 +24,7 @@ def getClassificacoes():
         data['regiao'].append({'id':item.idRegiao,'desc':item.regiaodocorpo})
     for item in Tamanho.objects.all():
         data['regiao'].append({'id':item.idRegiao,'desc':item.regiaodocorpo})
-    
+
     return HttpResponse(json.dumps(data), content_type="application/json")
 
 def fillJson():

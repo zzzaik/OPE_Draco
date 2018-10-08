@@ -1,6 +1,10 @@
-console.log($.getJSON('core/backend/dataJson.py', function(json) {
-    result = json
-}));
+$("#btnTest").click(function() {
+    alert("<span>Testo de texte</span>");
+    }
+    /*$.getJSON('core/backend/dataJson.py', function(json) {
+    return json
+    }))*/
+);
 
 function SubmitFormEnviarToken(){
     document.getElementById("formEnviarToken").submit();
@@ -97,7 +101,7 @@ function initMap() {
   };
 
 function loadClassificacao() {
-    
+
 }
 /*
 function urlinsta(){
