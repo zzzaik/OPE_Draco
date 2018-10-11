@@ -2,29 +2,39 @@
 function main() {
 
 $("#btnTest").click( function() {
-    data = {
-        'estilos':[],
-        'cores':[],
-        'regiao':[],
-        'tamanho':[]
-    }
-    jsonObject = $.getJSON('core/backend/dataJson.py', function(json) {
-        return json});
-    /*for (let item = 0; item < jsonObject.estilos.length; item++) {
-        data['estilos'].push(jsonObject.estilos[item])
-    }
-    for (let item=0;item<jsonObject.cores.length; item++){
-        data['cores'].push(jsonObject.cores[item])
-    }
-    for (let item=0;item<jsonObject.tamanho.length; item++){
-        data['tamanho'].push(jsonObject.tamanho[item])
-    }
-    for (let item=0;item<jsonObject.regiao.length; item++){
-        data['regiao'].push(jsonObject.regiao[item])
-    }*/
-    teste = jsonObject
+    let data = {}
+    //'estilos':[],
+    //'cores':[],
+    //'regiao':[],
+    //'tamanho':[]
+    let jsonObject = $.ajax({
+        method: 'GET',
+        headers:{
+            'Access-Control-Allow-Origin':'http://zzzaik.pythonanywhere.com',
+            'Content-Type':'application/x-www-form-urlencoded'
+        },
+        url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
+        crossDomain: true,
+        dataType: 'json'
+        });
+    //for (let item = 0; item < jsonObject.estilos.length; item++) {
+    //    data['estilos'].push(jsonObject.estilos[item])
+    //}
+    data['estilos']=jsonObject.estilos
+    //for (let item=0;item<jsonObject.cores.length; item++){
+    //    data['cores'].push(jsonObject.cores[item])
+    //}
+    data['cores']=jsonObject.cores
+    //for (let item=0;item<jsonObject.tamanho.length; item++){
+    //    data['tamanho'].push(jsonObject.tamanho[item])
+    //}
+    data['tamanho']=jsonObject.tamanho
+    //for (let item=0;item<jsonObject.regiao.length; item++){
+    //    data['regiao'].push(jsonObject.regiao[item])
+    //}
+    data['regiao']=jsonObject.regiao
 
-    $("#testeJSON").text(teste);
+    $("#testeJSON").text(Object.values(data));
 
     });
 
