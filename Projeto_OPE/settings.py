@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 #needed to make async requests with crossDomain
-from corsheaders.defaults import default_headers, default_methods
+import corsheaders.defaults as defCors
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -58,9 +58,9 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_METHODS = default_methods
+CORS_ALLOW_METHODS = defCors.default_methods
 
-CORS_ALLOW_HEADERS = default_methods
+CORS_ALLOW_HEADERS = defCors.default_methods
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -152,8 +152,3 @@ EMAIL_HOST_USER = 'testejira0@gmail.com '
 EMAIL_HOST_PASSWORD = 'P@ssw0rd_OPEDraco'
 EMAIL_USE_TLS = True
 
-
-try:
-   from local_settings import *
-except:
-    pass
