@@ -9,10 +9,6 @@ $("#btnTest").click( function() {
     //'tamanho':[]
     let jsonObject = $.ajax({
         method: 'GET',
-        headers:{
-            'Access-Control-Allow-Origin':'http://zzzaik.pythonanywhere.com',
-            'Content-Type':'application/x-www-form-urlencoded'
-        },
         url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
         crossDomain: true,
         dataType: 'json'
