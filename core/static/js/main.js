@@ -11,7 +11,7 @@ $("#btnTest").click( function() {
         method: 'GET',
         url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
         headers:{
-            'Access-Control-Allow-Origin':'http://zzzaik.pythonanywhere.com'}
+            'Access-Control-Allow-Origin':'http://zzzaik.pythonanywhere.com/'}
         });
     //for (let item = 0; item < jsonObject.estilos.length; item++) {
     //    data['estilos'].push(jsonObject.estilos[item])
