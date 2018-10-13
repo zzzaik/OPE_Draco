@@ -8,15 +8,16 @@ data = {
         'images':[images]
     }
 
-def getClassificacoes():
+def getClassificacoes(request):
     data = {
         'estilos':['1','2','3'],
         'cores':['a','b','c'],
         'regiao':['um','dois','tres'],
         'tamanho':['s','m','l']
     }
-    
-    return HttpResponse(json.dumps(data), content_type="application/json")
+    if request.method == 'GET':
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    return HttpResponse("This is not a GET request", content_type="text/plain")
 
 def fillJson():
     pass
