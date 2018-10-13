@@ -30,7 +30,7 @@ $("#btnTest").click( function() {
     //}
     
 
-    $("#testeJSON").text(jsonObject);
+    $("#testeJSON").text(Object.toString(jsonObject));
 
     });
 
