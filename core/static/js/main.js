@@ -7,7 +7,7 @@ $("#btnTest").click( function() {
     //'cores':[],
     //'regiao':[],
     //'tamanho':[]
-    let jsonObject = $.ajax({
+    let jfilho = $.ajax({
         method: 'GET',
         url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
         headers:{
@@ -30,7 +30,7 @@ $("#btnTest").click( function() {
     //}
     
 
-    $("#testeJSON").text(Object.toString(jsonObject));
+    $("#testeJSON").text(Object.toString(jfilho));
 
     });
 
