@@ -6,7 +6,7 @@ $("#btnTest").click( function() {
         function(data){
             $("#testeJSON").text(data);
         },
-        success: alert("Funcionou");
+        success: alert("Funcionou")
     });
 
 
