@@ -4,7 +4,8 @@ from django.urls import reverse
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
-from core.backend.pinterAPI import pins
+from core.backend.pinterAPI import pins, salvarPins
+#from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
@@ -39,20 +40,17 @@ def alimentarJson(request):
 def index(request):
     #Usuario.objects.create(loginusuario="tatuador@tattoo.com", senhausuario="$2y$08$0X2GdkM5nBuiL4Dh.Igw6enQ/yegLU866sj7RekUJfH.w6564okSq", tipousuario=True, econfiavel=True)
     #Usuario.objects.create(loginusuario="zzzaik21@gmail.com", senhausuario="$2y$08$Ve0m4XPT8SM5YaR07wFUi.1JMPbvHfPq4xJOs62IzhaLrqk8vM0M2", tipousuario=True, econfiavel=False)
-    createSession(request, 'firstRun', True)
-    #if request.session['firstRun']:
-    #    return redirect(reverse('alimentarJson'))
+
     context = {
         'user':verifyUserSession(request),
-        'fotos':alocarFotos()
+        'fotos':alocarFotos(),
+        #'postar':postar()
     }
     return render(request, 'index.html', context)
 
 def agenda(request):
     context = {
-        'user': verifyUserSession(request),
-        'test':salvarFoto('Outros') #getFoto()
-
+        'user': verifyUserSession(request)
     }
     return render(request, 'agenda.html', context)
 
@@ -234,7 +232,7 @@ def gestaoCatalogo(request):
         return redirect(reverse('home'))
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
-    
+
     context = {
         'data':selectFotos(),
         'user':verifyUserSession(request)
@@ -262,6 +260,41 @@ def gestaoPromos(request):
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
     return render(request, 'tatuador/gestaoPromos.html', {'user':verifyUserSession(request)})
+
+def atualizarImagens(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    salvarFoto('Outros')
+    salvarPins()
+    #função para alimentar o json com as imagens do banco
+    return redirect(reverse('home'))
+
+def postarRedesSociais(request):
+    if not isLogged(request):
+        return redirect(reverse('home'))
+    if request.session['user']['tipo'] != 1:
+        return redirect(reverse('home'))
+    #Interação com as redes sociais
+    salvarFoto('Outros')
+    salvarPins()
+    #função para alimentar o json com as imagens do banco
+    return render(request, 'tatuador/postarRedesSociais.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #############################################################################################################

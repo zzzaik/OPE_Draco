@@ -19,7 +19,7 @@ Including another URLconf
 from django.urls import path#, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
-from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos
+from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, atualizarImagens, postarRedesSociais
 from core.views import reset, alimentarJson
 
 urlpatterns = [
@@ -53,10 +53,12 @@ urlpatterns = [
     ########## tatuador ########## Páginas exclusivas dos tatuadores
     path('tatuador/main', main, name = 'main'),
     path('tatuador/clientes', gestaoClientes, name = 'gestaoClientes'),
-    path('tatuador/gestaoCatalogo', gestaoCatalogo, name = 'gestaoCatalogo'),
-    path('tatuador/gestaoPortfolio', gestaoPortfolio, name = 'gestaoPortfolio'),
-    path('tatuador/gestaoAgenda', gestaoAgenda, name = 'gestaoAgenda'),
-    path('tatuador/gestaoPromos', gestaoPromos, name = 'gestaoPromos'),
+    path('tatuador/gestao_catalogo', gestaoCatalogo, name = 'gestaoCatalogo'),
+    path('tatuador/gestao_portfolio', gestaoPortfolio, name = 'gestaoPortfolio'),
+    path('tatuador/gestao_agenda', gestaoAgenda, name = 'gestaoAgenda'),
+    path('tatuador/gestao_promos', gestaoPromos, name = 'gestaoPromos'),
+    path('tatuador/atualiza_imagens', atualizarImagens, name = 'atualizarImagens'),
+    path('tatuador/postar_redes_sociais', postarRedesSociais, name = 'postarRedesSociais'),
     ##############################
 
     ########## Admins ############ Páginas com o proposito de desenvolvimento
