@@ -2,35 +2,13 @@
 function main() {
 
 $("#btnTest").click( function() {
-    let data = {}
-    //'estilos':[],
-    //'cores':[],
-    //'regiao':[],
-    //'tamanho':[]
-    let jfilho = $.ajax({
-        method: 'GET',
-        url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
-        headers:{
-            'Access-Control-Allow-Origin':'http://zzzaik.pythonanywhere.com/'}
-        });
-    //for (let item = 0; item < jsonObject.estilos.length; item++) {
-    //    data['estilos'].push(jsonObject.estilos[item])
-    //}
-    
-    //for (let item=0;item<jsonObject.cores.length; item++){
-    //    data['cores'].push(jsonObject.cores[item])
-    //}
-    
-    //for (let item=0;item<jsonObject.tamanho.length; item++){
-    //    data['tamanho'].push(jsonObject.tamanho[item])
-    //}
-    
-    //for (let item=0;item<jsonObject.regiao.length; item++){
-    //    data['regiao'].push(jsonObject.regiao[item])
-    //}
-    
+    $.get({url: 'http://www.pythonanywhere.com/user/zzzaik/files/home/zzzaik/OPE_Draco/core/backend/dataJson.py',
+        function(data){
+            $("#testeJSON").text(data);
+        },
+        success: alert("Funcionou");
+    });
 
-    $("#testeJSON").text(Object.toString(jfilho));
 
     });
 
