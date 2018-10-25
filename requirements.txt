@@ -9,6 +9,7 @@ colorama==0.3.9
 Django==2.0.4
 django-cors-headers==2.4.0
 django-jquery==3.1.0
+djangorestframework==3.9.0
 facebook-sdk==3.0.0
 Flask==0.12.2
 httplib2==0.11.3
