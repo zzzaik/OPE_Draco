@@ -25,7 +25,7 @@ from core.views import reset, alimentarJson
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
     ######### Endpoint Routes ##########################
-    re_path('core/getImagens', include('core.urls')),
+    re_path('core/', include('core.urls')),
 
 
     ######### comum ############## Páginas comuns para usuarios autenticados e não autenticados
