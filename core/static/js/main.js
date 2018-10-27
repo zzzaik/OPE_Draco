@@ -5,11 +5,9 @@ $("#btnTest").click( function() {
     $.getJSON({url: 'http://www.pythonanywhere.com/core/getImagens',
         function(data){
             $("#testeJSON").text(data);
-        },
-        success: alert("Funcionou")
-    });
-
-
+            success: alert("Funcionou")
+            }
+        });
     });
 
 (function () {
