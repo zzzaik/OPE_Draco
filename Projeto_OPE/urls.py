@@ -16,7 +16,7 @@ Including another URLconf
 #from django.contrib import admin
 #from django.contrib.auth.models import User
 #from django.conf.urls.static import static
-from django.urls import path#, include
+from django.urls import path, re_path, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
 from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, atualizarImagens, postarRedesSociais
@@ -24,6 +24,9 @@ from core.views import reset, alimentarJson
 
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
+    ######### Endpoint Routes ##########################
+    re_path('core/(?P<version>(v1|v2))/', include('core.urls')),
+
 
     ######### comum ############## Páginas comuns para usuarios autenticados e não autenticados
     path('', index, name = 'home'),
@@ -48,7 +51,7 @@ urlpatterns = [
     ##############################
 
     ########## clientes ########## Páginas exclusivas dos clientes
-    ##############################
+
 
     ########## tatuador ########## Páginas exclusivas dos tatuadores
     path('tatuador/main', main, name = 'main'),

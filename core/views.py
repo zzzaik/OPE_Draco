@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect as redirect
 from django.urls import reverse
+from rest_framework import generics
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
@@ -15,7 +16,9 @@ from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
 from core.backend.dataJson import fillJson
-from core.models import Usuario, Tatuador#, Cliente
+from core.models import Usuario, Tatuador, Imagem
+
+from core.serializers import ImagensSerializer
 
 ############################### Admin ##########################################
 
@@ -34,6 +37,12 @@ def alimentarJson(request):
     fillJson()
     alterSession(request, 'firstRun', False)
     return redirect(reverse('home'))
+
+############################ API Endpoints #######################################
+
+class ListImagensView(generics.ListAPIView):
+    queryset = Imagem.objects.all()
+    serializer_class = ImagensSerializer
 
 ################################################################################
 
