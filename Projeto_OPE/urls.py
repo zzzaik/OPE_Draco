@@ -26,7 +26,7 @@ from core.views import ListImagensView
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
     ######### Endpoint Routes ##########################
-    path('core/getImagens/', ListImagensView.as_view(), name="imagens-all")),
+    path('core/getImagens/', ListImagensView.as_view(), name="imagens-all"),
 
 
     ######### comum ############## Páginas comuns para usuarios autenticados e não autenticados
