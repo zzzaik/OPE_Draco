@@ -66,7 +66,7 @@ CORS_ALLOW_HEADERS = default_headers
 CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny')
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
 }
 
 ROOT_URLCONF = 'Projeto_OPE.urls'
