@@ -21,11 +21,12 @@ from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
 from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, atualizarImagens, postarRedesSociais
 from core.views import reset, alimentarJson
+from core.views import ListImagensView
 
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
     ######### Endpoint Routes ##########################
-    re_path('core/(?P<version>(v1|v2))/', include('core.urls')),
+    path('core/getImagens/', ListImagensView.as_view(), name="imagens-all")),
 
 
     ######### comum ############## Páginas comuns para usuarios autenticados e não autenticados

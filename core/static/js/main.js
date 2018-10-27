@@ -2,7 +2,7 @@
 function main() {
 
 $("#btnTest").click( function() {
-    $.getJSON({url: 'http://www.pythonanywhere.com/core/v1/getImagens',
+    $.getJSON({url: 'http://www.pythonanywhere.com/core/getImagens',
         function(data){
             $("#testeJSON").text(data);
         },
