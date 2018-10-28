@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect as redirect
 from django.urls import reverse
-from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
@@ -40,9 +42,18 @@ def alimentarJson(request):
 
 ############################ API Endpoints #######################################
 
-class ListImagensView(generics.ListAPIView):
-    queryset = Imagem.objects.all()
-    serializer_class = ImagensSerializer
+class ListImagensView(APIView):
+    def get(self, request, format=None):
+        imagens = Imagem.objects.all()
+        serial = ImagensSerializer(imagens, many=True)
+        return Response(serial.data)
+
+    def post(self, request, format=None):
+        serial = ImagensSerializer(data=request.DATA)
+        if serial.is_valid():
+            serial.save()
+            return Response(serial.data, status=status.HTTP_201_CREATED)
+        return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)
 
 ################################################################################
 
