@@ -2,6 +2,23 @@
 {% load static %}
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Agenda{% endblock %}
+{% block calendar %}
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+    <script src="{% static 'plugins/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'plugins/fullcalendar/js/fullcalendar.min.js' %}" ></script>
+    <script src="{% static 'plugins/fullcalendar/js/locale-all.js' %}" ></script>
+    <script src='fullcalendar/locale/pt-br.js'></script>
+    <script>
+
+      $(function() {
+
+        $('#calendar').fullCalendar({
+        });
+
+      });
+
+    </script>
+{% endblock %}
 {% block main %}
 {{ test }}
 {{ test2 }}
