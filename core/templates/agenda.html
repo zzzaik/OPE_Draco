@@ -3,24 +3,15 @@
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Agenda{% endblock %}
 {% block calendar %}
-    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-    <script src="{% static 'plugins/moment/min/moment.min.js' %}"></script>
-    <script src="{% static 'plugins/fullcalendar/js/fullcalendar.min.js' %}" ></script>
-    <script src="{% static 'plugins/fullcalendar/js/locale-all.js' %}" ></script>
-    <script src='fullcalendar/locale/pt-br.js'></script>
-    <script>
-
-      $(function() {
-
-        $('#calendar').fullCalendar({
-        });
-
-      });
-
-    </script>
+    <link rel='stylesheet' href="{% static 'fullcalendar/fullcalendar.css' %}" />
+    <script src="{% static 'fullcalendar/lib/moment.min.js' %}"></script>
+    <script src="{% static 'fullcalendar/fullcalendar.js' %}" ></script>
+    <script src="{% static 'fullcalendar/locale-all.js' %}" ></script>
+    <script src="{% static 'fullcalendar/locale/pt-br.js' %}"></script>
 {% endblock %}
 {% block main %}
-{{ test }}
-{{ test2 }}
+{{ calendar }}
     <h1>Em construção</h1>
+
+    <div id="calendar"></div>
 {% endblock %}

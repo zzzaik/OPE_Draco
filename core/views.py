@@ -10,6 +10,7 @@ from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
 from core.backend.pinterAPI import pins, salvarPins
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
+from core.backend.calendar import getCalendar
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
 from core.backend.sessionsSettings import verifyUserSession, isLogged, redefSenhaSession, killSession, createSession, alterSession
@@ -70,7 +71,8 @@ def index(request):
 
 def agenda(request):
     context = {
-        'user': verifyUserSession(request)
+        'user': verifyUserSession(request),
+        'calendar':  getCalendar()
     }
     return render(request, 'agenda.html', context)
 

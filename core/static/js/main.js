@@ -1,6 +1,11 @@
 
 function main() {
 
+$(document).ready(function() {
+        $('#calendar').fullCalendar({
+        })
+});
+
 $("#btnTest").click( function() {
     $.getJSON({url: 'http://zzzaik.pythonanywhere.com/dataImagens/',
         function(data){
