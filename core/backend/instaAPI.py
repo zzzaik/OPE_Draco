@@ -26,10 +26,12 @@ def salvarFoto(estiloEscolhido=None):
 
 def selectFotos(estilo=None,tamanho=None,cor=None,regiao=None):
     fotos = []
-    img = Imagem.objects.all()
+    img = Imagem.objects.all().exclude(idestilo=False)
 
     for foto in img:
-        fotos.append({'url':foto.urlimagem,'estilo':foto.idestilo})
+        urlImg = foto.urlimagem
+        styleId = str(foto.idestilo)
+        fotos.append({'url':urlImg,'estilo':styleId})
 
     return fotos
 

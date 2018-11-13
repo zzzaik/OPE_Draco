@@ -31,6 +31,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="{% static '/' %}js/modernizr.custom.js"></script>
+    {% block script %}{% endblock %}
 
 </head>
 
@@ -71,7 +72,7 @@
                         <li>
                             <a class="page-scroll" href="{% url 'gestaoPromos' %}">Promoções</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -79,7 +80,7 @@
     </div>
 
     <main class="main">{% block main %}{% endblock %}</main>
-    
+
     <footer>
         <div id="footer">
             <div class="text-center">

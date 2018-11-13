@@ -66,6 +66,9 @@ class Estilo(models.Model):
         managed = False
         db_table = 'Estilo'
 
+    def __str__(self):
+        return self.estilo
+
 
 class Imagem(models.Model):
     idimagem = models.AutoField(db_column='idImagem', primary_key=True)  # Field name made lowercase.

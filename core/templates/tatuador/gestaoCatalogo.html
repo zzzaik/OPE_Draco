@@ -1,14 +1,32 @@
 {% extends 'tatuador/base2.html' %} {% load static %}
+
+{% block script %}
+<script type="text/javascript">
+    let json_values = JSON.parse({{ data }});
+    let target = document.getElementById("testeJson");
+    json_values.foreach(function {
+        let box = document.createElement("span");
+        let text = document.createTextNode(json_values['url']);
+        box.appendChild(text);
+
+        target.appendChild(box);
+    });
+
+</script>
+{% endblock %}
+
 {% block title%}Catálogo{% endblock %}
 {% block main %}
+
 <div class="container moveTop80">
+    <div id="testeJson"></div>
     <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
         <div><!-- Coluna não Classificados -->
             <h3>Não Classificados</h3>
             {% for item in data %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
-                    <img src="{{ item.url }}" class="miniFoto">
+                    <img src='{{ item.url }}' class="miniFoto">
                 </div>
                 <div class="selectorGroup">
                     <div class="selectorContainer"><!-- Container Seletor -->
@@ -90,6 +108,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -97,7 +116,6 @@
         <button class="btn btn-primary">Atualizar</button>
         <button class="btn btn-primary">Salvar</button>
     </div>
-    {{ data }}
 </div>
 
 {% endblock %}
