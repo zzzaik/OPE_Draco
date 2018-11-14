@@ -4,4 +4,4 @@ from core.models import Imagem
 class ImagensSerializer(serializers.ModelSerializer):
     class Meta:
         model = Imagem
-        fields = ("idimagem","urlimagem","ratins","idestilo","fonteimagem")
+        fields = ["idimagem","urlimagem","ratins","idestilo","fonteimagem"]

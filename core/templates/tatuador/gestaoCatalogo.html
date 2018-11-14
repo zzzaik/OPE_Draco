@@ -2,15 +2,15 @@
 
 {% block script %}
 <script type="text/javascript">
-    let json_values = JSON.parse({{ data }});
+    let json_values = {{ data }};
     let target = document.getElementById("testeJson");
-    json_values.foreach(function {
+    for(let i=0;i<json_values.length;i++){
         let box = document.createElement("span");
-        let text = document.createTextNode(json_values['url']);
+        let text = document.createTextNode(json_values[i]['url']);
         box.appendChild(text);
 
         target.appendChild(box);
-    });
+    };
 
 </script>
 {% endblock %}
@@ -19,93 +19,40 @@
 {% block main %}
 
 <div class="container moveTop80">
-    <div id="testeJson"></div>
     <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
-        <div><!-- Coluna não Classificados -->
-            <h3>Não Classificados</h3>
+        <h3>Não Classificados</h3>
+        <div class="gridItemContainer"><!-- Coluna não Classificados -->
             {% for item in data %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src='{{ item.url }}' class="miniFoto">
                 </div>
-                <div class="selectorGroup">
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Estilo</h5>
-                        <select>
-                            <option>Estilo 1</option>
-                            <option>Estilo 2</option>
-                            <option>Estilo 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Tamanho</h5>
-                        <select>
-                            <option>Tamanho 1</option>
-                            <option>Tamanho 2</option>
-                            <option>Tamanho 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Cor</h5>
-                        <select>
-                            <option>Cor 1</option>
-                            <option>Cor 2</option>
-                            <option>Cor 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Região</h5>
-                        <select>
-                            <option>Região 1</option>
-                            <option>Região 2</option>
-                            <option>Região 3</option>
-                        </select>
-                    </div>
+                <div class="selectorContainer"><!-- Container Seletor -->
+                    <h5>Estilo</h5>
+                    <select>
+                        <option>Estilo 1</option>
+                        <option>Estilo 2</option>
+                        <option>Estilo 3</option>
+                    </select>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div><!-- Coluna Classificados -->
-            <h3>Não Classificados</h3>
+        <h3>Classificados</h3>
+        <div class="gridItemContainer"><!-- Coluna Classificados -->
             {% for item in data %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src="{{ item.url }}" class="miniFoto">
                 </div>
-                <div class="selectorGroup">
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Estilo</h5>
-                        <select>
-                            <option>Estilo 1</option>
-                            <option>Estilo 2</option>
-                            <option>Estilo 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Tamanho</h5>
-                        <select>
-                            <option>Tamanho 1</option>
-                            <option>Tamanho 2</option>
-                            <option>Tamanho 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Cor</h5>
-                        <select>
-                            <option>Cor 1</option>
-                            <option>Cor 2</option>
-                            <option>Cor 3</option>
-                        </select>
-                    </div>
-                    <div class="selectorContainer"><!-- Container Seletor -->
-                        <h5>Região</h5>
-                        <select>
-                            <option>Região 1</option>
-                            <option>Região 2</option>
-                            <option>Região 3</option>
-                        </select>
-                    </div>
+                <div class="selectorContainer"><!-- Container Seletor -->
+                    <h5>Estilo</h5>
+                    <select>
+                        <option>{{ item.estilo }}</option>
+                        <option>Estilo 2</option>
+                        <option>Estilo 3</option>
+                    </select>
                 </div>
             </div>
             {% endfor %}
