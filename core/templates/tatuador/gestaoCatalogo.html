@@ -22,26 +22,29 @@
     <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
         <h3>Não Classificados</h3>
         <div class="gridItemContainer"><!-- Coluna não Classificados -->
-            {% for item in data %}
+            {% for item in data.noClassf %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src='{{ item.url }}' class="miniFoto">
                 </div>
-                <div class="selectorContainer"><!-- Container Seletor -->
+                <div class="selectorContainer" name="semClassificacao"><!-- Container Seletor -->
+                    <input type="hidden" name="imgID" value="{{ item.imgId }}"></input>
+                    {{ item.imgId }}
                     <h5>Estilo</h5>
                     <select>
-                        <option>Estilo 1</option>
-                        <option>Estilo 2</option>
-                        <option>Estilo 3</option>
+                        {% for estilo in estilos %}
+                        <option value="{{ estilo }}">{{ estilo }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
             {% endfor %}
+
         </div>
 
         <h3>Classificados</h3>
         <div class="gridItemContainer"><!-- Coluna Classificados -->
-            {% for item in data %}
+            {% for item in data.classf %}
             <div class="gridItemGestao"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src="{{ item.url }}" class="miniFoto">
@@ -56,12 +59,13 @@
                 </div>
             </div>
             {% endfor %}
+
         </div>
     </div>
 
     <div><!-- Salvar Modificações -->
         <button class="btn btn-primary">Atualizar</button>
-        <button class="btn btn-primary">Salvar</button>
+        <button class="btn btn-primary" onclick="saveCatalogo()">Salvar</button>
     </div>
 </div>
 

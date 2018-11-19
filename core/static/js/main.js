@@ -1,6 +1,27 @@
 
 function main() {
 
+function saveCatalogo () {
+    let data = [];
+    let images = $("name=semClassificacao");
+    for(let i=0;i<images.length;i++){
+        imgId = images.children[0].value
+        estilo = images.children[2].val()
+        data.push({'imgId': imgId,'estilo':estilo})
+    };
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
+        type:'POST',
+        content-type:'application/json; charset=utf-8',
+        data: $.toJSON(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result.Result);
+        }
+    });
+}
+
 $(document).ready(function() {
         $('#calendar').fullCalendar({
         })

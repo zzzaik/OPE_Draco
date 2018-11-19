@@ -8,7 +8,7 @@ from rest_framework import status
 import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos
+from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos, alterarEstilo
 from core.backend.pinterAPI import pins, salvarPins
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
@@ -20,7 +20,7 @@ from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
-from core.backend.dataJson import fillJson
+from core.backend.dataJson import fillJson, getEstilos
 from core.models import Usuario, Tatuador, Imagem
 
 from core.serializers import ImagensSerializer
@@ -53,9 +53,6 @@ class ListImagensView(CreateAPIView):
         s = serializer.save()
         return Response(s)
 
-
-            return Response(serial.data, status=status.HTTP_201_CREATED)
-        return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
         imagens = Imagem.objects.all()
@@ -263,6 +260,7 @@ def gestaoCatalogo(request):
 
     context = {
         'data':selectFotos(),
+        'estilos': getEstilos(),
         'user':verifyUserSession(request)
     }
 
@@ -311,6 +309,12 @@ def postarRedesSociais(request):
     return render(request, 'tatuador/postarRedesSociais.html')
 
 
+def saveGestaoCatalogo(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = request.body
+            for item in data:
+                alterarEstilo(item.imgId, item.estilo)
 
 
 

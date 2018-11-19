@@ -23,3 +23,11 @@ def fillJson():
     pass
     #with open('core/data.json', 'w') as j:
     #    json.dump(data, j, ensure_ascii=False)
+
+def getEstilos():
+    estilos = Estilo.objects.all()
+    data = []
+    for estilo in estilos:
+        data.append(estilo)
+
+    return data

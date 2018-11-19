@@ -24,22 +24,30 @@ def salvarFoto(estiloEscolhido=None):
             msg += 'Estilo não encontrado! '
     return msg
 
-def selectFotos(estilo=None,tamanho=None,cor=None,regiao=None):
-    fotos = []
-    img = Imagem.objects.all().exclude(idestilo=False)
+def selectFotos():
+    fotos = {'classf':[],'noClassf':[]}
+    imgClass = Imagem.objects.all().exclude(idestilo=False)
+    imgNoClass = Imagem.objects.all().exclude(idestilo=True)
 
-    for foto in img:
+    for foto in imgClass:
+        imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos.append({'url':urlImg,'estilo':styleId})
+        fotos['classf'].append({'imgID':imgId, 'url':urlImg, 'estilo':styleId})
+
+    for foto in imgNoClass:
+        imgId = foto.idimagem
+        urlImg = foto.urlimagem
+        styleId = str(foto.idestilo)
+        fotos['noClassf'].append({'imgID':imgId, 'url':urlImg, 'estilo':styleId})
 
     return fotos
 
-'''
+
 def alterarEstilo(imagem, estilo):
     img = Imagem.objects.filter(idimagem=imagem)
     img.update(estilo=Estilo.objects.only('idestilo').get(estilo=estilo))
-'''
+
 
 def alocarFotos(imgs=0):
     fotos = {}

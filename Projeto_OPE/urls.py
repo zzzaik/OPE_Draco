@@ -20,6 +20,7 @@ from django.urls import path, re_path, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
 from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, atualizarImagens, postarRedesSociais
+from core.views import saveGestaoCatalogo
 from core.views import reset, alimentarJson
 from core.views import ListImagensView
 
@@ -63,6 +64,7 @@ urlpatterns = [
     path('tatuador/gestao_promos', gestaoPromos, name = 'gestaoPromos'),
     path('tatuador/atualiza_imagens', atualizarImagens, name = 'atualizarImagens'),
     path('tatuador/postar_redes_sociais', postarRedesSociais, name = 'postarRedesSociais'),
+    path('tatuador/gestao_catalogo/save_catalogo', saveGestaoCatalogo),
     ##############################
 
     ########## Admins ############ Páginas com o proposito de desenvolvimento
