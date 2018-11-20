@@ -4,50 +4,1095 @@
 {% block title %}Dados{% endblock %}
 {% block main %}
     {{ resp }}
-    <div id='clientPage' class='container spaceUp spaceDown'>
-        <form id="formInfoUser" method="POST">
-            {% csrf_token %}
-            <div class='form-group row'>
-                <label name="login" class='control-label col-lg-1'>E-mail:</label>
-                <div class="col-lg-4">
-                    <input name="login" type="mail" id="login" class="form-control" disabled/>
-                </div>
-            </div>
-            <div class='form-group row'>
-                <label name="CPF" class='control-label col-lg-1'>CPF:</label>
-                <div class="col-lg-4">
-                    <input name="CPF" id="CPF" type="text" class="form-control" disabled/>
-                </div>
-            </div>
-            <div class='form-group row'>
-                <label name="celular" class='control-label col-lg-1'>Celular:</label>
-                <div class="col-lg-4">
-                    <input name="celular" id="celular" type="text" class="form-control" disabled/>
-                </div>
-            </div>
-            <div class='form-group row'>
-                    <label name="restricoes" class='control-label col-lg-1'>Restrições:</label>
-                    <div class="col-lg-4 row moveLeft30">
-                        <div class='checkbox row'>
-                            <label><input type="checkbox" value='' disabled> Restrição 1</label>
-                        </div>
-                        <div class='checkbox row'>
-                            <label><input type="checkbox" value='' disabled> Restrição 2</label>
-                        </div>
-                        <div class='checkbox row'>
-                            <label><input type="checkbox" value='' disabled> Restrição 3</label>
-                        </div>
-                        <div class='checkbox row'>
-                            <label><input type="checkbox" value='' disabled> Restrição 4</label>
-                        </div>
-                        <label for='outrasRestricoes'>Outras:</label>
-                        <textarea class='form-control textBox' wrap="off" id="outrasRestricoes" rows='5' disabled></textarea>
-                    </div>
-                </div>
-            <div class="row col-lg-offset-2">
-                    <button type="button" id='btnAtualizarFormUser' onclick="AtualizarFormInfoUser()" class='btn btn-primary'>Atualizar</button>
-                <button type="submit" form="formInfoUser" value="Submit" id='btnSalvarFormUser' onclick="SubmitFormInfoUser()" class='btn btn-primary displayNone'>Salvar</button>
-            </div>
-        </form>
-    </div>
+    <form action="/pagina-processa-dados-do-form" method="post">
+		<div class="container">
+			<div class="bloco1">  <!--Tudo que for classe menor não pode apacerer se o checkbox souMenor for false-->
+				<h2>TERMO DE AUTORIZAÇÃO PARA MICROPIGMENTAÇÃO</h2>
+				<input type="checkbox" name="souMenor" id="souMenor"/><label for="souMenor">Sou menor de 18 anos</label><br>
+				<p class="maior">Eu, abaixo especificado, declaro que estou em perfeitas
+					condições físicas e mentais, pelo presente
+					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
+					a técnica de Micropigmentação,
+					arte de tatuar sobrancelhas semi-permanentes, ou outras
+					áreas faciais e corporais.</p>
+				<p class="menor">Declaro que estou em perfeitas
+					condições físicas e mentais, pelo presente
+					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
+					do meu filho(a) menor de 18 anos, abaixo identificando, no qual sou
+					responsável, a técnica de Micropigmentação,
+					arte de tatuar sobrancelhas semi-permanentes, ou outras
+					áreas faciais e corporais.</p>
+				<p class="menor">Assumo, na qualidade de genitor de menor, plena responsabilidade
+					pelo trabalho ora autorizado, e de minha livre e plena vontade
+					declarar que isento qualquer responsabilidade civil ou criminal
+					o (a) micropigmentador. Seja de ordem médica ou estética. Ficando
+					ainda plenamente ciente de que o processo da arte na pele, ficará
+					semi-permanente com duração entre 6 meses a um ano.</p>
+				<p class="menor">Declaro ainda, ser do meu conhecimento das
+					técnicas a serem executadas, os matérias
+					a serem utilizados, bem como fui informado, e
+					tenho total ciência dos procedimentos e
+					cuidados, que devem ser executados por mim ou por
+					meu filho(a); durante o período recomendado pelo
+					profissional, com a finalidade de evitar
+					qualquer complicação médica no período de cicatrização do local.</p>
+				<p class="menor">Reconheço finalmente tratar-se o processo
+					de arte na pele, como micropigmentação
+					eminente ARTESANAL, e como tal, não comporta perfeição.</p>
+				<div class="menor bloco1 bloco-form">
+					<label for="nomeResponsavel">Responsavel:</label>
+					<input type="text" id="nomeResponsavel" name="nomeResponsavel" />
+				</div>
+
+				<div class="menor bloco2 bloco-form">
+					<label for="rgResponsavel">Rg:</label>
+					<input type="text" id="rgResponsavel" name="rgResponsavel" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="cpfResponsavel">CPF:</label>
+					<input type="text" id="cpfResponsavel" name="cpfResponsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="dataNascResponsavel">Data Nasc:</label>
+					<input type="date" id="dataNascResponsavel" name="dataNascResponsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="estadoCivilResponsavel">Estado Civil:</label>
+					<input type="text" id="estadoCivilResponsavel" name="estadoCivilResponsavel" />
+				</div>
+
+				<div class="bloco1 bloco-form">
+					<label for="enderecoResponsavel">Endereço:</label>
+					<input type="text" id="enderecoResponsavel" name="enderecoResponsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="bairroResponsavel">Bairro:</label>
+					<input type="text" id="bairroResponsavel" name="bairroResponsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="responsavel">Cidade/Estado:</label>
+					<input type="text" id="cidadeResponsavel" name="cidadeResponsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="responsavel">Cep:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="responsavel">Profissão:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="responsavel">Telefone:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="responsavel">E-mail:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+				<div class="bloco1 bloco-form">
+					<label for="responsavel">Nome do Menor:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="rg">Rg:</label>
+					<input type="text" id="rg" name="rg" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="cpf">CPF:</label>
+					<input type="text" id="cpf" name="cpf" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="rg">Data Nasc:</label>
+					<input type="date" id="rg" name="rg" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="cpf">Telefone:</label>
+					<input type="text" id="cpf" name="cpf" />
+				</div>
+
+				<div class="bloco1 bloco-form">
+					<label for="responsavel">E-mail:</label>
+					<input type="text" id="responsavel" name="responsavel" />
+				</div>
+
+
+
+			</div>
+
+		<div class="container">
+
+			<div class="bloco1">
+
+				<div class="bloco1 bloco-form">
+					<label for="LocalTatto">Local da Micropigmentação:</label>
+					<input type="text" id="LocalTatto" name="LocalTatto" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="dataMicro">Data:</label>
+					<input type="date" id="dataMicro" name="dataMicro" />
+				</div>
+
+				<div class="bloco2 bloco-form">
+					<label for="nomeMicro">Micropigmentador(a):</label>
+					<input type="text" id="nomeMicro" name="nomeMicro" />
+				</div>
+
+
+				<p>Referente ás perguntas sobre problemas de saúde e anmanse, serão preenchidas
+				através da ficha do cliente. Nos quais serão arquivados juntamente com este
+				pedido de autorização.</p>
+
+				<p>DECLARO SEREM VERDADEIRAS AS AFIRMAÇÕES ACIMA DECLARADAS, ASSUMO
+				TOTAL RESPONSABILIDADE POR QUALQUER OMISSÃO OU ERRO NAS MESMAS.</p>
+
+				<p>IMPORTANTE: TRAZER XEROX DO DOCUMENTO DE INDENTIDADE DO
+				RESPONSAVEL E DO MENOR. AUNTENTICAR ESTE TERMO NO CARTÓ.RIO</p>
+
+
+				<p>Sem mais, Firmo Verdade.</p>
+
+
+				<div class="bloco3 bloco-form">
+					<label for="assinaturaNomeRes">Assinatura Responsável:</label>
+					<input type="text" id="assinaturaNomeRes" name="assinaturaNomeRes" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="">Assinatura Menor:</label>
+					<input type="text" id="assinaturaNomeMen" name="assinaturaNomeMen" />
+				</div>
+
+				<div class="bloco3 bloco-form">
+					<label for="nomeMicro">Micropigmentador(a):</label>
+					<input type="text" id="nomeMicro" name="nomeMicro" />
+				</div>
+
+			</div>
+		</div>
+
+			<div class="bloco1">
+				<h2>Registro de Acidentes</h2>
+
+				<div class="bloco1 bloco-form">
+						<label for="nomeAci">Nome:</label>
+						<input type="text" id="nomeAci" name="nomeAci" />
+				</div>
+
+				<div class="bloco4 bloco-form">
+					<label for="rgAci">Rg:</label>
+					<input type="text" id="rgAci" name="rgAci" />
+				</div>
+
+				<div class="bloco4 bloco-form">
+					<label for="idadeAci">Idade:</label>
+					<input type="text" id="idadeAci" name="idadeAci" />
+				</div>
+
+				<div class="bloco4 bloco-form">
+						<label for="sexoAci">Sexo:</label>
+						<input type="text" id="sexoAci" name="sexoAci" />
+				</div>
+				<div class="bloco4 bloco-form">
+						<label for="EstadoCivilAci">Estado Civil:</label>
+						<input type="text" id="EstadoCivilAci" name="EstadoCivilAci" />
+				</div>
+				<div class="bloco1 bloco-form">
+						<label for="CargoAci">Cargo:</label>
+						<input type="text" id="CargoAci" name="CargoAci" />
+				</div>
+
+						<div class="bloco1 bloco-form">
+						<label for="FuncaoAci">Função Exercida:</label>
+						<input type="text" id="FuncaoAci" name="FuncaoAci" />
+				</div>
+
+
+				<table style="width:100%">
+  					<tr>
+    					<th>Categoria Funcional</th>
+  					</tr>
+    					<td><input type="checkbox" name="vehicle1" value="Micropig">Micropigmentador(a)<br>
+					<input type="checkbox" name="vehicle2" value="cliente">Cliente<br>
+					<input type="checkbox" name="vehicle3" value="prestador">Prestador<br></td>
+
+  					</tr>
+
+				</table>
+
+			</div>
+
+			<div class="bloco1">
+
+				<h4>II - IDENTIFICAÇÃO DA EMPRESA</h4>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="empresaIdent">Empresa:</label>
+						<input type="text" id="empresaIdent" name="empresaIdent" />
+				</div>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="municipioIdent">Municipio:</label>
+						<input type="text" id="municipioIdent" name="municipioIdent" />
+				</div>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="telefoneIdent">Telefone:</label>
+						<input type="text" id="telefoneIdent" name="telefoneIdent" />
+				</div>
+
+				<h4>III - INFORMAÇÃO SOBRE O ACIDENTE</h4>
+
+				<div>
+
+						<div class="bloco3 bloco-form">
+						<label for="dataAci">Data do Acidente:</label>
+						<input type="date" id="dataAci" name="dataAci" />
+				</div>
+
+				<div>
+
+						<div class="bloco3 bloco-form">
+						<label for="horaAci">Hora:</label>
+						<input type="text" id="horaAci" name="horaAci" />
+				</div>
+
+				<div>
+
+						<div class="bloco3 bloco-form">
+						<label for="localAci">Local do Acidente:</label>
+						<input type="text" id="localAci" name="localAci" />
+				</div>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="numeroHoraAci">ºNumero de horas trabalhada até o acidente:</label>
+						<input type="text" id="numeroHoraAci" name="numeroHoraAci" />
+				</div>
+
+				<table style="width:100%">
+
+    				<td>
+    						<input type="checkbox" name="vehicle1" value="Micropig">1. Com afastamento<br>
+							<input type="checkbox" name="vehicle2" value="cliente">2. Com lesão<br>
+
+					</td>
+
+					<td>
+    						<input type="checkbox" name="vehicle1" value="Micropig">1. Sem afastamento<br>
+							<input type="checkbox" name="vehicle2" value="cliente">2. Sem lesão<br>
+
+					</td>
+
+					<td>
+						<input type="checkbox" name="vehicle1" value="Micropig">3. Alérgica<br>
+					</td>
+
+				</table>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="diasAci">Dias do afastamento:</label>
+						<input type="text" id="diasAci" name="diasAci" />
+				</div>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="parteCorpoAci">Partes do corpo atingida:</label>
+						<input type="text" id="parteCorpoAci" name="parteCorpoAci" />
+				</div>
+
+				<div>
+
+						<div class="bloco1 bloco-form">
+						<label for="caudadorAci">Agente causador:</label>
+						<input type="text" id="caudadorAci" name="caudadorAci" />
+				</div>
+
+				<h4>IV - TIPO DE ACIDENTE/ REAÇÃO ALÉRGICA</h4>
+
+				<table style="width:100%">
+
+    			  <td>
+    				<input type="checkbox" name="vehicle1" value="Micropig">1. Tipico (No trabalho)<br>
+					<input type="checkbox" name="vehicle2" value="cliente">2. Trajeto (Deslocamento: Trabalho p/ casa ou casa p/ trabalho<br>
+					<input type="checkbox" name="vehicle3" value="prestador">3. Doença Profissional / Doença Alérgica do Cliente<br>
+				  </td>
+
+				</table>
+
+
+				<div class="bloco1">
+  					<h4>V - DESCRIÇÃO DO ACIDENTE</h4>
+  					<textarea class="bloco1" name="comentarios" id="comentarios"></textarea>
+				</div>
+
+				<div class="bloco1">
+  					<h4>V - PROCESSO DE CONDUTA</h4>
+  					<textarea class="bloco1" name="comentarios" id="comentarios"></textarea>
+				</div>
+
+				</br>
+				</br>
+
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="ResponAci">Resposavél:</label>
+						<input type="text" id="ResponAci" name="ResponAci" />
+				</div>
+
+			</div>
+
+
+			<div class="bloco1">
+				<P>
+				 <h2>FICHA DE ANAMNESE</h2>
+			    </P>
+
+			    <div>
+						<div class="bloco2 bloco-form">
+						<label for="nomeAnam">Nome:</label>
+						<input type="text" id="nomeanam" name="nomeanam" />
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="dataAnam">Dat.Nasc:</label>
+						<input type="date" id="dataAnam" name="dataAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="RGAnam">RG:</label>
+						<input type="text" id="RGAnam" name="RGAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="CPFAnam">CPF:</label>
+						<input type="text" id="CPFAnam" name="CPFAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="naturaAnam">Naturalidade:</label>
+						<input type="text" id="naturaAnam" name="naturaAnam" />
+				</div>
+
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="endAnam">Endereço:</label>
+						<input type="text" id="endAnam" name="endAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="FoneAnam">Fone(Res):</label>
+						<input type="text" id="FoneAnam" name="FoneAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="CelAnam">Cel:</label>
+						<input type="text" id="CPFAnam" name="CPFAnam" />
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="EmailAnam">E-mail:</label>
+						<input type="text" id="EmailAnam" name="EmailAnam" />
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="PesoAnam">Peso:</label>
+						<input type="text" id="PesoAnam" name="PesoAnam" />
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="EstaturaAnam">Estatura:</label>
+						<input type="text" id="EstaturaAnam" name="EstaturaAnam" />
+				</div>
+
+				<h4>Informações do Procedimento</h4>
+
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="prodAnam">Procedimento a ser realizado:</label>
+						<input type="text" id="prodAnam" name="prodAnam" />
+				</div>
+
+
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="profAnam">Profissional:</label>
+						<input type="text" id="profAnam" name="profAnam" />
+				</div>
+
+
+				<div>
+						<div class="bloco1 bloco-form">
+							<label for="tecPigAnam">Tecnica / Pigmento:</label>
+							<input type="text" id="tecPigAnam" name="tecPigAnam" />
+						</div>
+				</div>
+
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Aspirina 5 dias</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="aspirina" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="aspirina" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Herpes</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Herpes" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Herpes" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Hipertensão</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hipertensao" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hipertensao" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Hemofilía</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hemofilia" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hemofilia" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Tonturas</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Tonturas" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Tonturas" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Câncer</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Cancer" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Cancer" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Cardiopatia</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Cardiopatia" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Cardiopatia" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>HIV</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="HIV" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="HIV" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Menstruada</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Menstruada" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Menstruada" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Grávida</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Gravida" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Gravida" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Amamentando</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Amamentando" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Amamentando" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Asma</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Asma" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Asma" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Colesterol</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Colesterol" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Colesterol" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Epilepsia</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Epilepsia" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Epilepsia" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Problema Renal</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="ProblemaRenal" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="ProblemaRenal" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Diabetes</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Diabetes" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Diabetes" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Marca Passo</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="MarcaPasso" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="MarcaPasso" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Lúpus</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Lupus" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Lupus" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Circulatório</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Circulatorio" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Circulatorio" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Glaucoma</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Glaucoma" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Glaucoma" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Respiratório</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Respiratorio" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Respiratorio" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Psoríase</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Psoriase" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Psoriase" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Hepatite</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hepatite" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Hepatite" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Coagulação</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Coagulacao" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Coagulacao" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Depressão</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Depressao" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="Depressao" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<b>Gripe HN1</b>
+							</div>
+							<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="GripeHN1" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="GripeHN1" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="alergiaAnam">Possui Alergia ? Quais ?:</label>
+						<input type="text" id="alergiaAnam" name="alergiaAnam" /></div>
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="tatuagemAnam">Possui Tatuagem ?</label>
+						<input type="text" id="tatuagemAnam" name="tatuagemAnam" /></div>
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="localCorpoAnam">Local do corpo ?</label>
+						<input type="text" id="localCorpoAnam" name="localCorpoAnam" /></div>
+				</div>
+
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="nomeTatuadorAnam">Nome do Tatuador ou Empresa:</label>
+						<input type="text" id="nomeTatuadorAnam" name="nomeTatuadorAnam" /></div>
+				</div>
+
+			</div>
+
+
+			<div class="bloco1">
+
+				<p>1- Declaro que são verdadeiras as informações acima e independente das minhas
+				informações serem positivas eu negativas, confirmo o meu dejeso de executar o
+				procedimento;</p>
+
+				<p>2- O procedimento e todas as implicações relativas ao mesmo, me foram
+				esclarecidas e estou ciente das minhas condições psicológicas e de saúde. Ficando
+				assim a profissional e o estabelecimento isento de qualquer responsabilidade, quanto
+				as reações que por ventura eu venha apresentar;</p>
+
+				<p>3- Assumo a resposabilidade no pós-procedimento, pois afirmo que seguirei
+				rigorosamente as instruções;</p>
+
+				<p>4- Renuncio por vontade própria a aplicação do teste de sensibilidade e estou
+				ciente que por este ato, assumo total responsabilidade no tocante á reação que
+				minha pele poderá á apresentar;</p>
+
+				<p>5- Autorizo gratuitamente a exibição de minha imagem, através de foto ou
+				reprodução da mesma, para propaganda em qualquer veículo de comunicação</p>
+				<div class="bloco2">
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="autorizo" value="sim">
+									<span style="width: 15px;">Sim</span>
+								</div>
+								<div class="bloco2">
+									<input style="width: 15px; height: 15px;" type="radio" name="autorizo" value="nao">
+									<span style="width: 15px;">Não</span>
+								</div>
+							</div>
+
+
+							<div>
+						<div class="bloco1 bloco-form">
+						<label for="nomeResAnam">Assinatura Responsavel:</label>
+						<input type="text" id="nomeResAnam" name="nomeResAnam" /></div>
+				</div>
+
+
+
+			</div>
+
+
+			<div class="bloco1">
+
+				<h2>CUIDADOS PÓS-PROCEDIMENTOS</h2>
+
+				<p>1. Não molhar por 48 horas no caso de sobrancelhas.</p>
+
+				<p>2. Não se expor ao sol direto durante 30 dias</p>
+
+				<p>3. Não usar sauna, não frequentar piscina e mar, nos primeiros 7 dias</p>
+
+				<p>4. nunca usar sabonete, base, loções, oleos, cremes, ou produtos cremosos, o que contenham ácidos sobre o local.</p>
+
+				<p>5. Ter cuidados com calor de forno, secador de cabelos, vapor de panelas.</p>
+
+				<p>6. Passar pomada 2x ao dia, de manhã e de noite para manter hidratada.</p>
+
+				<p>7. não usar maquiagem até completar a cicatrização.</p>
+
+				<p>8. não arrancar a casca que se forma, deixar que saia naturalmente.</p>
+
+				<p>9. Não ingerir comidas gordurosas, evitar chocolate, comidas e bebidas ácidas.</p>
+
+				<p>10. Só lavar a área com soro fisiológico e compressas geladas nas primeiras 24 horas.</p>
+
+				<p>11. Não usar pomada Nebacetina, e use Bepantol com cautela. Poderá
+					indicar usar manteiga de cacau, ou óleo Dersani. Ou as pomadas própias.</p>
+
+				<p>12. Fazer retoque no prazo máximo de 30 dias. Após 30 dias
+					perderá o direito de retoque assim sendo considerado como novo
+					serviço</p>
+
+			</div>
+
+
+			<div class="bloco1">
+
+				<h2> COLORIMETRIA BÁSICA</h2>
+
+				<p>já conhecemos um pouco mais afundo sobre a colorimetria, e nem tudo
+				conseguimos memorizar não é mesmo ?
+
+				Para ajudar a refrescar a mente, vou deixar essas regrinhas básicas,
+				para ficar sempre conosco, e para sanar dúvidas no momento do procedimento.</p>
+
+
+				<h4>CORES:</h4>
+
+				<p>Cores primárias - azul vermelho e amarelo.
+
+				Cores secundárias - Roxas verdes e laranja - É o resultado das cores
+				primárias. Preste atenção nas misturas.</p>
+
+				<p>Roxo - Vermelho + Azul
+				Verde- Azul + Amarelo
+				Laranja - Vermelho + Amarelo
+				Cores quentes - Vermelho, laranja e amarelo
+				Cores frias - Roxo azul e verde.</p>
+
+				<h4>MELANINA / BASE:</h4>
+
+				<p><b>Pessoas de base quente = Normalmente brancas e loiras.</b>
+				Aréola: Sua aréola normalmente é vermelha, ou rosa.
+				Mucosa Labial: Possui sub-tom vermelho.
+				Pele: Ao tomar sol, fica com a pele avermelhada.
+				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do modificador frio.</p>
+
+
+				<p><b>Pessoas de base fria= Normalmente negras e mulatas.</b>
+				Aréola: Sua aréola normalmente é arroxeada.
+				Mucosa Labial: Sua mucosa labial é roxa.
+				Pele: Quando toma sol sua pele também fica arroxeada.
+				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do
+				modificdor quente.</p>
+
+				<p><b>Pessoas orientais =</b> Mesmo sendo de etnia branca, podem ter melanina fria.</p>
+
+				<h4>PROCEDIMENTO INCORRETO:</h4>
+
+				<p><b>pigmento frio + pele fria =</b> azul, cinza, verde ou grafite.</br>
+				<b>pigmento quente + pele quente =</b> Vermelho, rosa, laranja.</p>
+
+				<h4>PROCEDIMENTO CORRETO</h4>
+
+				<p><b>pigmento frio + Pele quente =</b> Resultado correto.</br>
+				<b>Pigmento quente + Pele fria =</b> Resultado correto.</p>
+
+				<p>Lembre-se que o ideal é aplicar nas sobrancelhas pigmentos de tons
+				castanhos, nos olhos tons de preto, e na boca tons vermelhos ou tons rosas.</p>
+
+
+			</div>
+		</div>
+
+	</form>
 {% endblock %}

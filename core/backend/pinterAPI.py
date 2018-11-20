@@ -14,7 +14,7 @@ def getMyPins():
     except:
         return ''
 
-def getMyBoards():
+def getBoards():
     url = "https://api.pinterest.com/v1/me/boards/?access_token=AqWjsuMFTl7lLNgJMAx16tNZruZuFVLHC7vvSIBFNXsqJoAzTAgKgDAAAUufRTl10J_gNhwAAAAA"
     ret = req.api.get(url).json()
     return ret
@@ -36,7 +36,7 @@ def salvarPins():
             msg += 'Imagem já salva! '
     return msg
 
-def pins(imgs=0):
+def selectPins(imgs=0):
     pins = {}
     resp = getMyPins()
     if resp == '': #Verificação para quando a api dar maxRequestReached

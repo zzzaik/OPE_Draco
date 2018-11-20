@@ -27,7 +27,7 @@ def fillJson():
 def getEstilos():
     estilos = Estilo.objects.all()
     data = []
-    for estilo in estilos:
-        data.append(estilo)
+    for item in estilos:
+        data.append({'estiloId':item.idestilo, 'estiloName':item.estilo})
 
     return data

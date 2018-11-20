@@ -1,3 +1,24 @@
+function saveCatalogo () {
+    let data = [];
+    let images = $("name=semClassificacao");
+    for(let i=0;i<images.length;i++){
+        imgId = images.children[0].value
+        estilo = images.children[2].val()
+        data.push({'imgId': imgId,'estilo':estilo})
+    };
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
+        type:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: $.toJSON(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result.Result);
+        }
+    });
+}
+
 $("#btnTest").click(function() {
     alert("<span>Testo de texte</span>");
     }

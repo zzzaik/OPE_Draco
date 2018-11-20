@@ -33,20 +33,22 @@ def selectFotos():
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos['classf'].append({'imgID':imgId, 'url':urlImg, 'estilo':styleId})
+        fotos['classf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
 
     for foto in imgNoClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos['noClassf'].append({'imgID':imgId, 'url':urlImg, 'estilo':styleId})
+        fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
 
     return fotos
 
 
-def alterarEstilo(imagem, estilo):
-    img = Imagem.objects.filter(idimagem=imagem)
-    img.update(estilo=Estilo.objects.only('idestilo').get(estilo=estilo))
+def alterarEstilo(imgId, estiloId):
+    imgDB = Imagem.objects.get(idimagem=imgId)
+    newEstilo = Estilo.obects.get(idestilo=estiloId).estilo
+    if imgDB.estilo != newEstilo:
+        imgDB.update(idestilo=newEstilo)
 
 
 def alocarFotos(imgs=0):

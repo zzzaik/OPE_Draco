@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect as redirect
+from django.http import JsonResponse
 from django.urls import reverse
 from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
@@ -9,7 +10,7 @@ import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos, alterarEstilo
-from core.backend.pinterAPI import pins, salvarPins
+from core.backend.pinterAPI import selectPins, salvarPins, getBoards
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
 from core.backend.calendar import getCalendar
@@ -271,7 +272,14 @@ def gestaoPortfolio(request):
         return redirect(reverse('home'))
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
-    return render(request, 'tatuador/gestaoPortfolio.html', {'user':verifyUserSession(request)})
+
+    context = {
+        "data": selectPins(),
+        "boards": getBoards(),
+        'user':verifyUserSession(request),
+    }
+
+    return render(request, 'tatuador/gestaoPortfolio.html', context)
 
 def gestaoAgenda(request):
     if not isLogged(request):
@@ -314,8 +322,18 @@ def saveGestaoCatalogo(request):
         if request.method == 'POST':
             data = request.body
             for item in data:
-                alterarEstilo(item.imgId, item.estilo)
-
+                alterarEstilo(item.imgId, item.estiloId)
+            response = JsonResponse({"success":"Database Updated"})
+            response.status_code = 200
+            return response
+        else:
+            response = JsonResponse({"error":"Only POST method allowed"})
+            response.status_code = 403
+            return response
+    else:
+        response = JsonResponse({"error":"Request is not AJAX"})
+        response.status_code = 500
+        return response
 
 
 

@@ -1,26 +1,13 @@
 
 function main() {
 
-function saveCatalogo () {
-    let data = [];
-    let images = $("name=semClassificacao");
-    for(let i=0;i<images.length;i++){
-        imgId = images.children[0].value
-        estilo = images.children[2].val()
-        data.push({'imgId': imgId,'estilo':estilo})
-    };
-
-    $.ajax({
-        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
-        type:'POST',
-        content-type:'application/json; charset=utf-8',
-        data: $.toJSON(data),
-        dataType: 'text',
-        success: function(result){
-            alert(result.Result);
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
-    });
-}
+    }
+});
 
 $(document).ready(function() {
         $('#calendar').fullCalendar({
@@ -132,4 +119,54 @@ $('#nav').affix({
 
 
 }
+
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+    }
+}
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+console.log(csrftoken);
+
+//Ajax call
+function csrfSafeMethod(method) {
+// these HTTP methods do not require CSRF protection
+return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+
+function saveCatalogo () {
+    let data = [];
+    let images = $("div[name=semClassificacao]");
+    for(let i=0;i<images.length;i++){
+        imgId = images.children("input").attr("value");
+        estiloId = images.children("select").val();
+        data.push({'imgId': imgId,'estiloId':estiloId})
+    };
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+        }
+    });
+}
+
 main();

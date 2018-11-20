@@ -28,12 +28,11 @@
                     <img src='{{ item.url }}' class="miniFoto">
                 </div>
                 <div class="selectorContainer" name="semClassificacao"><!-- Container Seletor -->
-                    <input type="hidden" name="imgID" value="{{ item.imgId }}"></input>
-                    {{ item.imgId }}
+                    <input type="hidden" name="imgID" value="{{ item.imgId }}">
                     <h5>Estilo</h5>
                     <select>
-                        {% for estilo in estilos %}
-                        <option value="{{ estilo }}">{{ estilo }}</option>
+                        {% for item in estilos %}
+                        <option value="{{ item.estiloId }}">{{ item.estiloName }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -62,7 +61,6 @@
 
         </div>
     </div>
-
     <div><!-- Salvar Modificações -->
         <button class="btn btn-primary">Atualizar</button>
         <button class="btn btn-primary" onclick="saveCatalogo()">Salvar</button>
