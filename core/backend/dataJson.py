@@ -28,6 +28,6 @@ def getEstilos():
     estilos = Estilo.objects.all()
     data = []
     for item in estilos:
-        data.append({'estiloId':item.idestilo, 'estiloName':item.estilo})
+        data.append({'estiloId':str(item.idestilo), 'estiloName':str(item.estilo)})
 
     return data

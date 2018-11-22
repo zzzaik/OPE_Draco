@@ -8,15 +8,6 @@ $.ajaxSetup({
     }
 });
 
-$("#btnTest").click( function() {
-    $.getJSON({url: 'http://zzzaik.pythonanywhere.com/dataImagens/',
-        function(data){
-            $("#testeJSON").text(data);
-            success: alert("Funcionou")
-            }
-        });
-    });
-
 (function () {
    'use strict';
 
@@ -138,16 +129,45 @@ function csrfSafeMethod(method) {
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-
-function saveCatalogo () {
+function atualizarCatalogo () {
     let data = [];
-    let images = $("div[name=semClassificacao]");
+    let images = $("[name=semClassificacao]");
     images.each(function (){
         imgId = images.find("input").val();
         estiloId = images.find("select").val();
         dict = {'imgId': imgId,'estiloId':estiloId};
         data.push(dict);
+        console.log(dict);
     });
+
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+            console.log(JSON.stringify(data));
+        }
+    });
+}
+
+function saveCatalogo () {
+    let data = [];
+    let images = $("[name=semClassificacao]");
+    images.each(function (){
+        imgId = images.find("input").val();
+        estiloId = images.find("select").val();
+        dict = {'imgId': imgId,'estiloId':estiloId};
+        data.push(dict);
+        console.log(dict);
+    });
+
 
     $.ajax({
         url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',

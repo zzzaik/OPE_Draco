@@ -327,7 +327,7 @@ def saveGestaoCatalogo(request):
         if request.method == 'POST':
             data = json.loads(request.body)
             for item in data:
-                alterarEstilo(item['imgId'], item['estiloId'])
+                alterarEstilo(item['imgId'],item['estiloId'])
             response = JsonResponse({"success":"Database Updated"})
             response.status_code = 200
             return response

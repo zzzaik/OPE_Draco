@@ -6,44 +6,49 @@ def getFoto():
     ret = req.api.get(url).json()
     return ret
 
-def salvarFoto(estiloEscolhido=None):
+def atualizarDatabase():
     fotos = getFoto()
     msg = ''
     for foto in fotos['data']:
         imagem = foto['images']['standard_resolution']['url']
         likes = foto['likes']['count']
-        est = Estilo.objects.only('idestilo').get(estilo=estiloEscolhido)
-        if est:
+        if not Imagem.objects.filter(urlimagem = imagem).exists():
             try:
-                img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=est, fonteimagem=True)
+                tag = Tag.objects.get(tag='catalogo')
+                img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, idtag=tag.idtag, fonteimagem=True)
                 img.save()
                 msg += ''
             except:
                 msg += 'Imagem já salva! '
-        else:
-            msg += 'Estilo não encontrado! '
     return msg
 
-def alterarEstilo(imgId, estiloId):
+
+def alterarEstilo(imgId,estiloId):
     imgDB = Imagem.objects.get(pk=imgId)
     newEstilo = Estilo.objects.get(idestilo=estiloId).estilo
-    if imgDB.idestilo != newEstilo:
+    if Imagem.objects.filter(pk=imgId).values('idestilo') == 'NULL':
+        if imgDB.idestilo != newEstilo:
+            Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
+    else:
         Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
+
 
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
     imgClass = Imagem.objects.all().exclude(idestilo=False)
-    imgNoClass = Imagem.objects.all().exclude(idestilo=True)
+    imgNoClass = Imagem.objects.all().filter(idestilo__isnull=True)
+
     for foto in imgClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
         fotos['classf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
+
     for foto in imgNoClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
-        styleId = str(foto.idestilo)
-        fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
+        fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estilo':"---"})
+
     return fotos
 
 def alocarFotos(imgs=0):
