@@ -1,17 +1,11 @@
 
 function main() {
-
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type)) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
     }
-});
-
-$(document).ready(function() {
-        $('#calendar').fullCalendar({
-        })
 });
 
 $("#btnTest").click( function() {
@@ -148,11 +142,12 @@ return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 function saveCatalogo () {
     let data = [];
     let images = $("div[name=semClassificacao]");
-    for(let i=0;i<images.length;i++){
-        imgId = images.children("input").attr("value");
-        estiloId = images.children("select").val();
-        data.push({'imgId': imgId,'estiloId':estiloId})
-    };
+    images.each(function (){
+        imgId = images.find("input").val();
+        estiloId = images.find("select").val();
+        dict = {'imgId': imgId,'estiloId':estiloId};
+        data.push(dict);
+    });
 
     $.ajax({
         url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
@@ -165,6 +160,7 @@ function saveCatalogo () {
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status +"-"+thrownError);
+            console.log(JSON.stringify(data));
         }
     });
 }

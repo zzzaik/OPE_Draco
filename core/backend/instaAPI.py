@@ -24,32 +24,27 @@ def salvarFoto(estiloEscolhido=None):
             msg += 'Estilo não encontrado! '
     return msg
 
+def alterarEstilo(imgId, estiloId):
+    imgDB = Imagem.objects.get(pk=imgId)
+    newEstilo = Estilo.objects.get(idestilo=estiloId).estilo
+    if imgDB.idestilo != newEstilo:
+        Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
+
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
     imgClass = Imagem.objects.all().exclude(idestilo=False)
     imgNoClass = Imagem.objects.all().exclude(idestilo=True)
-
     for foto in imgClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
         fotos['classf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
-
     for foto in imgNoClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
         fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
-
     return fotos
-
-
-def alterarEstilo(imgId, estiloId):
-    imgDB = Imagem.objects.get(idimagem=imgId)
-    newEstilo = Estilo.obects.get(idestilo=estiloId).estilo
-    if imgDB.estilo != newEstilo:
-        imgDB.update(idestilo=newEstilo)
-
 
 def alocarFotos(imgs=0):
     fotos = {}

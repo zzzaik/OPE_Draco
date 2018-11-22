@@ -230,6 +230,11 @@ def login(request):
     request.POST
     return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 12345678 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'user':verifyUserSession(request)})
 
+def solicitarPedido(request):
+    if verificarCliente(request, request.session['user']['login']):
+        pass
+
+
 def sair(request):
     killSession(request, 'user')
     verifyUserSession(request)
@@ -320,9 +325,9 @@ def postarRedesSociais(request):
 def saveGestaoCatalogo(request):
     if request.is_ajax():
         if request.method == 'POST':
-            data = request.body
+            data = json.loads(request.body)
             for item in data:
-                alterarEstilo(item.imgId, item.estiloId)
+                alterarEstilo(item['imgId'], item['estiloId'])
             response = JsonResponse({"success":"Database Updated"})
             response.status_code = 200
             return response
