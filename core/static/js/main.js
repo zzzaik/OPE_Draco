@@ -188,7 +188,7 @@ function saveCatalogo () {
 function atualizarCatalogo () {
     let data = {'action':'atualizar'}
     $.ajax({
-        url:'http://zzzaik.pythonanywhere.com/tatuador/main',
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/atualizar_catalogo',
         method:'POST',
         contentType:'application/json; charset=utf-8',
         data: JSON.stringify(data),

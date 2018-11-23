@@ -29,7 +29,7 @@ def salvarPins():
     for pin in pins:
         imagem = pin['image']['original']['url']
         try:
-            img = Imagem.objects.create(urlimagem=imagem, ratins=None, idestilo=None, fonteimagem=False)
+            img = Imagem.objects.create(urlimagem=imagem, ratins=None, idestilo=None, idtag=1, fonteimagem=False)
             img.save()
             msg += ''
         except:

@@ -250,21 +250,6 @@ def main(request):
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
 
-    if request.is_ajax():
-        if request.method == 'POST':
-            data = json.loads(request.body)
-            if data['action'] == 'atualizar':
-                atualizarCatalogo()
-                response = JsonResponse({"success":"Database Updated"})
-                response.status_code = 200
-                return response
-            else:
-                response = JsonResponse({"Fail":"Something went wrong"})
-                return response
-        else:
-            response = JsonResponse({"Error":"Not a POST request"})
-            return response
-
     return render(request, 'tatuador/main.html', {'user':verifyUserSession(request)})
 
 def gestaoClientes(request):
@@ -357,6 +342,21 @@ def saveGestaoCatalogo(request):
         return response
 
 
+def atualizarGestaoCatalogo(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            if data['action'] == 'atualizar':
+                atualizarCatalogo()
+                response = JsonResponse({"success":"Database Updated"})
+                response.status_code = 200
+                return response
+            else:
+                response = JsonResponse({"Fail":"Something went wrong"})
+                return response
+        else:
+            response = JsonResponse({"Error":"Not a POST request"})
+            return response
 
 
 

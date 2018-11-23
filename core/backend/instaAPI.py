@@ -1,5 +1,5 @@
 import requests as req
-from core.models import Imagem, Tag, Imagemtag, Estilo
+from core.models import Tag, Imagem, Estilo
 
 def getFoto():
     url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=3251373559.1556bce.467e8e9f0219425abf9915fa978bb275"
@@ -8,16 +8,18 @@ def getFoto():
 
 def atualizarCatalogo():
     fotos = getFoto()
+    tag = Tag.objects.get(tag='catalogo')
     msg = ''
     for foto in fotos['data']:
         imagem = foto['images']['standard_resolution']['url']
         likes = foto['likes']['count']
         try:
-            img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, idtag=2, fonteimagem=True)
+            img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, fonteimagem=True)
             img.save()
+            Imagem.objects.filter(urlimagem=imagem).update(tag=2)
             msg = 'Imagens Salvas'
         except:
-            msg += 'Imagem já salva! '
+            msg = "Imagem já salva"
     return msg
 
 
@@ -33,8 +35,10 @@ def alterarEstilo(imgId,estiloId):
 
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
-    imgClass = Imagem.objects.all().filter(imagemtag=2).exclude(idestilo=False)
-    imgNoClass = Imagem.objects.all().filter(imagemtag=2).filter(idestilo__isnull=True)
+    tag = Tag.objects.get(tag='catalogo')
+    imgNoClass = tag.imagem_set.objects.all().filter(idestilo__isnull=True)
+    imgClass = tag.imagem_set.objects.all().exclude(idestilo=False)
+
 
     for foto in imgClass:
         imgId = foto.idimagem
