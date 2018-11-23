@@ -9,7 +9,7 @@ from rest_framework import status
 import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos, getFoto, salvarFoto, selectFotos, alterarEstilo
+from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, alterarEstilo, atualizarCatalogo
 from core.backend.pinterAPI import selectPins, salvarPins, getBoards
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
@@ -249,6 +249,22 @@ def main(request):
         return redirect(reverse('home'))
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
+
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            if data['action'] == 'atualizar':
+                atualizarCatalogo()
+                response = JsonResponse({"success":"Database Updated"})
+                response.status_code = 200
+                return response
+            else:
+                response = JsonResponse({"Fail":"Something went wrong"})
+                return response
+        else:
+            response = JsonResponse({"Error":"Not a POST request"})
+            return response
+
     return render(request, 'tatuador/main.html', {'user':verifyUserSession(request)})
 
 def gestaoClientes(request):

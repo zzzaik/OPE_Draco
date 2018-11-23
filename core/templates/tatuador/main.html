@@ -1,5 +1,11 @@
 {% extends 'tatuador/base2.html' %} {% load static %}
 {% block title%}Catálogo{% endblock %}
 {% block main %}
-<h1 class="moveTop80">Pagina Principal da Area do Tatuador</h1>
+<div class="container moveTop80">
+    <h1>Pagina Principal da Area do Tatuador</h1>
+    <div>
+        <button class="btn btn-primary" onclick="atualizarCatalogo()">Atualizar Catálogo</button>
+        <button class="btn btn-primary" onclick="atualizarPortifolio()">Atualizar Portifólio</button>
+    </div>
+</div>
 {% endblock %}

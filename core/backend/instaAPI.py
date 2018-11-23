@@ -6,20 +6,18 @@ def getFoto():
     ret = req.api.get(url).json()
     return ret
 
-def atualizarDatabase():
+def atualizarCatalogo():
     fotos = getFoto()
     msg = ''
     for foto in fotos['data']:
         imagem = foto['images']['standard_resolution']['url']
         likes = foto['likes']['count']
-        if not Imagem.objects.filter(urlimagem = imagem).exists():
-            try:
-                tag = Tag.objects.get(tag='catalogo')
-                img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, idtag=tag.idtag, fonteimagem=True)
-                img.save()
-                msg += ''
-            except:
-                msg += 'Imagem já salva! '
+        try:
+            img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, idtag=2, fonteimagem=True)
+            img.save()
+            msg = 'Imagens Salvas'
+        except:
+            msg += 'Imagem já salva! '
     return msg
 
 
@@ -35,8 +33,8 @@ def alterarEstilo(imgId,estiloId):
 
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
-    imgClass = Imagem.objects.all().exclude(idestilo=False)
-    imgNoClass = Imagem.objects.all().filter(idestilo__isnull=True)
+    imgClass = Imagem.objects.all().filter(imagemtag=2).exclude(idestilo=False)
+    imgNoClass = Imagem.objects.all().filter(imagemtag=2).filter(idestilo__isnull=True)
 
     for foto in imgClass:
         imgId = foto.idimagem
