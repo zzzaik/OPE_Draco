@@ -30,7 +30,7 @@ def atualizarPortifolio():
     for pin in pins:
         imagem = pin['image']['original']['url']
         try:
-            img = Imagem.objects.create(urlimagem=imagem, ratins=0, idestilo=None, fonteimagem=False, idTag=tag)
+            img = Imagem.objects.create(urlimagem=imagem, ratins=0, idestilo=None, fonteimagem=False, idtag=tag)
             img.save()
             msg = 'Imagens Salvas'
         except Exception as e:

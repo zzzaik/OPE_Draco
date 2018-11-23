@@ -14,14 +14,11 @@ def atualizarCatalogo():
         imagem = foto['images']['standard_resolution']['url']
         likes = foto['likes']['count']
         try:
-            img = Imagem(urlimagem=imagem, ratins=likes, idestilo=None, fonteimagem=True)
+            img = Imagem(urlimagem=imagem, ratins=likes, idestilo=None, fonteimagem=True, idtag=tag)
             img.save()
             msg = 'Imagens Salvas'
         except Exception as e:
             msg = str(e)
-        imgSave = Imagem.objects.get(urlimagem=imagem)
-        imgSave.idtag = tag
-        imgSave.save()
     return msg
 
 
