@@ -10,7 +10,7 @@ import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, alterarEstilo, atualizarCatalogo
-from core.backend.pinterAPI import selectPins, salvarPins, getBoards
+from core.backend.pinterAPI import selectPins, atualizarPortifolio, getBoards
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
 from core.backend.calendar import getCalendar
@@ -347,9 +347,23 @@ def atualizarGestaoCatalogo(request):
         if request.method == 'POST':
             data = json.loads(request.body)
             if data['action'] == 'atualizar':
-                atualizarCatalogo()
-                response = JsonResponse({"success":"Database Updated"})
-                response.status_code = 200
+                ret = atualizarCatalogo()
+                response = JsonResponse({"Status":ret})
+                return response
+            else:
+                response = JsonResponse({"Fail":"Something went wrong"})
+                return response
+        else:
+            response = JsonResponse({"Error":"Not a POST request"})
+            return response
+
+def atualizarGestaoPortifolio(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            if data['action'] == 'atualizar':
+                ret = atualizarPortifolio()
+                response = JsonResponse({"Status":ret})
                 return response
             else:
                 response = JsonResponse({"Fail":"Something went wrong"})

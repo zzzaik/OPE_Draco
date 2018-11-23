@@ -1,5 +1,5 @@
 import requests as req
-from core.models import Imagem
+from core.models import Imagem, Tag, Estilo
 '''
 def getImages(): #Usando a api v3 em beta provavalmete teremos que atualizar depois
     url = "https://api.pinterest.com/v3/pidgets/users/justinotattoo/pins/"
@@ -21,19 +21,20 @@ def getBoards():
 
 
 #fonteimagem = True(Instagram) / False(Pinterest)
-def salvarPins():
+def atualizarPortifolio():
     pins = getMyPins()
-    msg = ''
-    if pins == '': #Verificação para quando a api dar maxRequestReached
-        return pins
+    tag = Tag.objects.get(tag='portifolio').idtag
+    msg = pins
+    #if pins == '': #Verificação para quando a api dar maxRequestReached
+    #    return pins
     for pin in pins:
         imagem = pin['image']['original']['url']
         try:
-            img = Imagem.objects.create(urlimagem=imagem, ratins=None, idestilo=None, idtag=1, fonteimagem=False)
+            img = Imagem.objects.create(urlimagem=imagem, ratins=0, idestilo=None, fonteimagem=False, idTag=tag)
             img.save()
-            msg += ''
-        except:
-            msg += 'Imagem já salva! '
+            msg = 'Imagens Salvas'
+        except Exception as e:
+            msg = str(e)
     return msg
 
 def selectPins(imgs=0):

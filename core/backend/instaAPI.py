@@ -8,18 +8,20 @@ def getFoto():
 
 def atualizarCatalogo():
     fotos = getFoto()
-    tag = Tag.objects.get(tag='catalogo')
+    tag = Tag.objects.get(tag='catalogo').idtag
     msg = ''
     for foto in fotos['data']:
         imagem = foto['images']['standard_resolution']['url']
         likes = foto['likes']['count']
         try:
-            img = Imagem.objects.create(urlimagem=imagem, ratins=likes, idestilo=None, fonteimagem=True)
+            img = Imagem(urlimagem=imagem, ratins=likes, idestilo=None, fonteimagem=True)
             img.save()
-            Imagem.objects.filter(urlimagem=imagem).update(tag=2)
             msg = 'Imagens Salvas'
-        except:
-            msg = "Imagem já salva"
+        except Exception as e:
+            msg = str(e)
+        imgSave = Imagem.objects.get(urlimagem=imagem)
+        imgSave.idtag = tag
+        imgSave.save()
     return msg
 
 
@@ -35,7 +37,7 @@ def alterarEstilo(imgId,estiloId):
 
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
-    tag = Tag.objects.get(tag='catalogo')
+    tag = Tag.objects.filter(tag='catalogo')
     imgNoClass = tag.imagem_set.objects.all().filter(idestilo__isnull=True)
     imgClass = tag.imagem_set.objects.all().exclude(idestilo=False)
 

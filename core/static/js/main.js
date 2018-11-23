@@ -188,7 +188,24 @@ function saveCatalogo () {
 function atualizarCatalogo () {
     let data = {'action':'atualizar'}
     $.ajax({
-        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/atualizar_catalogo',
+        url:'http://zzzaik.pythonanywhere.com/tatuador/main/atualizar_catalogo',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+        }
+    });
+};
+
+function atualizarPortifolio () {
+    let data = {'action':'atualizar'}
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/main/atualizar_portifolio',
         method:'POST',
         contentType:'application/json; charset=utf-8',
         data: JSON.stringify(data),

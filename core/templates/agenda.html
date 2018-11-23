@@ -27,6 +27,8 @@
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: [
+          {% for id, title, start, end, url in events %}
+          {% endfor %}
         {
           title: 'Nada',
           start: '2018-11-22',
