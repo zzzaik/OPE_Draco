@@ -71,6 +71,26 @@ class Imagem(models.Model):
         db_table = 'Imagem'
 
 
+class Promoimagem(models.Model):
+    idpromo = models.ForeignKey('Promocao', models.DO_NOTHING, db_column='idPromo', blank=True, null=True)  # Field name made lowercase.
+    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem', blank=True, null=True)  # Field name made lowercase.
+    validade = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'PromoImagem'
+
+
+class Promocao(models.Model):
+    idpromo = models.AutoField(db_column='idPromo', primary_key=True)  # Field name made lowercase.
+    desconto = models.FloatField(blank=True, null=True)
+    ativo = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Promocao'
+
+
 class Regiao(models.Model):
     idregiao = models.AutoField(db_column='idRegiao', primary_key=True)  # Field name made lowercase.
     regiaodocorpo = models.CharField(db_column='regiaoDoCorpo', max_length=50, blank=True, null=True)  # Field name made lowercase.

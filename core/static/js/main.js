@@ -168,9 +168,35 @@ function saveCatalogo () {
         console.log(dict);
     });
 
-
     $.ajax({
         url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_catalogo/save_catalogo',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+            console.log(JSON.stringify(data));
+        }
+    });
+}
+
+function savePortifolio () {
+    let data = [];
+    let images = $("[name=semClassificacao]");
+    images.each(function (){
+        imgId = images.find("input").val();
+        estiloId = images.find("select").val();
+        dict = {'imgId': imgId,'estiloId':estiloId};
+        data.push(dict);
+        console.log(dict);
+    });
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_portifolio/save_portifolio',
         method:'POST',
         contentType:'application/json; charset=utf-8',
         data: JSON.stringify(data),
@@ -217,6 +243,29 @@ function atualizarPortifolio () {
             alert(xhr.status +"-"+thrownError);
         }
     });
-};
+}
+
+function filtrarEstilo () {
+    let estilo = $('select[name=Estilo] option:selected').text();
+    $('.gridFoto').each(function (){
+        if($(this).attr('name') != "estilo_"+estilo){
+            if($(this).css('display') != 'none'){
+                $(this).hide();
+            }
+        } else {
+            if($(this).css('display') == 'none'){
+                $(this).show();
+            }
+        }
+    });
+}
+
+function limparFiltro () {
+    $('.gridFoto').each(function () {
+        if($(this).css('display') == 'none'){
+                $(this).show();
+        }
+    });
+}
 
 main();

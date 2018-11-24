@@ -20,15 +20,11 @@ from django.urls import path, re_path, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
 from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
 from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, atualizarImagens, postarRedesSociais
-from core.views import saveGestaoCatalogo, atualizarGestaoCatalogo, atualizarGestaoPortifolio
+from core.views import saveGestaoCatalogo, saveGestaoPortifolio, atualizarGestaoCatalogo, atualizarGestaoPortifolio
 from core.views import reset, alimentarJson
-from core.views import ListImagensView
 
 urlpatterns = [
     #path('admin/', admin.site.urls, name = 'admin'),
-    ######### Endpoint Routes ##########################
-    path('dataImagens/', ListImagensView.as_view()),
-
 
     ######### comum ############## Páginas comuns para usuarios autenticados e não autenticados
     path('', index, name = 'home'),
@@ -65,6 +61,7 @@ urlpatterns = [
     path('tatuador/atualiza_imagens', atualizarImagens, name = 'atualizarImagens'),
     path('tatuador/postar_redes_sociais', postarRedesSociais, name = 'postarRedesSociais'),
     path('tatuador/gestao_catalogo/save_catalogo', saveGestaoCatalogo),
+    path('tatuador/gestao_portifolio/save_portifolio', saveGestaoPortifolio),
     path('tatuador/main/atualizar_catalogo', atualizarGestaoCatalogo),
     path('tatuador/main/atualizar_portifolio', atualizarGestaoPortifolio),
     ##############################

@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %}
 {% block title%}Justino Art Tattoo{% endblock %}
 {% block main %}
+{% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
     <a href="{% url 'tokenRedefinirSenha' %}" class="subnavLink">Alterar Senha / Esqueceu senha</a>
@@ -12,9 +13,8 @@
         <a href="{% url 'main' %}" class="subnavLink">Gestão</a>
     {% endif %}
 </div>
+{% endif %}
 {{ user }}
-<button type="button" id="btnTest">Teste JSON</button>
-<div id="testeJSON"></div>
 <!-- Portfolio Section -->
 <div>
     <div class="container">

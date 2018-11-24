@@ -92,6 +92,19 @@
 </script>
 {% endblock %}
 {% block main %}
+{% if user.auth %}
+<div class="subnav">
+    <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
+    <a href="{% url 'tokenRedefinirSenha' %}" class="subnavLink">Alterar Senha / Esqueceu senha</a>
+    <a href="{% url 'configsConta' %}" class="subnavLink">Configurações da conta</a>
+    {% if user.confiavel == 0 %}
+        <a href="{% url 'confirmEmail' %}" class="subnavLink">Confirmar e-mail</a>
+    {% endif %}
+    {% if user.tipo == 1 %}
+        <a href="{% url 'main' %}" class="subnavLink">Gestão</a>
+    {% endif %}
+</div>
+{% endif %}
 {{ calendar }}
 
     <style>

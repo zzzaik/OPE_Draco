@@ -31,3 +31,12 @@ def getEstilos():
         data.append({'estiloId':str(item.idestilo), 'estiloName':str(item.estilo)})
 
     return data
+
+def alterarEstilo(imgId,estiloId):
+    imgDB = Imagem.objects.get(pk=imgId)
+    newEstilo = Estilo.objects.get(idestilo=estiloId).estilo
+    if Imagem.objects.filter(pk=imgId).values('idestilo') == 'NULL':
+        if imgDB.idestilo != newEstilo:
+            Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
+    else:
+        Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)

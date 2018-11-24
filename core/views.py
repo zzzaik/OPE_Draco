@@ -2,15 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect as redirect
 from django.http import JsonResponse
 from django.urls import reverse
-from rest_framework.generics import CreateAPIView
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, alterarEstilo, atualizarCatalogo
-from core.backend.pinterAPI import selectPins, atualizarPortifolio, getBoards
+from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio
+from core.backend.pinterAPI import alocarPins, selectPins, atualizarCatalogo, getBoards
 #from core.backend.fbAPI import postar
 #from core.backend.promos import getPromos
 from core.backend.calendar import getCalendar
@@ -21,10 +19,8 @@ from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
-from core.backend.dataJson import fillJson, getEstilos
-from core.models import Usuario, Tatuador, Imagem
-
-from core.serializers import ImagensSerializer
+from core.backend.dataJson import fillJson, getEstilos, alterarEstilo
+from core.models import Usuario, Tatuador
 
 ############################### Admin ##########################################
 
@@ -43,24 +39,6 @@ def alimentarJson(request):
     fillJson()
     alterSession(request, 'firstRun', False)
     return redirect(reverse('home'))
-
-############################ API Endpoints #######################################
-
-class ListImagensView(CreateAPIView):
-    querySet = Imagem.objects.all()
-    serializerClass = ImagensSerializer
-    def post(self, serializer):
-        imagem = self.request.data
-        s = serializer.save()
-        return Response(s)
-
-
-    def get(self, request, format=None):
-        imagens = Imagem.objects.all()
-        serial = ImagensSerializer(imagens, many=True)
-        return Response(serial.data)
-
-################################################################################
 
 def index(request):
     #Usuario.objects.create(loginusuario="tatuador@tattoo.com", senhausuario="$2y$08$0X2GdkM5nBuiL4Dh.Igw6enQ/yegLU866sj7RekUJfH.w6564okSq", tipousuario=True, econfiavel=True)
@@ -91,13 +69,15 @@ def promocao(request):
 def portfolio(request):
     context = {
         'fotos': alocarFotos(),
+        'estilos':getEstilos(),
         'user': verifyUserSession(request)
     }
     return render(request, 'portfolio.html', context)
 
 def catalogo(request):
     context = {
-        'pins': pins(),
+        'pins': alocarPins(),
+        'estilos':getEstilos(),
         'user': verifyUserSession(request)
     }
     return render(request, 'catalogo.html',context)
@@ -266,7 +246,7 @@ def gestaoCatalogo(request):
         return redirect(reverse('home'))
 
     context = {
-        'data':selectFotos(),
+        'data':selectPins(),
         'estilos': getEstilos(),
         'user':verifyUserSession(request)
     }
@@ -280,8 +260,8 @@ def gestaoPortfolio(request):
         return redirect(reverse('home'))
 
     context = {
-        "data": selectPins(),
-        "boards": getBoards(),
+        "data": selectFotos(),
+        "estilos": getEstilos(),
         'user':verifyUserSession(request),
     }
 
@@ -324,6 +304,24 @@ def postarRedesSociais(request):
 
 
 def saveGestaoCatalogo(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            for item in data:
+                alterarEstilo(item['imgId'],item['estiloId'])
+            response = JsonResponse({"success":"Database Updated"})
+            response.status_code = 200
+            return response
+        else:
+            response = JsonResponse({"error":"Only POST method allowed"})
+            response.status_code = 403
+            return response
+    else:
+        response = JsonResponse({"error":"Request is not AJAX"})
+        response.status_code = 500
+        return response
+
+def saveGestaoPortifolio(request):
     if request.is_ajax():
         if request.method == 'POST':
             data = json.loads(request.body)

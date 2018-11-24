@@ -21,9 +21,9 @@ def getBoards():
 
 
 #fonteimagem = True(Instagram) / False(Pinterest)
-def atualizarPortifolio():
+def atualizarCatalogo():
     pins = getMyPins()
-    tag = Tag.objects.get(tag='portifolio').idtag
+    tag = Tag.objects.get(tag='catalogo')
     msg = pins
     #if pins == '': #Verificação para quando a api dar maxRequestReached
     #    return pins
@@ -37,21 +37,35 @@ def atualizarPortifolio():
             msg = str(e)
     return msg
 
-def selectPins(imgs=0):
-    pins = {}
-    resp = getMyPins()
-    if resp == '': #Verificação para quando a api dar maxRequestReached
-        return resp
-    cont = 0
-    if imgs == 0:
-        for elements in resp:
-            pins[cont] = elements['image']['original']['url']
-            cont += 1
-        return pins
-    elements = resp
-    while cont < imgs:
-        pins[cont] = elements[cont]['image']['original']['url']
-        cont += 1
+def selectPins():
+    pins = {'classf':[],'noClassf':[]}
+    tag = Tag.objects.get(tag='catalogo')
+    imgClass = tag.imagem_set.exclude(idestilo=False)
+    imgNoClass = tag.imagem_set.filter(idestilo__isnull=True)
+
+    for foto in imgClass:
+        imgId = foto.idimagem
+        urlImg = foto.urlimagem
+        styleId = str(foto.idestilo)
+        pins['classf'].append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
+
+    for foto in imgNoClass:
+        imgId = foto.idimagem
+        urlImg = foto.urlimagem
+        pins['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estiloId':"---"})
+
+    return pins
+
+def alocarPins():
+    pins = []
+    tag = Tag.objects.get(tag='catalogo')
+    imgClass = tag.imagem_set.exclude(idestilo=False)
+
+    for pin in imgClass:
+        imgId = pin.idimagem
+        urlImg = pin.urlimagem
+        styleId = str(pin.idestilo)
+        pins.append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
     return pins
 
 

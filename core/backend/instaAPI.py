@@ -6,9 +6,9 @@ def getFoto():
     ret = req.api.get(url).json()
     return ret
 
-def atualizarCatalogo():
+def atualizarPortifolio():
     fotos = getFoto()
-    tag = Tag.objects.get(tag='catalogo').idtag
+    tag = Tag.objects.get(tag='portifolio')
     msg = ''
     for foto in fotos['data']:
         imagem = foto['images']['standard_resolution']['url']
@@ -22,48 +22,33 @@ def atualizarCatalogo():
     return msg
 
 
-def alterarEstilo(imgId,estiloId):
-    imgDB = Imagem.objects.get(pk=imgId)
-    newEstilo = Estilo.objects.get(idestilo=estiloId).estilo
-    if Imagem.objects.filter(pk=imgId).values('idestilo') == 'NULL':
-        if imgDB.idestilo != newEstilo:
-            Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
-    else:
-        Imagem.objects.filter(pk=imgId).update(idestilo=estiloId)
-
-
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
-    tag = Tag.objects.filter(tag='catalogo')
-    imgNoClass = tag.imagem_set.objects.all().filter(idestilo__isnull=True)
-    imgClass = tag.imagem_set.objects.all().exclude(idestilo=False)
-
+    tag = Tag.objects.get(tag='portifolio')
+    imgClass = tag.imagem_set.exclude(idestilo=False)
+    imgNoClass = tag.imagem_set.filter(idestilo__isnull=True)
 
     for foto in imgClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos['classf'].append({'imgId':imgId, 'url':urlImg, 'estilo':styleId})
+        fotos['classf'].append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
 
     for foto in imgNoClass:
         imgId = foto.idimagem
         urlImg = foto.urlimagem
-        fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estilo':"---"})
+        fotos['noClassf'].append({'imgId':imgId, 'url':urlImg, 'estiloId':"---"})
 
     return fotos
 
-def alocarFotos(imgs=0):
-    fotos = {}
-    resp = getFoto()
-    cont = 0
-    if imgs == 0:
-        for elements in resp['data']:
-            fotos[cont] = elements['images']['standard_resolution']['url']
-            cont += 1
-        return fotos
-    else:
-        elements = resp['data']
-        while cont < imgs:
-            fotos[cont] = elements[cont]['images']['standard_resolution']['url']
-            cont += 1
-        return fotos
+def alocarFotos():
+    fotos = []
+    tag = Tag.objects.get(tag='portifolio')
+    imgClass = tag.imagem_set.exclude(idestilo=False)
+
+    for foto in imgClass:
+        imgId = foto.idimagem
+        urlImg = foto.urlimagem
+        styleId = str(foto.idestilo)
+        fotos.append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
+    return fotos

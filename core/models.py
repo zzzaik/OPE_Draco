@@ -76,6 +76,7 @@ class Imagem(models.Model):
     ratins = models.IntegerField()
     idestilo = models.ForeignKey(Estilo, models.DO_NOTHING, db_column='idEstilo')  # Field name made lowercase.
     fonteimagem = models.IntegerField(db_column='fonteImagem')  # Field name made lowercase.
+    idtag = models.ForeignKey('Tag', models.DO_NOTHING, db_column='idTag')
 
     class Meta:
         managed = False
@@ -99,6 +100,24 @@ class Portifolio(models.Model):
     class Meta:
         managed = False
         db_table = 'Portifolio'
+
+class Promocao(models.Model):
+    idpromo = models.AutoField(db_column='idPromo', primary_key=True)
+    desconto = models.FloatField(db_column='desconto')
+    ativo = models.IntegerField(db_column='ativo')
+
+    class Meta:
+        managed = False
+        db_table = 'Promocao'
+
+class PromoImagem(models.Model):
+    idpromo = models.ForeignKey(Promocao, models.DO_NOTHING,db_column='idPromo')
+    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem')
+    validade = models.DateField(db_column='ativo')
+
+    class Meta:
+        managed = False
+        db_table = 'PromoImagem'
 
 
 class Regiao(models.Model):
