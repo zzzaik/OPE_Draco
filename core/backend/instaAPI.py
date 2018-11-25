@@ -52,3 +52,26 @@ def alocarFotos():
         styleId = str(foto.idestilo)
         fotos.append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
     return fotos
+
+def getRecentes():
+    fotos = []
+    tag = Tag.objects.get(tag='portifolio')
+    imgClass = tag.imagem_set.exclude(idestilo=False).order_by('-idimagem')
+
+    for x in range(0,8):
+        imgId = imgClass[x].idimagem
+        urlImg = imgClass[x].urlimagem
+        fotos.append({'imgId':imgId, 'url':urlImg})
+    return fotos
+
+def getTop5():
+    fotos = []
+    tag = Tag.objects.get(tag='portifolio')
+    imgClass = tag.imagem_set.exclude(idestilo=False).order_by('-ratins')
+
+    for x in range(0,5):
+        imgId = imgClass[x].idimagem
+        urlImg = imgClass[x].urlimagem
+        rating = imgClass[x].ratins
+        fotos.append({'imgId':imgId, 'url':urlImg, 'rating':rating, 'pos':x})
+    return fotos

@@ -1,6 +1,5 @@
 {% extends 'base.html' %} {% load static %}
 {% block title%}Justino Art Tattoo{% endblock %}
-{% block main %}
 {% block subnav %}
 {% if user.auth %}
 <div class="subnav">
@@ -16,25 +15,26 @@
 </div>
 {% endif %}
 {% endblock %}
+{% block main %}
 
 {{ user }}
 <!-- Portfolio Section -->
 <div>
     <div class="container">
-        <div class="section-title text-center center">
+        <div class="section-title text-center center"><!-- Trabalhos Recentes -->
             <h2>Trabalhos Recentes</h2>
             <hr>
         </div>
         <div class="row">
             <div>
-                {% for index, img in fotos.items %}
+                {% for r in recentes %}
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="portfolio-item">
                         <div class="hover-bg">
-                            <a href="{{ img }}" rel="prettyPhoto">
+                            <a href="{{ r.url }}" rel="prettyPhoto">
                                 <div class="hover-text">
                                 </div>
-                                <img src="{{ img }}" class="img-responsive"> </a>
+                                <img src="{{ r.url }}" class="img-responsive"> </a>
                         </div>
                     </div>
                 </div>
@@ -53,21 +53,17 @@
                 <div class="top5" id="top5">
                     <div class="gridtop5">
                         <!-- a class .highlight vai precisar de um script toggle onClick, que mude ela de div-->
+                        {% for t in top5 %}
+                        {% if t.pos == 0 %}
                         <div class="itemtop5 highlight">
-                            <img src="{{ fotos.0 }}" class="imgtop5 imgHighlight" onclick="toggleHighlight2(0)" />
+                            <img src="{{ t.url }}" class="imgtop5 imgHighlight" onclick="toggleHighlight2({{ t.pos }})" />
                         </div>
+                        {% else %}
                         <div class="itemtop5">
-                            <img class="imgtop5" onclick="toggleHighlight2(1)" src="{{ fotos.1 }}" />
+                            <img class="imgtop5" onclick="toggleHighlight2({{ t.pos }})" src="{{ t.url }}" />
                         </div>
-                        <div class="itemtop5">
-                            <img class="imgtop5" onclick="toggleHighlight2(2)" src="{{ fotos.2 }}" />
-                        </div>
-                        <div class="itemtop5">
-                            <img class="imgtop5" onclick="toggleHighlight2(3)" src="{{ fotos.3 }}" />
-                        </div>
-                        <div class="itemtop5">
-                            <img class="imgtop5" onclick="toggleHighlight2(4)" src="{{ fotos.4 }}" />
-                        </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

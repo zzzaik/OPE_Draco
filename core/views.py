@@ -7,10 +7,10 @@ from rest_framework import status
 import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
-from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio
+from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio, getRecentes, getTop5
 from core.backend.pinterAPI import alocarPins, selectPins, atualizarCatalogo, getBoards
 #from core.backend.fbAPI import postar
-from core.backend.promos import getPromos, newPromo, registerPromo
+from core.backend.promos import getPromos, newPromo, registerPromo, getPromoImages, showPromos
 from core.backend.calendar import getCalendar
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
@@ -46,8 +46,8 @@ def index(request):
 
     context = {
         'user':verifyUserSession(request),
-        'fotos':alocarFotos(),
-        #'postar':postar()
+        'recentes':getRecentes(),
+        'top5': getTop5(),
     }
     return render(request, 'index.html', context)
 
@@ -60,8 +60,7 @@ def agenda(request):
 
 def promocao(request):
     context = {
-        'fotos': alocarFotos(),
-        'pins': pins(),
+        'promos': showPromos(),
         'user': verifyUserSession(request),
     }
     return render(request, 'promocao.html', context)
@@ -282,6 +281,7 @@ def gestaoPromos(request):
     context = {
         'user':verifyUserSession(request),
         'promos': getPromos(),
+        'promoImages': getPromoImages(),
         'all': getAllImages(),
         }
 

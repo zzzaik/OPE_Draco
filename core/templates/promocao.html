@@ -2,7 +2,7 @@
 {% load static %}
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Promoções{% endblock %}
-{% block main %}
+
 {% block subnav %}
 {% if user.auth %}
 <div class="subnav">
@@ -19,20 +19,22 @@
 {% endif %}
 {% endblock %}
 
+{% block main %}
+
 <div class="container">
     <div class="section-title text-center center">
         <h2>Promoções do Dia</h2>
         <hr>
     </div>
     <div class="gridPromos" id="gridPromos">
-        {% for index, img in fotos.items %}
+        {% for p in promos %}
         <div class="gridFoto">
-            <span class="promoTag">-20%</span>
+            <span class="promoTag">-{{ p.desconto }}%</span>
             <div class="portfolio-item">
                 <div class="hover-bg">
-                    <a href="{{ img }}" rel="prettyPhoto">
+                    <a href="{{ p.url }}" rel="prettyPhoto">
                         <div class="hover-text"></div>
-                        <img src="{{ img }}" class="img-responsive">
+                        <img src="{{ p.url }}" class="img-responsive">
                     </a>
                 </div>
             </div>
@@ -40,13 +42,13 @@
         {% endfor %}
         <button type="button" class="btn btn-link">Ver Mais</button>
     </div>
-
+{{ promos }}
     <div class="section-title text-center center">
         <h2>Pacotes</h2>
         <hr>
     </div>
     <div class="gridPacotes" id="gridPacotes">
-    {% for indice, img in pins.items %}
+    {% for p in promos %}
         <div class="pacoteContainer">
             <div class="infoPacote">
                 <p>Algum Item</p>
@@ -58,9 +60,9 @@
             <div>
                 <div class="portfolio-item">
                     <div class="hover-bg">
-                        <a href="{{ img }}" rel="prettyPhoto">
+                        <a href="{{ p.url }}" rel="prettyPhoto">
                             <div class="hover-text"></div>
-                            <img src="{{ img }}" class="img-responsive">
+                            <img src="{{ p.url }}" class="img-responsive">
                         </a>
                     </div>
                 </div>

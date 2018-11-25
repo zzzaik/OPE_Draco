@@ -40,7 +40,13 @@
                     {% endif %}
                 </div>
                 <div class="gridListImageHolder"><!-- Container Fotos -->
-
+                    {% for item in promoImages %}
+                    {% if item.idPromo == p.idPromo %}
+                    <div class="microFrame">
+                        <img src="{{ item.url }}" class="miniFoto">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                     <div class="microFrame">
                         <button class="addImgSquare" onclick="showSelector({{ p.idPromo }})">+</button>
                     </div>
@@ -48,9 +54,6 @@
             </div>
             {% endfor %}
         </div>
-
-
-
     </div>
     <div><!-- Seção Nova Promoção -->
         <h3>Nova Promoção</h3>

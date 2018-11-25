@@ -111,9 +111,10 @@ class Promocao(models.Model):
         db_table = 'Promocao'
 
 class PromoImagem(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     idpromo = models.ForeignKey(Promocao, models.DO_NOTHING,db_column='idPromo')
     idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem')
-    validade = models.DateField(db_column='ativo')
+    validade = models.DateField(db_column='validade')
 
     class Meta:
         managed = False

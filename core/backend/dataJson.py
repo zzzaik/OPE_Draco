@@ -1,6 +1,6 @@
 import json
 from django.http import HttpResponse
-from core.models import Imagem, Estilo, Cor, Regiao, Tamanho
+from core.models import Imagem, Estilo, PromoImagem
 
 def getEstilos():
     estilos = Estilo.objects.all()

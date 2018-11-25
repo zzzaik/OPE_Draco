@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Portfolio{% endblock %}
-{% block main %}
+
 {% block subnav %}
 {% if user.auth %}
 <div class="subnav">
@@ -17,6 +17,9 @@
 </div>
 {% endif %}
 {% endblock %}
+
+{% block main %}
+
 
     <div class="sidebarFiltro">
         <h4 class="whiteText">Categorias<h4>
