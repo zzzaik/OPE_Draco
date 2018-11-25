@@ -3,6 +3,7 @@
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Promoções{% endblock %}
 {% block main %}
+{% block subnav %}
 {% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
@@ -16,6 +17,7 @@
     {% endif %}
 </div>
 {% endif %}
+{% endblock %}
 
 <div class="container">
     <div class="section-title text-center center">

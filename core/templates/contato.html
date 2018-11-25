@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Contato{% endblock %}
 {% block main %}
+{% block subnav %}
 {% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
@@ -15,6 +16,8 @@
     {% endif %}
 </div>
 {% endif %}
+{% endblock %}
+
     <!-- Contact Section -->
     <div id="contact" class="text-center">
         <div class="container">
@@ -67,13 +70,4 @@
     <div id="map"></div>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzucE-JUGcpuo0DecYx6Gbr1tVIE3GP1Q&callback=initMap">
         </script>
-    <div id="footer">
-        <div class="container text-center">
-            <div class="fnav">
-                <p>Copyright &copy; 2016 John Doe. Designed by
-                    <a href="http://www.templatewire.com" rel="nofollow">TemplateWire</a>
-                </p>
-            </div>
-        </div>
-    </div>
 {% endblock %}

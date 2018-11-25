@@ -2,6 +2,7 @@
 {% block script %}{% endblock %}
 {% block title%}Catálogo{% endblock %}
 {% block main %}
+{% block subnav %}
 {% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
@@ -15,13 +16,14 @@
     {% endif %}
 </div>
 {% endif %}
+{% endblock %}
 
 <div class="container moveTop80">
-    <div class="gridCatalogoGestao"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
+    <div class="gridGestao2Col"><!-- Grid Container: 2 colunas [não classificados] [Classificados] -->
         <h3>Não Classificados</h3>
-        <div class="gridItemContainer"><!-- Coluna não Classificados -->
+        <div class="gridItemContainer2Col"><!-- Coluna não Classificados -->
             {% for item in data.noClassf %}
-            <div class="gridItemGestao"><!-- Container Item-->
+            <div class="gridItemGestaoSquare"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src='{{ item.url }}' class="miniFoto">
                 </div>
@@ -40,9 +42,9 @@
         </div>
 
         <h3>Classificados</h3>
-        <div class="gridItemContainer"><!-- Coluna Classificados -->
+        <div class="gridItemContainer2Col"><!-- Coluna Classificados -->
             {% for item in data.classf %}
-            <div class="gridItemGestao"><!-- Container Item-->
+            <div class="gridItemGestaoSquare"><!-- Container Item-->
                 <div class="miniFrame"><!-- Miniatura Imagem -->
                     <img src="{{ item.url }}" class="miniFoto">
                 </div>

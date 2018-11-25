@@ -268,4 +268,65 @@ function limparFiltro () {
     });
 }
 
+function novaPromocao () {
+    let desc = $('input[name=desconto]').val();
+    let data = {'desconto':desc/100}
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_promos/nova_promocao',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+        }
+    });
+}
+
+let listPromos = [];
+
+function addImagemPromo(imgId) {
+    listPromos.push({'imagemId':imgId});
+}
+
+function registrarPromocao () {
+    let promoId = $('#containerHidden').attr('name');
+    let validade = $('#inputValidade').val();
+    let data = {'promoId':promoId, 'validade':validade, 'imagens':listPromos};
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/tatuador/gestao_promos/registrar_promocao',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result);
+            let seletor = $('div.seletorPromos');
+                if (seletor.css('display') != 'none') {
+                seletor.hide('fast');
+                }
+                listPromos = [];
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+            listPromos = [];
+        }
+    });
+
+}
+
+function showSelector (promoId) {
+    let width = $('div.container').css('width');
+    $('div.seletorPromos').css('width',width);
+    $('#containerHidden').attr('name',promoId);
+    let seletor = $('div.seletorPromos');
+    if (seletor.css('display') == 'none') {
+        seletor.show('fast');
+    }
+}
+
 main();

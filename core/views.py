@@ -10,7 +10,7 @@ import json
 from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio
 from core.backend.pinterAPI import alocarPins, selectPins, atualizarCatalogo, getBoards
 #from core.backend.fbAPI import postar
-#from core.backend.promos import getPromos
+from core.backend.promos import getPromos, newPromo, registerPromo
 from core.backend.calendar import getCalendar
 from core.backend.createUser import salvaUsuario
 from core.backend.login import logar
@@ -19,7 +19,7 @@ from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
-from core.backend.dataJson import fillJson, getEstilos, alterarEstilo
+from core.backend.dataJson import getEstilos, alterarEstilo, getAllImages
 from core.models import Usuario, Tatuador
 
 ############################### Admin ##########################################
@@ -279,17 +279,50 @@ def gestaoPromos(request):
         return redirect(reverse('home'))
     if request.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
-    return render(request, 'tatuador/gestaoPromos.html', {'user':verifyUserSession(request)})
+    context = {
+        'user':verifyUserSession(request),
+        'promos': getPromos(),
+        'all': getAllImages(),
+        }
 
-def atualizarImagens(request):
-    if not isLogged(request):
-        return redirect(reverse('home'))
-    if request.session['user']['tipo'] != 1:
-        return redirect(reverse('home'))
-    salvarFoto('Outros')
-    salvarPins()
-    #função para alimentar o json com as imagens do banco
-    return redirect(reverse('home'))
+    return render(request, 'tatuador/gestaoPromos.html', context)
+
+
+def novaPromocao(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            res = newPromo(data)
+            response = JsonResponse({"Status":res})
+            response.status_code = 200
+            return response
+        else:
+            response = JsonResponse({"error":"Only POST method allowed"})
+            response.status_code = 403
+            return response
+    else:
+        response = JsonResponse({"error":"Request is not AJAX"})
+        response.status_code = 500
+        return response
+
+
+def registrarPromocao(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            res = registerPromo(data)
+            response = JsonResponse({"success":res})
+            response.status_code = 200
+            return response
+        else:
+            response = JsonResponse({"error":"Only POST method allowed"})
+            response.status_code = 403
+            return response
+    else:
+        response = JsonResponse({"error":"Request is not AJAX"})
+        response.status_code = 500
+        return response
+
 
 def postarRedesSociais(request):
     if not isLogged(request):
@@ -320,6 +353,7 @@ def saveGestaoCatalogo(request):
         response = JsonResponse({"error":"Request is not AJAX"})
         response.status_code = 500
         return response
+
 
 def saveGestaoPortifolio(request):
     if request.is_ajax():
@@ -354,6 +388,7 @@ def atualizarGestaoCatalogo(request):
         else:
             response = JsonResponse({"Error":"Not a POST request"})
             return response
+
 
 def atualizarGestaoPortifolio(request):
     if request.is_ajax():

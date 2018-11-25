@@ -1,6 +1,7 @@
 {% extends 'tatuador/base2.html' %} {% load static %}
 {% block title%}Promoções{% endblock %}
 {% block main %}
+{% block subnav %}
 {% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
@@ -14,7 +15,68 @@
     {% endif %}
 </div>
 {% endif %}
+{% endblock %}
 
-<a href="{% url 'atualizarImagens' %}" >Atualizar Imagens</a>
-<a href="{% url 'postarRedesSociais' %}" >Postar conteudo nas redes sociais</a>
+<div class="container moveTop80">
+    <div class=gridGestao1Col><!-- Grid Container: 1 coluna [Promocoes] -->
+        <h3>Promoções</h3>
+        <div class="gridItemContainer1Col"><!-- Coluna não Classificados -->
+            {% for p in promos %}
+            <div class="gridItemGestaoList"><!-- Container Item-->
+                <div class="gridListInputHolder"><!-- Container Inputs-->
+                    <label for="promocao{{ p.idPromo }}" class="labelGestaoList">Desconto</label>
+                    <input type="number" id="promocao{{ p.idPromo }}" value={{ p.desconto }}  class="inputGestaoList" readonly><!-- Desconto -->
+                    {% if p.ativo == 1 %}
+                    <!-- Status -->
+                    <label class="switch" for="promocaoStatus{{ p.idPromo }}">
+                    <input type="checkbox" id="promocaoStatus{{ p.idPromo }}" checked>
+                    <span class="slider round"></span>
+                    </label>
+                    {% else %}
+                    <!-- Status -->
+                    <label class="switch" for="promocaoStatus{{ p.idPromo }}">
+                    <input type="checkbox" id="promocaoStatus{{ p.idPromo }}">
+                    <span class="slider round"></span>
+                    {% endif %}
+                </div>
+                <div class="gridListImageHolder"><!-- Container Fotos -->
+
+                    <div class="microFrame">
+                        <button class="addImgSquare" onclick="showSelector({{ p.idPromo }})">+</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+    <div><!-- Seção Nova Promoção -->
+        <h3>Nova Promoção</h3>
+        <input type="number" min="1" max="100" name="desconto">
+        <button class="btn btn-primary" onclick="novaPromocao()">Criar</button>
+
+    </div>
+    <div class="seletorPromos"><!-- Container Seletor de Fotos - Hidden por padrão -->
+        <div class="gridGestaoPromos" id="containerHidden" name="">
+            {% for item in all %}
+            <div class="gridFoto" name="id_{{ item.id }}">
+                <div class="portfolio-item">
+                    <div class="hover-bg miniFrame">
+                        <a href="{{ item.url }}" rel="prettyPhoto">
+                            <div class="hover-text"></div>
+                            <img src="{{ item.url }}" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <button class="addImgRound" onclick="addImagemPromo({{ item.id }})">+</button>
+            </div>
+            {% endfor %}
+        </div>
+        <input type="date" id="inputValidade">
+        <button class="btn btn-primary" onclick="registrarPromocao()">Registrar</button>
+    </div>
+    <a href="{% url 'postarRedesSociais' %}" >Postar conteudo nas redes sociais</a>
+</div>
 {% endblock %}
