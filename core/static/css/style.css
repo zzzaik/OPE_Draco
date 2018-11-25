@@ -1030,6 +1030,11 @@ input:checked + .slider:before {
 	margin-bottom: 15px;
 }
 
+.shareButton {
+    display: flex;
+    justify-content: center;
+}
+
 .pacoteContainer {
 	display: flex;
 	flex-flow: row;
@@ -1237,6 +1242,8 @@ input:checked + .slider:before {
 	z-index: 11;
 }
 
+
+/* cadastra_dados.html - Ficha Anamnese */
 
 /*h4 {
     text-align: -webkit-auto;

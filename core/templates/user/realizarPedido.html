@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block unic_style %}{% static '/' %}css/index.css{% endblock %}
+{% block title %}Pedido{% endblock %}
+{% block main %}
+    <form action="/pagina-processa-dados-do-form" method="post">
+        <div class="menor bloco2 bloco-form">
+			<label for="teste">Teste: </label>
+		    <input type="text" id="teste" name="teste" />
+		</div>
+    </form>
+{% endblock %}

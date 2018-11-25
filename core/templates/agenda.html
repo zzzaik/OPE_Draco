@@ -15,19 +15,20 @@
   $(document).ready(function() {
 
     $('#agenda').fullCalendar({
+        defaultView: 'agendaWeek',
+        selectable: true,
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek'
+            right: 'month,agendaWeek',
         },
         navLinks: true, // can click day/week names to navigate views
         eventLimit: true, // allow "more" link when too many events
         dayClick: function(date, jsEvent, view, resourceObj) {
-            alert(date + jsEvent + view + resourceObj);
-            $(this).css('background-color', '#ffefef');
+            window.location = "{% url 'realizarPedido' %}";
         },
-        eventClick: function(event, jsEvent, view ) {
-            alert(event.title);
+        select: function(startDate, endDate) {
+            window.location = "{% url 'realizarPedido' %}";
         },
         events: [
             {% for eTitle, eStart, eEnd, eUrl, eAllDay in events %}
@@ -36,16 +37,20 @@
                     start: eStart,
                     end: eEnd,
                     url: eUrl,
-                    allDay: eAllDay,
-                }
+                },
             {% endfor %}
             {
-                title: "Testes",
-                start: "2018-11-24",
-                end: "2018-11-26",
+                title: "teste1",
+                start: "2018-11-26T09:00:00",
+                end: "2018-11-26T23:00:00",
                 url: "",
-                allDay: true,
-            }
+            },
+            {
+                title: "teste2",
+                start: "2018-11-26T09:00:00",
+                end: "2018-11-26T23:00:00",
+                url: "",
+            },
         ]
     });
 

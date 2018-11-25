@@ -7,6 +7,7 @@ from rest_framework import status
 import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
+from core.backend.realizarPedido import verificarCliente
 from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio, getRecentes, getTop5
 from core.backend.pinterAPI import alocarPins, selectPins, atualizarCatalogo, getBoards
 #from core.backend.fbAPI import postar
@@ -209,15 +210,24 @@ def login(request):
     request.POST
     return render(request, 'user/login.html', {'ret':'Usuarios disponiveis: %s Senhas: 12345678 0 = cliente / 1 = Tatuador' %(getUsuarios()), 'user':verifyUserSession(request)})
 
-def solicitarPedido(request):
-    if verificarCliente(request, request.session['user']['login']):
-        pass
-
-
 def sair(request):
     killSession(request, 'user')
     verifyUserSession(request)
     return redirect(reverse('login'))
+
+#############################################################################################################
+
+############################################### Cliente #####################################################
+
+def realizarPedido(request):
+    if not isLogged(request):
+        return redirect(reverse('login'))
+    if not verificarCliente(request, request.session['user']['login']):
+        return redirect(reverse('cadastraDados'))
+    if request.method == 'POST':
+        return render(request, 'user/realizarPedido.html')
+    else:
+        return render(request, 'user/realizarPedido.html')
 
 #############################################################################################################
 
@@ -269,7 +279,7 @@ def gestaoPortfolio(request):
 def gestaoAgenda(request):
     if not isLogged(request):
         return redirect(reverse('home'))
-    if request.session['user']['tipo'] != 1:
+    if req9uest.session['user']['tipo'] != 1:
         return redirect(reverse('home'))
     return render(request, 'tatuador/gestaoAgenda.html', {'user':verifyUserSession(request)})
 

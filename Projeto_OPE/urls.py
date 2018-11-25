@@ -18,7 +18,7 @@ Including another URLconf
 #from django.conf.urls.static import static
 from django.urls import path, re_path, include
 from core.views import index, agenda, promocao, portfolio, catalogo, contato
-from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha
+from core.views import login, criarConta, sair, cadastraDados, redefinirSenha, tokenRedefinirSenha, configsConta, confirmEmail, reenviarConfirmarEmail, reenviarRedefinirSenha, realizarPedido
 from core.views import main, gestaoClientes, gestaoAgenda, gestaoCatalogo, gestaoPortfolio , gestaoPromos, postarRedesSociais
 from core.views import saveGestaoCatalogo, saveGestaoPortifolio, atualizarGestaoCatalogo, atualizarGestaoPortifolio
 from core.views import registrarPromocao, novaPromocao
@@ -50,7 +50,8 @@ urlpatterns = [
     ##############################
 
     ########## clientes ########## Páginas exclusivas dos clientes
-
+    path('user/realizar_pedido', realizarPedido, name = 'realizarPedido'),
+    ##############################
 
     ########## tatuador ########## Páginas exclusivas dos tatuadores
     path('tatuador/main', main, name = 'main'),
