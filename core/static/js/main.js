@@ -1,5 +1,7 @@
 
 function main() {
+
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type)) {
@@ -360,9 +362,10 @@ function showSelector (promoId) {
     }
 }
 
-function showOrcamento (imageId,url) {
+function showOrcamento (imageId,url,estiloComplex) {
     $('#input_idImagem').val(imageId);
     $('#largeFoto').attr('src',url);
+    $('#input_complex').val(estiloComplex)
     let seletor = $('div.seletorServico');
     if (seletor.css('display') == 'none') {
         seletor.show('slow');
@@ -372,7 +375,58 @@ function showOrcamento (imageId,url) {
 function closeWindow (classe) {
     if($('div.'+classe).css('display') != 'none'){
         $('div.'+classe).hide('slow');
+        $('#input_show_valor').text('')
     };
 }
+
+function calcularOrcamento () {
+    let baseVal = parseInt($('#input_complex').val()) + parseInt($('#select_tamanho option:selected').attr('name'));
+    let colorMult = parseInt($('#select_cor option:selected').attr('name'));
+    let localMult = parseInt($('#select_regiao option:selected').attr('name'));
+    let orcamento = (baseVal * 25) + colorMult + localMult;
+
+    console.log(baseVal, colorMult, localMult);
+
+    $('#input_show_valor').text('R$'+orcamento);
+
+
+}
+
+function submitAnamnese () {
+
+
+
+    /*$.ajax({
+        url:'http://zzzaik.pythonanywhere.com/user/registrar_servico',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result['Status']);
+            let seletor = $('div.seletorServico');
+                if (seletor.css('display') != 'none') {
+                seletor.hide('fast');
+                }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+        }
+    });*/
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 main();

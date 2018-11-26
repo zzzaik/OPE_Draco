@@ -8,6 +8,7 @@ import json
 #from datetime import datetime
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from core.backend.realizarPedido import verificarCliente
+from core.backend.cadastraCliente import cadastraCliente
 from core.backend.instaAPI import alocarFotos, getFoto, selectFotos, atualizarPortifolio, getRecentes, getTop5
 from core.backend.pinterAPI import alocarPins, selectPins, atualizarCatalogo, getBoards
 #from core.backend.fbAPI import postar
@@ -20,7 +21,7 @@ from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
-from core.backend.dataJson import getEstilos, alterarEstilo, getAllImages, registerService
+from core.backend.dataJson import getEstilos, getCores, getTamanhos, getRegioes, alterarEstilo, getAllImages, registerService
 from core.models import Usuario, Tatuador
 
 ############################### Admin ##########################################
@@ -70,6 +71,9 @@ def portfolio(request):
     context = {
         'fotos': alocarFotos(),
         'estilos':getEstilos(),
+        'regioes':getRegioes(),
+        'cores':getCores(),
+        'tamanhos':getTamanhos(),
         'user': verifyUserSession(request)
     }
     return render(request, 'portfolio.html', context)
@@ -78,6 +82,9 @@ def catalogo(request):
     context = {
         'pins': alocarPins(),
         'estilos':getEstilos(),
+        'regioes':getRegioes(),
+        'cores':getCores(),
+        'tamanhos':getTamanhos(),
         'user': verifyUserSession(request)
     }
     return render(request, 'catalogo.html',context)
@@ -422,7 +429,17 @@ def registrarServico(request):
         response = JsonResponse({"Status":"Not a AJAX call"})
     return response
 
-
+def cadastrarCliente(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            package = json.loads(request.body)
+            res = cadastraCliente(package['login'],package['data'])
+            response = JsonResponse({'Status':'OK'})
+        else:
+            response = JsonResponse({"Status":"Not a POST request"})
+    else:
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
 

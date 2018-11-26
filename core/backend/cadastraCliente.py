@@ -1,6 +1,6 @@
 from core.models import Usuario, Cliente, Responsavel, Acidente
 
-def cadastraCliente(request, login, dados):
+def cadastraCliente(login, dados):
     user = Usuario.objects.get(loginusuario=login)
     client = Cliente.objects.filter(logincliente=user)
     if client:

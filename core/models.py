@@ -8,6 +8,20 @@
 from django.db import models
 
 
+class Acidente(models.Model):
+    idacidente = models.AutoField(db_column='idAcidente', primary_key=True)  # Field name made lowercase.
+    loginmenor = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='loginMenor')  # Field name made lowercase.
+    dataacidente = models.DateField(db_column='dataAcidente')  # Field name made lowercase.
+    localacidente = models.CharField(db_column='localAcidente', max_length=100)  # Field name made lowercase.
+    descriacaoacidente = models.CharField(db_column='descriacaoAcidente', max_length=500)  # Field name made lowercase.
+    lesaoacidente = models.IntegerField(db_column='lesaoAcidente')  # Field name made lowercase.
+    alergiaacidente = models.IntegerField(db_column='alergiaAcidente')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Acidente'
+
+
 class Agenda(models.Model):
     idagenda = models.AutoField(db_column='idAgenda', primary_key=True)  # Field name made lowercase.
     dataagenda = models.DateField(db_column='dataAgenda', blank=True, null=True)  # Field name made lowercase.
@@ -18,20 +32,49 @@ class Agenda(models.Model):
         db_table = 'Agenda'
 
 
-class Catalogo(models.Model):
-    idcatalogo = models.AutoField(db_column='idCatalogo', primary_key=True)  # Field name made lowercase.
-    idimagem = models.ForeignKey('Imagem', models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Catalogo'
-
-
 class Cliente(models.Model):
     idcliente = models.AutoField(db_column='idCliente', primary_key=True)  # Field name made lowercase.
     nomecliente = models.CharField(db_column='nomeCliente', max_length=120, blank=True, null=True)  # Field name made lowercase.
     logincliente = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='loginCliente')  # Field name made lowercase.
     assiduidade = models.IntegerField(blank=True, null=True)
+    datanasccliente = models.DateField(db_column='dataNascCliente')  # Field name made lowercase.
+    rgcliente = models.CharField(db_column='rgCliente', max_length=12)  # Field name made lowercase.
+    cpfcliente = models.CharField(db_column='cpfCliente', max_length=14)  # Field name made lowercase.
+    enderecocliente = models.CharField(db_column='enderecoCliente', max_length=300)  # Field name made lowercase.
+    foneresidencialcliente = models.CharField(db_column='foneResidencialCliente', max_length=8, blank=True, null=True)  # Field name made lowercase.
+    telefonecliente = models.CharField(db_column='telefoneCliente', max_length=9, blank=True, null=True)  # Field name made lowercase.
+    emailcliente = models.CharField(db_column='emailCliente', max_length=150)  # Field name made lowercase.
+    pesocliente = models.CharField(db_column='pesoCliente', max_length=6, blank=True, null=True)  # Field name made lowercase.
+    alturacliente = models.CharField(db_column='alturaCliente', max_length=6, blank=True, null=True)  # Field name made lowercase.
+    aspitinacliente = models.IntegerField(db_column='aspitinaCliente')  # Field name made lowercase.
+    herpescliente = models.IntegerField(db_column='herpesCliente')  # Field name made lowercase.
+    hipertensaocliente = models.IntegerField(db_column='hipertensaoCliente')  # Field name made lowercase.
+    hemofiliacliente = models.IntegerField(db_column='hemofiliaCliente')  # Field name made lowercase.
+    tonturascliente = models.IntegerField(db_column='tonturasCliente')  # Field name made lowercase.
+    cancercliente = models.IntegerField(db_column='cancerCliente')  # Field name made lowercase.
+    cardiopatiacliente = models.IntegerField(db_column='cardiopatiaCliente')  # Field name made lowercase.
+    hivcliente = models.IntegerField(db_column='hivCliente')  # Field name made lowercase.
+    menstruadacliente = models.IntegerField(db_column='menstruadaCliente')  # Field name made lowercase.
+    gravidacliente = models.IntegerField(db_column='gravidaCliente')  # Field name made lowercase.
+    amamentadocliente = models.IntegerField(db_column='amamentadoCliente')  # Field name made lowercase.
+    asmacliente = models.IntegerField(db_column='asmaCliente')  # Field name made lowercase.
+    colesterolcliente = models.IntegerField(db_column='colesterolCliente')  # Field name made lowercase.
+    eplepsiacliente = models.IntegerField(db_column='eplepsiaCliente')  # Field name made lowercase.
+    problemarenalcliente = models.IntegerField(db_column='problemaRenalCliente')  # Field name made lowercase.
+    diabetescliente = models.IntegerField(db_column='diabetesCliente')  # Field name made lowercase.
+    marcapassocliente = models.IntegerField(db_column='marcaPassoCliente')  # Field name made lowercase.
+    lupuscliente = models.IntegerField(db_column='lupusCliente')  # Field name made lowercase.
+    circulatoriocliente = models.IntegerField(db_column='circulatorioCliente')  # Field name made lowercase.
+    glaucomacliente = models.IntegerField(db_column='glaucomaCliente')  # Field name made lowercase.
+    respiratoriocliente = models.IntegerField(db_column='respiratorioCliente')  # Field name made lowercase.
+    psoriasecliente = models.IntegerField(db_column='psoriaseCliente')  # Field name made lowercase.
+    hepatitecliente = models.IntegerField(db_column='hepatiteCliente')  # Field name made lowercase.
+    coagulacaocliente = models.IntegerField(db_column='coagulacaoCliente')  # Field name made lowercase.
+    depressaocliente = models.IntegerField(db_column='depressaoCliente')  # Field name made lowercase.
+    gripeh1n1cliente = models.IntegerField(db_column='gripeH1n1Cliente')  # Field name made lowercase.
+    alergiacliente = models.CharField(db_column='alergiaCliente', max_length=500)  # Field name made lowercase.
+    outrastatuagenscliente = models.CharField(db_column='outrasTatuagensCliente', max_length=500)  # Field name made lowercase.
+    generocliente = models.CharField(db_column='generoCliente', max_length=6)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -61,64 +104,44 @@ class Emailcliente(models.Model):
 class Estilo(models.Model):
     idestilo = models.AutoField(db_column='idEstilo', primary_key=True)  # Field name made lowercase.
     estilo = models.CharField(max_length=50, blank=True, null=True)
+    complexidade = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'Estilo'
 
-    def __str__(self):
-        return self.estilo
-
 
 class Imagem(models.Model):
     idimagem = models.AutoField(db_column='idImagem', primary_key=True)  # Field name made lowercase.
     urlimagem = models.CharField(db_column='urlImagem', unique=True, max_length=255)  # Field name made lowercase.
-    ratins = models.IntegerField()
-    idestilo = models.ForeignKey(Estilo, models.DO_NOTHING, db_column='idEstilo')  # Field name made lowercase.
+    ratins = models.IntegerField(blank=True, null=True)
+    idestilo = models.ForeignKey(Estilo, models.DO_NOTHING, db_column='idEstilo', blank=True, null=True)  # Field name made lowercase.
     fonteimagem = models.IntegerField(db_column='fonteImagem')  # Field name made lowercase.
-    idtag = models.ForeignKey('Tag', models.DO_NOTHING, db_column='idTag')
+    idtag = models.IntegerField(db_column='idTag')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'Imagem'
 
 
-class Imagemtag(models.Model):
-    idimagemtag = models.AutoField(db_column='idImagemTag', primary_key=True)  # Field name made lowercase.
-    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
-    idtag = models.ForeignKey('Tag', models.DO_NOTHING, db_column='idTag')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'ImagemTag'
-
-
-class Portifolio(models.Model):
-    idportifolio = models.AutoField(db_column='idPortifolio', primary_key=True)  # Field name made lowercase.
-    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Portifolio'
-
-class Promocao(models.Model):
-    idpromo = models.AutoField(db_column='idPromo', primary_key=True)
-    desconto = models.FloatField(db_column='desconto')
-    ativo = models.IntegerField(db_column='ativo')
-
-    class Meta:
-        managed = False
-        db_table = 'Promocao'
-
-class PromoImagem(models.Model):
-    id = models.AutoField(db_column='id', primary_key=True)
-    idpromo = models.ForeignKey(Promocao, models.DO_NOTHING,db_column='idPromo')
-    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem')
-    validade = models.DateField(db_column='validade')
+class Promoimagem(models.Model):
+    idpromo = models.ForeignKey('Promocao', models.DO_NOTHING, db_column='idPromo', blank=True, null=True)  # Field name made lowercase.
+    idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem', blank=True, null=True)  # Field name made lowercase.
+    validade = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'PromoImagem'
+
+
+class Promocao(models.Model):
+    idpromo = models.AutoField(db_column='idPromo', primary_key=True)  # Field name made lowercase.
+    desconto = models.FloatField(blank=True, null=True)
+    ativo = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Promocao'
 
 
 class Regiao(models.Model):
@@ -129,6 +152,24 @@ class Regiao(models.Model):
     class Meta:
         managed = False
         db_table = 'Regiao'
+
+
+class Responsavel(models.Model):
+    idresponsavel = models.AutoField(db_column='idResponsavel', primary_key=True)  # Field name made lowercase.
+    loginmenor = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='loginMenor', blank=True, null=True)  # Field name made lowercase.
+    rgresponsavel = models.CharField(db_column='rgResponsavel', max_length=12)  # Field name made lowercase.
+    cpfresponsavel = models.CharField(db_column='cpfResponsavel', max_length=14)  # Field name made lowercase.
+    datanascresponsavel = models.DateField(db_column='dataNascResponsavel', blank=True, null=True)  # Field name made lowercase.
+    enderecoresponsavel = models.CharField(db_column='enderecoResponsavel', max_length=300)  # Field name made lowercase.
+    cepresponsavel = models.CharField(db_column='cepResponsavel', max_length=9)  # Field name made lowercase.
+    profissaoresponsavel = models.CharField(db_column='profissaoResponsavel', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    telefoneresponsavel = models.CharField(db_column='telefoneResponsavel', max_length=9)  # Field name made lowercase.
+    emailresponsavel = models.CharField(db_column='emailResponsavel', max_length=100)  # Field name made lowercase.
+    nomeresponsavel = models.CharField(db_column='nomeResponsavel', max_length=100)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Responsavel'
 
 
 class Servico(models.Model):
@@ -167,7 +208,7 @@ class Tag(models.Model):
 
 class Tamanho(models.Model):
     idtamanho = models.AutoField(db_column='idTamanho', primary_key=True)  # Field name made lowercase.
-    tamanho = models.CharField(max_length=8, blank=True, null=True)
+    tamanho = models.CharField(max_length=20, blank=True, null=True)
     faixavalor = models.FloatField(db_column='faixaValor', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

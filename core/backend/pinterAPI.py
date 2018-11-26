@@ -61,11 +61,13 @@ def alocarPins():
     tag = Tag.objects.get(tag='catalogo')
     imgClass = tag.imagem_set.exclude(idestilo=False)
 
+
     for pin in imgClass:
         imgId = pin.idimagem
         urlImg = pin.urlimagem
         styleId = str(pin.idestilo)
-        pins.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId})
+        complexidade = Estilo.objects.get(estilo=styleId).complexidade
+        pins.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId, 'estiloComplex':complexidade})
     return pins
 
 

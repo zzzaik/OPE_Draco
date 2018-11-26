@@ -50,7 +50,8 @@ def alocarFotos():
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId})
+        complexidade = Estilo.objects.get(estilo=styleId).complexidade
+        fotos.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId, 'estiloComplex':complexidade})
     return fotos
 
 def getRecentes():

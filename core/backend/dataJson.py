@@ -5,9 +5,35 @@ def getEstilos():
     estilos = Estilo.objects.all()
     data = []
     for item in estilos:
-        data.append({'estiloId':str(item.idestilo), 'estiloName':str(item.estilo)})
+        data.append({'estiloId':str(item.idestilo), 'estiloName':str(item.estilo), 'complexidade':item.complexidade})
 
     return data
+
+def getRegioes():
+    R = Regiao.objects.all()
+    data = []
+    for item in R:
+        data.append({'regiaoId':item.idregiao, 'regiaoName':item.regiaodocorpo, 'multiplicador':item.faixavalor})
+
+    return data
+
+def getCores():
+    C = Cor.objects.all()
+    data = []
+    for item in C:
+        data.append({'corId':item.idcor, 'corNumber':item.colorido, 'multiplicador':item.faixavalor})
+
+    return data
+
+def getTamanhos():
+    T = Tamanho.objects.all()
+    data = []
+    for item in T:
+        data.append({'tamanhoId':item.idtamanho, 'tamanhoName':item.tamanho, 'multiplicador':item.faixavalor})
+
+    return data
+
+
 
 def alterarEstilo(imgId,estiloId):
     imgDB = Imagem.objects.get(pk=imgId)

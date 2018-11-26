@@ -47,7 +47,7 @@
                             </a>
                         </div>
                     </div>
-                    <button class="addImgRound" onclick="showOrcamento({{ item.imageId }}, '{{ item.url }}')">$</button>
+                    <button class="addImgRound" onclick="showOrcamento({{ item.imageId }}, '{{ item.url }}', {{ item.estiloComplex }})">$</button>
                 </div>
             {% endfor %}
     </div>
@@ -58,23 +58,34 @@
             </div>
 
             <div class="gridOrcamento">
-                <label for="select_cor">Cor</label>
-                <select id="select_cor">
-                    <option value=""></option>
-                </select>
+
                 <label for="select_tamanho">Tamanho</label>
                 <select id="select_tamanho">
-                    <option value=""></option>
+                    {% for t in tamanhos %}
+                    <option value="{{ t.tamanhoId }}"  name="{{ t.multiplicador }}">{{ t.tamanhoName }}</option>
+                    {% endfor %}
                 </select>
+
+                <label for="select_cor">Cor</label>
+                <select id="select_cor">
+                    {% for cor in cores %}
+                    <option value="{{ cor.corId }}" name="{{ cor.multiplicador }}">{{ cor.corNumber }}</option>
+                    {% endfor %}
+                </select>
+
                 <label for="select_regiao">Região</label>
                 <select id="select_regiao">
-                    <option value=""></option>
+                    {% for r in regioes %}
+                    <option value="{{ r.regiaoId }}" name="{{ r.multiplicador }}">{{ r.regiaoName }}</option>
+                    {% endfor %}
                 </select>
-                <label for="input_show_valor">Preço Estimado</label>
-                <input id="input_show_valor" readonly>
+
+                <button class="btn btn-primary" onclick="calcularOrcamento()">Preço Estimado</button>
+                <div class="boxOrcamento" id="input_show_valor" readonly></div>
 
                 <input type="hidden" id="input_idCliente" value="">
                 <input type="hidden" id="input_idImagem" value="">
+                <input type="hidden" id="input_complex" value="">
 
                 {% if user.auth %}
                 <button class="btn btn-primary" onclick="contratarServico()">Contratar</button>

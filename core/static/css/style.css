@@ -1041,7 +1041,7 @@ input:checked + .slider:before {
 .gridOrcamento select, input {
     height: 30px;
     width: 150px;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .gridOrcamento label {
@@ -1056,6 +1056,15 @@ input:checked + .slider:before {
     width:30px;
     height:30px;
     margin-left: 30px;
+}
+
+.boxOrcamento{
+    display:flex;
+    align-items: center;
+    background-color: #fff;
+    height: 30px;
+    width: 150px;
+    margin-left: 5px;
 }
 
 
@@ -1307,52 +1316,91 @@ input:checked + .slider:before {
 
 /* cadastra_dados.html - Ficha Anamnese */
 
-/*h4 {
-    text-align: -webkit-auto;
+.blockLevel1 {
+    display: flex;
+    flex-flow: column;
+	width: 100%;
+	margin: 0 auto;
+	justify-content: center;
 }
-		.container {
-			width: 100%;
-			max-width: 700px;
-			margin: 0 auto;
-		}
 
-		h2 {
-			width: 100%;
-			text-align:center;
-		}
+.blockLevel1 h2 {
+    text-align: center;
+}
 
-		.bloco1 {
-			width: calc(100% - 2%);
-			margin: 1%;
-			float: left;
-		}
+.blockLevel2 {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+	width: 95%;
+	margin: 0 auto;
+}
 
-		.bloco2 {
-			width: calc(50% - 2%);
-			margin: 1%;
-			float: left;
-		}
+.blockLevel3 {
+	display: flex;
+    align-items: center;
+	width: 100%;
+	margin: 0 auto;
+}
 
-		.bloco3 {
-			width: calc(33% - 2%);
-			margin: 1%;
-			float: left;
-		}
+.blockLevel3Grid {
+    display:grid;
+    width:95%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 45px;
+}
 
-		.bloco4 {
-			width: calc(25% - 2%);
-			margin: 1%;
-			float: left;
-		}
+.columnFlow {
+    flex-flow: column;
+}
 
-		.bloco-form label {
-			width: 100%;
-			color: rgb(49, 49, 49);
-		}
+.blockLevel4 {
+	display: flex;
+	justify-content:space-between;
+    align-items: center;
+	width: 100%;
+	margin: 0 auto;
+}
 
-		.bloco-form input {
-			width: 100%;
-			color: rgb(49, 49, 49);
-			padding: 10px 0;
-		}*/
+.blockColSpan4 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
 
+.blockRowSpan3 {
+    grid-row-start: 2;
+    grid-row-end: 5;
+}
+
+.blockLevel4Grid {
+    display:grid;
+    width:95%;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 45px;
+    grid-column-gap: 5px;
+}
+
+.bloco-form label {
+	width: 36%;
+	color: rgb(49, 49, 49);
+	margin-bottom: 0px;
+}
+
+.bloco-form input, select {
+	width: 56%;
+	color: rgb(49, 49, 49);
+}
+
+.bloco-form input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	color: rgb(49, 49, 49);
+	padding: 10px 0;
+}
+
+.bloco-form textarea {
+	width: 90%;
+	height:80%;
+	color: rgb(49, 49, 49);
+	margin: auto;
+}

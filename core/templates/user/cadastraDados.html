@@ -2,582 +2,503 @@
 {% load static %}
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Dados{% endblock %}
+{% block subnav %}
+    {% if user.auth %}
+    <div class="subnav">
+        <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
+        <a href="{% url 'tokenRedefinirSenha' %}" class="subnavLink">Alterar Senha / Esqueceu senha</a>
+        <a href="{% url 'configsConta' %}" class="subnavLink">Configurações da conta</a>
+        {% if user.confiavel == 0 %}
+            <a href="{% url 'confirmEmail' %}" class="subnavLink">Confirmar e-mail</a>
+        {% endif %}
+        {% if user.tipo == 1 %}
+            <a href="{% url 'main' %}" class="subnavLink">Gestão</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
-{% if user.auth %}
-<div class="subnav">
-    <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
-    <a href="{% url 'tokenRedefinirSenha' %}" class="subnavLink">Alterar Senha / Esqueceu senha</a>
-    <a href="{% url 'configsConta' %}" class="subnavLink">Configurações da conta</a>
-    {% if user.confiavel == 0 %}
-        <a href="{% url 'confirmEmail' %}" class="subnavLink">Confirmar e-mail</a>
-    {% endif %}
-    {% if user.tipo == 1 %}
-        <a href="{% url 'main' %}" class="subnavLink">Gestão</a>
-    {% endif %}
-</div>
-{% endif %}
+
 
     {{ resp }}
+    <div class="container">
     <form action="/pagina-processa-dados-do-form" method="post">
-		<div class="container">
-			<div class="bloco1">  <!--Tudo que for classe menor não pode apacerer se o checkbox souMenor for false-->
-				<h2>TERMO DE AUTORIZAÇÃO PARA MICROPIGMENTAÇÃO</h2>
-				<input type="checkbox" name="souMenor" id="souMenor"/><label for="souMenor">Sou menor de 18 anos</label><br>
+		<div class="blockLevel1">  <!--Tudo que for classe menor não pode apacerer se o checkbox souMenor for false-->
+			<h2>TERMO DE AUTORIZAÇÃO PARA MICROPIGMENTAÇÃO</h2>
+			<hr>
+			<div class="blockLevel2 bloco-form">
+			    <label for="souMenor">Sou menor de 18 anos</label>
+			    <input type="checkbox" name="souMenor" id="souMenor"/>
+			    <br>
 				<p class="maior">Eu, abaixo especificado, declaro que estou em perfeitas
-					condições físicas e mentais, pelo presente
-					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
-					a técnica de Micropigmentação,
-					arte de tatuar sobrancelhas semi-permanentes, ou outras
-					áreas faciais e corporais.</p>
+    					condições físicas e mentais, pelo presente
+    					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
+    					a técnica de Micropigmentação,
+    					arte de tatuar sobrancelhas semi-permanentes, ou outras
+    					áreas faciais e corporais.</p>
 				<p class="menor">Declaro que estou em perfeitas
-					condições físicas e mentais, pelo presente
-					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
-					do meu filho(a) menor de 18 anos, abaixo identificando, no qual sou
-					responsável, a técnica de Micropigmentação,
-					arte de tatuar sobrancelhas semi-permanentes, ou outras
-					áreas faciais e corporais.</p>
+    					condições físicas e mentais, pelo presente
+    					AUTORIZO O(A) ARTISTA a executar sobre o meu corpo
+    					do meu filho(a) menor de 18 anos, abaixo identificando, no qual sou
+    					responsável, a técnica de Micropigmentação,
+    					arte de tatuar sobrancelhas semi-permanentes, ou outras
+    					áreas faciais e corporais.</p>
 				<p class="menor">Assumo, na qualidade de genitor de menor, plena responsabilidade
-					pelo trabalho ora autorizado, e de minha livre e plena vontade
-					declarar que isento qualquer responsabilidade civil ou criminal
-					o (a) micropigmentador. Seja de ordem médica ou estética. Ficando
-					ainda plenamente ciente de que o processo da arte na pele, ficará
-					semi-permanente com duração entre 6 meses a um ano.</p>
+    					pelo trabalho ora autorizado, e de minha livre e plena vontade
+    					declarar que isento qualquer responsabilidade civil ou criminal
+    					o (a) micropigmentador. Seja de ordem médica ou estética. Ficando
+    					ainda plenamente ciente de que o processo da arte na pele, ficará
+    					semi-permanente com duração entre 6 meses a um ano.</p>
 				<p class="menor">Declaro ainda, ser do meu conhecimento das
-					técnicas a serem executadas, os matérias
-					a serem utilizados, bem como fui informado, e
-					tenho total ciência dos procedimentos e
-					cuidados, que devem ser executados por mim ou por
-					meu filho(a); durante o período recomendado pelo
-					profissional, com a finalidade de evitar
-					qualquer complicação médica no período de cicatrização do local.</p>
+    					técnicas a serem executadas, os matérias
+    					a serem utilizados, bem como fui informado, e
+    					tenho total ciência dos procedimentos e
+    					cuidados, que devem ser executados por mim ou por
+    					meu filho(a); durante o período recomendado pelo
+    					profissional, com a finalidade de evitar
+    					qualquer complicação médica no período de cicatrização do local.</p>
 				<p class="menor">Reconheço finalmente tratar-se o processo
-					de arte na pele, como micropigmentação
-					eminente ARTESANAL, e como tal, não comporta perfeição.</p>
-				<div class="menor bloco1 bloco-form">
-					<label for="nomeResponsavel">Responsavel:</label>
-					<input type="text" id="nomeResponsavel" name="nomeResponsavel" />
-				</div>
+    					de arte na pele, como micropigmentação
+    					eminente ARTESANAL, e como tal, não comporta perfeição.</p>
+			</div>
 
-				<div class="menor bloco2 bloco-form">
-					<label for="rgResponsavel">Rg:</label>
-					<input type="text" id="rgResponsavel" name="rgResponsavel" />
-				</div>
+			<div class="blockLevel2">
+			    <div class="blockLevel3Grid">
+    				<div class="blockLevel3 bloco-form">
+    					<label for="nomeResponsavel">Responsavel:</label>
+    					<input type="text" id="nomeResponsavel" name="nomeResponsavel" />
+    				</div>
 
-				<div class="bloco2 bloco-form">
-					<label for="cpfResponsavel">CPF:</label>
-					<input type="text" id="cpfResponsavel" name="cpfResponsavel" />
-				</div>
+    				<div class="menor blockLevel3 bloco-form">
+    					<label for="rgResponsavel">Rg:</label>
+    					<input type="text" id="rgResponsavel" name="rgResponsavel" />
+    				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="dataNascResponsavel">Data Nasc:</label>
-					<input type="date" id="dataNascResponsavel" name="dataNascResponsavel" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="cpfResponsavel">CPF:</label>
+        				<input type="text" id="cpfResponsavel" name="cpfResponsavel" />
+        			</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="estadoCivilResponsavel">Estado Civil:</label>
-					<input type="text" id="estadoCivilResponsavel" name="estadoCivilResponsavel" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="dataNascResponsavel">Data Nasc:</label>
+        				<input type="date" id="dataNascResponsavel" name="dataNascResponsavel" />
+        			</div>
 
-				<div class="bloco1 bloco-form">
-					<label for="enderecoResponsavel">Endereço:</label>
-					<input type="text" id="enderecoResponsavel" name="enderecoResponsavel" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="estadoCivilResponsavel">Estado Civil:</label>
+        				<input type="text" id="estadoCivilResponsavel" name="estadoCivilResponsavel" />
+        			</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="cepRespon">Cep:</label>
-					<input type="text" id="cepRespon" name="cepRespon" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="enderecoResponsavel">Endereço:</label>
+        				<input type="text" id="enderecoResponsavel" name="enderecoResponsavel" />
+        			</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="profissaoRespon">Profissão:</label>
-					<input type="text" id="profissaoRespon" name="profissaoRespon" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="cepRespon">Cep:</label>
+        				<input type="text" id="cepRespon" name="cepRespon" />
+        			</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="telefoneRespon">Telefone:</label>
-					<input type="text" id="telefoneRespon" name="telefoneRespon" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="profissaoRespon">Profissão:</label>
+        				<input type="text" id="profissaoRespon" name="profissaoRespon" />
+        			</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="emailRespon">E-mail:</label>
-					<input type="text" id="emailRespon" name="emailRespon" />
-				</div>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="telefoneRespon">Telefone:</label>
+        				<input type="text" id="telefoneRespon" name="telefoneRespon" />
+        			</div>
 
-				<p>Referente ás perguntas sobre problemas de saúde e anmanse, serão preenchidas
-				através da ficha do cliente. Nos quais serão arquivados juntamente com este
-				pedido de autorização.</p>
+        			<div class="blockLevel3 bloco-form">
+        				<label for="emailRespon">E-mail:</label>
+        				<input type="text" id="emailRespon" name="emailRespon" />
+        			</div>
+    			</div>
+    		</div>
 
-				<p>DECLARO SEREM VERDADEIRAS AS AFIRMAÇÕES ACIMA DECLARADAS, ASSUMO
-				TOTAL RESPONSABILIDADE POR QUALQUER OMISSÃO OU ERRO NAS MESMAS.</p>
-
+    		<div class="blockLevel2">
+    			<p>Referente ás perguntas sobre problemas de saúde e anmanse, serão preenchidas
+    			através da ficha do cliente. Nos quais serão arquivados juntamente com este
+    			pedido de autorização.</p>
+    			<p>DECLARO SEREM VERDADEIRAS AS AFIRMAÇÕES ACIMA DECLARADAS, ASSUMO
+    				TOTAL RESPONSABILIDADE POR QUALQUER OMISSÃO OU ERRO NAS MESMAS.</p>
 				<p>IMPORTANTE: TRAZER XEROX DO DOCUMENTO DE INDENTIDADE DO
-				RESPONSAVEL E DO MENOR. AUNTENTICAR ESTE TERMO NO CARTÓRIO</p>
+    				RESPONSAVEL E DO MENOR. AUNTENTICAR ESTE TERMO NO CARTÓRIO</p>
 
 				<p>Sem mais, Firmo Verdade.</p>
 			</div>
 		</div>
 
-        <input type="checkbox" name="acidentesGraves" id="acidentesGraves"/><label for="acidentesGraves">Já teve algum acidente?</label><br>
-			<div class="bloco1">
-				<h2>Registro de Acidentes</h2>
-				<div>
-        			<div class="bloco3 bloco-form">
-			    	<label for="dataAci">Data do Acidente:</label>
-					<input type="date" id="dataAci" name="dataAci" />
-				</div>
-				<div>
-				    <div class="bloco3 bloco-form">
-					<label for="localAci">Local do Acidente:</label>
-					<input type="text" id="localAci" name="localAci" />
-				</div>
-					<input type="checkbox" id="comLesao" name="comLesao"><label for="comLesao">Com lesão</label><br>
-					<input type="checkbox" id="alergica" name="alergica"><label for="alergica">Alérgica</label><br>
-				<div class="bloco1">
-  					<h4>DESCRIÇÃO DO ACIDENTE</h4>
-  					<textarea class="bloco1" name="descricaoAcidente" id="descricaoAcidente"></textarea>
-				</div>
-			</div>
-			<div class="bloco1">
-				<P>
-				 <h2>FICHA DE ANAMNESE</h2>
-			    </P>
+        <div class="blockLevel1">
 
-			    <div>
-					<div class="bloco2 bloco-form">
-					<label for="nomeAnam">Nome:</label>
-					<input type="text" id="nomeAnam" name="nomeAnam" />
+			<h2>Registro de Acidentes</h2>
+			<hr>
+
+			<div class="blockLevel2 bloco-form">
+			    <label for="acidentesGraves">Já teve algum acidente?</label>
+			    <input type="checkbox" name="acidentesGraves" id="acidentesGraves"/>
+			    <br>
+
+                <div class="blockLevel3Grid">
+            		<div class="blockLevel3 bloco-form">
+    			   	    <label for="dataAcidente">Data do Acidente:</label>
+    				    <input type="date" id="dataAcidente" name="dataAcidente" />
+    			    </div>
+
+    			    <div class="blockLevel3 bloco-form">
+    			        <label for="localAcidente">Local do Acidente:</label>
+    				    <input type="text" id="localAcidente" name="localAcidente" />
+    			    </div>
+
+    			    <div class="blockLevel3 bloco-form">
+    				    <input type="checkbox" id="comLesao" name="comLesao"><label for="comLesao">Com lesão</label>
+    				    <input type="checkbox" id="alergica" name="alergica"><label for="alergica">Alérgica</label>
+    			    </div>
+
+    				<div class="blockLevel3 blockRowSpan3 columnFlow bloco-form">
+      					<h4>DESCRIÇÃO DO ACIDENTE</h4>
+      					<textarea name="descricaoAcidente" id="descricaoAcidente"></textarea>
+    				</div>
 				</div>
-    			<select>
-    			    <option><--SELECIONE--></option>
-                    <option name="genero" value="homem">Homem</option>
-                    <option name="genero" value="mulher">Mulher</option>
-                    <option name="genero" value="outro">Outro</option>
-                </select>
+		    </div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-						<label for="dataAnam">Dat.Nasc:</label>
-						<input type="date" id="dataAnam" name="dataAnam" />
-				</div>
+			<div class="blockLevel2">
+			    <h2>FICHA DE ANAMNESE</h2>
+			    <hr>
+                <div class="blockLevel3Grid">
+    				<div class="blockLevel3 bloco-form">
+    				    <label for="nomeAnam">Nome:</label>
+    				    <input type="text" id="nomeAnam" name="nomeAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="RGAnam">RG:</label>
-						<input type="text" id="RGAnam" name="RGAnam" />
-				</div>
+                    <div class="blockLevel3 bloco-form">
+                        <label for="generoAnam">Genero:</label>
+                		<select id="generoAnam "name="genero">
+                            <option  value="homem">Homem</option>
+                            <option  value="mulher">Mulher</option>
+                            <option  value="outro">Outro</option>
+                        </select>
+                    </div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="cpfAnam">CPF:</label>
-						<input type="text" id="cpfAnam" name="cpfAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="dataNascAnam">Dat.Nasc:</label>
+    					<input type="date" id="dataNascAnam" name="dataNascAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco1 bloco-form">
-						<label for="endAnam">Endereço:</label>
-						<input type="text" id="endAnam" name="endAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="RGAnam">RG:</label>
+    					<input type="text" id="RGAnam" name="RGAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="foneAnam">Fone(Res):</label>
-						<input type="text" id="foneAnam" name="foneAnam" />
-				</div>
+                    <div class="blockLevel3 bloco-form">
+    					<label for="cpfAnam">CPF:</label>
+    					<input type="text" id="cpfAnam" name="cpfAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="celAnam">Cel:</label>
-						<input type="text" id="celAnam" name="celAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="endAnam">Endereço:</label>
+    					<input type="text" id="endAnam" name="endAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="emailAnam">E-mail:</label>
-						<input type="text" id="emailAnam" name="emailAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="foneAnam">Fone(Res):</label>
+    					<input type="text" id="foneAnam" name="foneAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-						<label for="pesoAnam">Peso:</label>
-						<input type="text" id="pesoAnam" name="pesoAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="celAnam">Cel:</label>
+    					<input type="text" id="celAnam" name="celAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-						<label for="alturaAnam">Altura:</label>
-						<input type="text" id="alturaAnam" name="alturaAnam" />
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="emailAnam">E-mail:</label>
+    					<input type="text" id="emailAnam" name="emailAnam" />
+    				</div>
 
-				<h4>Informações do Procedimento</h4>
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="aspirina">Aspirina 5 dias</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="aspirina" id="aspirina">
-							</div>
-						</div>
-				</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="pesoAnam">Peso:</label>
+    					<input type="text" id="pesoAnam" name="pesoAnam" />
+    				</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Herpes">Herpes</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Herpes" id="Herpes">
-							</div>
+    				<div class="blockLevel3 bloco-form">
+    					<label for="alturaAnam">Altura:</label>
+    					<input type="text" id="alturaAnam" name="alturaAnam" />
+    				</div>
+    			</div>
 
-						</div>
-				</div>
+                <div class="blockLevel3 columnFlow">
+				    <h4>Informações do Procedimento</h4>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Hipertensao">Hipertensão</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Hipertensao" id="Hipertensao">
-							</div>
-						</div>
-				</div>
+                    <div class="blockLevel4Grid">
+    					<div class="blockLevel4 bloco-form">
+    						<label for="aspirina">Aspirina 5 dias</label>
+    						<input type="checkbox" name="aspirina" id="aspirina">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Hemofilia">Hemofilía</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Hemofilia" id="Hemofilia">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Herpes">Herpes</label>
+    						<input type="checkbox" name="Herpes" id="Herpes">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Tonturas">Tonturas</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Tonturas" id="Tonturas">
-							</div>
-						</div>
-				</div>
+    				    <div class="blockLevel4 bloco-form">
+    						<label for="Hipertensao">Hipertensão</label>
+    						<input type="checkbox" name="Hipertensao" id="Hipertensao">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Cancer">Câncer</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Cancer" id="Cancer">
-							</div>
-						</div>
-				</div>
+    				    <div class="blockLevel4 bloco-form">
+    						<label for="Hemofilia">Hemofilía</label>
+    						<input type="checkbox" name="Hemofilia" id="Hemofilia">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Cardiopatia">Cardiopatia</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Cardiopatia" id="Cardiopatia">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Tonturas">Tonturas</label>
+    						<input type="checkbox" name="Tonturas" id="Tonturas">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="HIV">HIV</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="HIV" id="HIV">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Cancer">Câncer</label>
+    						<input type="checkbox" name="Cancer" id="Cancer">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Menstruada">Menstruada</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Menstruada" id="Menstruada">
-							</div>
-						</div>
-				</div>
+                        <div class="blockLevel4 bloco-form">
+    						<label for="Cardiopatia">Cardiopatia</label>
+    						<input type="checkbox" name="Cardiopatia" id="Cardiopatia">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Gravida">Grávida</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Gravida" id="Gravida">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="HIV">HIV</label>
+    						<input type="checkbox" name="HIV" id="HIV">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Amamentando">Amamentando</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Amamentando" id="Amamentando">
-							</div>
-						</div>
-				</div>
+    				    <div class="blockLevel4 bloco-form">
+    						<label for="Menstruada">Menstruada</label>
+    						<input type="checkbox" name="Menstruada" id="Menstruada">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Asma">Asma</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Asma" id="Asma">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Gravida">Grávida</label>
+    						<input type="checkbox" name="Gravida" id="Gravida">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Colesterol">Colesterol</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Colesterol" id="Colesterol">
-							</div>
-						</div>
-				</div>
+    				    <div class="blockLevel4 bloco-form">
+    						<label for="Amamentando">Amamentando</label>
+    						<input type="checkbox" name="Amamentando" id="Amamentando">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Epilepsia">Epilepsia</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Epilepsia" id="Epilepsia">
-							</div>
-						</div>
-				</div>
+                        <div class="blockLevel4 bloco-form">
+    					    <label for="Asma">Asma</label>
+    						<input type="checkbox" name="Asma" id="Asma">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="ProblemaRenal">Problema Renal</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="ProblemaRenal" id="ProblemaRenal">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Colesterol">Colesterol</label>
+    						<input type="checkbox" name="Colesterol" id="Colesterol">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Diabetes">Diabetes</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Diabetes" id="Diabetes">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Epilepsia">Epilepsia</label>
+    						<input type="checkbox" name="Epilepsia" id="Epilepsia">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="MarcaPasso">Marca Passo</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="MarcaPasso" id="MarcaPasso">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="ProblemaRenal">Problema Renal</label>
+    						<input type="checkbox" name="ProblemaRenal" id="ProblemaRenal">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Lupus">Lúpus</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Lupus" id="Lupus">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Diabetes">Diabetes</label>
+    						<input type="checkbox" name="Diabetes" id="Diabetes">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Circulatorio">Circulatório</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Circulatorio" id="Circulatorio">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="MarcaPasso">Marca Passo</label>
+    						<input type="checkbox" name="MarcaPasso" id="MarcaPasso">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Glaucoma">Glaucoma</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Glaucoma" id="Glaucoma">
-							</div>
-						</div>
-				</div>
+                        <div class="blockLevel4 bloco-form">
+    						<label for="Lupus">Lúpus</label>
+    						<input type="checkbox" name="Lupus" id="Lupus">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Respiratorio">Respiratório</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Respiratorio" id="Respiratorio">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Circulatorio">Circulatório</label>
+    						<input type="checkbox" name="Circulatorio" id="Circulatorio">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Psoriase">Psoríase</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Psoriase" id="Psoriase">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Glaucoma">Glaucoma</label>
+    						<input type="checkbox" name="Glaucoma" id="Glaucoma">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Hepatite">Hepatite</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Hepatite" id="Hepatite">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Respiratorio">Respiratório</label>
+    						<input type="checkbox" name="Respiratorio" id="Respiratorio">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Coagulacao">Coagulação</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Coagulacao" id="Coagulacao">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Psoriase">Psoríase</label>
+    						<input type="checkbox" name="Psoriase" id="Psoriase">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="Depressao">Depressão</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="Depressao" id="Depressao">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Hepatite">Hepatite</label>
+    						<input type="checkbox" name="Hepatite" id="Hepatite">
+    					</div>
 
-				<div>
-						<div class="bloco2 bloco-form">
-							<div class="bloco2 bloco-form">
-								<label for="GripeH1N1">Gripe H1N1</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="GripeH1N1" id="GripeH1N1">
-							</div>
-						</div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Coagulacao">Coagulação</label>
+    						<input type="checkbox" name="Coagulacao" id="Coagulacao">
+    					</div>
 
+    					<div class="blockLevel4 bloco-form">
+    						<label for="Depressao">Depressão</label>
+    						<input type="checkbox" name="Depressao" id="Depressao">
+    					</div>
 
-				<div>
-						<div class="bloco1 bloco-form">
-						<label for="alergiaAnam">Possui Alergia ? Quais ?:</label>
-						<input type="text" id="alergiaAnam" name="alergiaAnam" /></div>
-				</div>
+    					<div class="blockLevel4 bloco-form">
+    						<label for="GripeH1N1">Gripe H1N1</label>
+    						<input type="checkbox" name="GripeH1N1" id="GripeH1N1">
+    					</div>
 
-				<div>
-						<div class="bloco3 bloco-form">
-						<label for="tatuagemAnam">Possui Tatuagem ?</label>
-						<input type="text" id="tatuagemAnam" name="tatuagemAnam" /></div>
+    					<div class="blockLevel4 bloco-form blockColSpan4">
+    					    <label for="alergiaAnam">Possui Alergias?</label>
+    					    <input type="text" id="alergiaAnam" name="alergiaAnam" />
+    				    </div>
+
+    				    <div class="blockLevel4 bloco-form blockColSpan4">
+    				        <label for="tatuagemAnam">Possui Tatuagem?</label>
+    				        <input type="text" id="tatuagemAnam" name="tatuagemAnam" />
+    				    </div>
+    				</div>
 				</div>
 			</div>
-			<div class="bloco1">
+        </div>
 
-				<p>1- Declaro que são verdadeiras as informações acima e independente das minhas
-				informações serem positivas eu negativas, confirmo o meu dejeso de executar o
-				procedimento;</p>
+		<div class="blockLevel1">
+		    <div class="blockLevel2">
 
-				<p>2- O procedimento e todas as implicações relativas ao mesmo, me foram
-				esclarecidas e estou ciente das minhas condições psicológicas e de saúde. Ficando
-				assim a profissional e o estabelecimento isento de qualquer responsabilidade, quanto
-				as reações que por ventura eu venha apresentar;</p>
+    			<p>1- Declaro que são verdadeiras as informações acima e independente das minhas
+    				informações serem positivas eu negativas, confirmo o meu dejeso de executar o
+    				procedimento;</p>
 
-				<p>3- Assumo a resposabilidade no pós-procedimento, pois afirmo que seguirei
-				rigorosamente as instruções;</p>
+    			<p>2- O procedimento e todas as implicações relativas ao mesmo, me foram
+    				esclarecidas e estou ciente das minhas condições psicológicas e de saúde. Ficando
+    				assim a profissional e o estabelecimento isento de qualquer responsabilidade, quanto
+    				as reações que por ventura eu venha apresentar;</p>
 
-				<p>4- Renuncio por vontade própria a aplicação do teste de sensibilidade e estou
-				ciente que por este ato, assumo total responsabilidade no tocante á reação que
-				minha pele poderá á apresentar;</p>
+    			<p>3- Assumo a resposabilidade no pós-procedimento, pois afirmo que seguirei
+    				rigorosamente as instruções;</p>
 
-				<p>5- Autorizo gratuitamente a exibição de minha imagem, através de foto ou
-				reprodução da mesma, para propaganda em qualquer veículo de comunicação</p>
-				<div class="bloco2">
-				    <div class="bloco2">
-						<input style="width: 15px; height: 15px;" type="checkbox" name="autorizo" id="autorizo">
-						<span style="width: 15px;">Sim</span>
-					</div>
-			    </div>
+    			<p>4- Renuncio por vontade própria a aplicação do teste de sensibilidade e estou
+    				ciente que por este ato, assumo total responsabilidade no tocante á reação que
+    				minha pele poderá á apresentar;</p>
+
+    			<p>5- Autorizo gratuitamente a exibição de minha imagem, através de foto ou
+    				reprodução da mesma, para propaganda em qualquer veículo de comunicação</p>
+    		</div>
+
+			<div class="blockLevel2 bloco-form">
+				<input type="checkbox" name="autorizo" id="autorizo">
+				<label for="autorizo">Sim</label>
 			</div>
-
-
-			<div class="bloco1">
-
-				<h2>CUIDADOS PÓS-PROCEDIMENTOS</h2>
-
-				<p>1. Não molhar por 48 horas no caso de sobrancelhas.</p>
-
-				<p>2. Não se expor ao sol direto durante 30 dias</p>
-
-				<p>3. Não usar sauna, não frequentar piscina e mar, nos primeiros 7 dias</p>
-
-				<p>4. nunca usar sabonete, base, loções, oleos, cremes, ou produtos cremosos, o que contenham ácidos sobre o local.</p>
-
-				<p>5. Ter cuidados com calor de forno, secador de cabelos, vapor de panelas.</p>
-
-				<p>6. Passar pomada 2x ao dia, de manhã e de noite para manter hidratada.</p>
-
-				<p>7. não usar maquiagem até completar a cicatrização.</p>
-
-				<p>8. não arrancar a casca que se forma, deixar que saia naturalmente.</p>
-
-				<p>9. Não ingerir comidas gordurosas, evitar chocolate, comidas e bebidas ácidas.</p>
-
-				<p>10. Só lavar a área com soro fisiológico e compressas geladas nas primeiras 24 horas.</p>
-
-				<p>11. Não usar pomada Nebacetina, e use Bepantol com cautela. Poderá
-					indicar usar manteiga de cacau, ou óleo Dersani. Ou as pomadas própias.</p>
-
-				<p>12. Fazer retoque no prazo máximo de 30 dias. Após 30 dias
-					perderá o direito de retoque assim sendo considerado como novo
-					serviço</p>
-
-			</div>
-
-
-			<div class="bloco1">
-
-				<h2> COLORIMETRIA BÁSICA</h2>
-
-				<p>já conhecemos um pouco mais afundo sobre a colorimetria, e nem tudo
-				conseguimos memorizar não é mesmo ?
-
-				Para ajudar a refrescar a mente, vou deixar essas regrinhas básicas,
-				para ficar sempre conosco, e para sanar dúvidas no momento do procedimento.</p>
-
-
-				<h4>CORES:</h4>
-
-				<p>Cores primárias - azul vermelho e amarelo.
-
-				Cores secundárias - Roxas verdes e laranja - É o resultado das cores
-				primárias. Preste atenção nas misturas.</p>
-
-				<p>Roxo - Vermelho + Azul
-				Verde- Azul + Amarelo
-				Laranja - Vermelho + Amarelo
-				Cores quentes - Vermelho, laranja e amarelo
-				Cores frias - Roxo azul e verde.</p>
-
-				<h4>MELANINA / BASE:</h4>
-
-				<p><b>Pessoas de base quente = Normalmente brancas e loiras.</b>
-				Aréola: Sua aréola normalmente é vermelha, ou rosa.
-				Mucosa Labial: Possui sub-tom vermelho.
-				Pele: Ao tomar sol, fica com a pele avermelhada.
-				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do modificador frio.</p>
-
-
-				<p><b>Pessoas de base fria= Normalmente negras e mulatas.</b>
-				Aréola: Sua aréola normalmente é arroxeada.
-				Mucosa Labial: Sua mucosa labial é roxa.
-				Pele: Quando toma sol sua pele também fica arroxeada.
-				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do
-				modificdor quente.</p>
-
-				<p><b>Pessoas orientais =</b> Mesmo sendo de etnia branca, podem ter melanina fria.</p>
-
-				<h4>PROCEDIMENTO INCORRETO:</h4>
-
-				<p><b>pigmento frio + pele fria =</b> azul, cinza, verde ou grafite.</br>
-				<b>pigmento quente + pele quente =</b> Vermelho, rosa, laranja.</p>
-
-				<h4>PROCEDIMENTO CORRETO</h4>
-
-				<p><b>pigmento frio + Pele quente =</b> Resultado correto.</br>
-				<b>Pigmento quente + Pele fria =</b> Resultado correto.</p>
-
-				<p>Lembre-se que o ideal é aplicar nas sobrancelhas pigmentos de tons
-				castanhos, nos olhos tons de preto, e na boca tons vermelhos ou tons rosas.</p>
-
-
+			<div class="blockLevel2">
+			    <button class="btn btn-primary" onclick="submitAnamnese()">Submeter Ficha</button>
 			</div>
 		</div>
 
+		<div class="blockLevel1">
+
+			<h2>CUIDADOS PÓS-PROCEDIMENTOS</h2>
+			<hr>
+
+            <div class="blockLevel2">
+    			<p>1. Não molhar por 48 horas no caso de sobrancelhas.</p>
+    			<p>2. Não se expor ao sol direto durante 30 dias</p>
+
+        		<p>3. Não usar sauna, não frequentar piscina e mar, nos primeiros 7 dias</p>
+
+    			<p>4. nunca usar sabonete, base, loções, oleos, cremes, ou produtos cremosos, o que contenham ácidos sobre o local.</p>
+
+    			<p>5. Ter cuidados com calor de forno, secador de cabelos, vapor de panelas.</p>
+
+    			<p>6. Passar pomada 2x ao dia, de manhã e de noite para manter hidratada.</p>
+
+    			<p>7. não usar maquiagem até completar a cicatrização.</p>
+
+    			<p>8. não arrancar a casca que se forma, deixar que saia naturalmente.</p>
+
+    			<p>9. Não ingerir comidas gordurosas, evitar chocolate, comidas e bebidas ácidas.</p>
+
+    			<p>10. Só lavar a área com soro fisiológico e compressas geladas nas primeiras 24 horas.</p>
+
+    			<p>11. Não usar pomada Nebacetina, e use Bepantol com cautela. Poderá
+    					indicar usar manteiga de cacau, ou óleo Dersani. Ou as pomadas própias.</p>
+
+    			<p>12. Fazer retoque no prazo máximo de 30 dias. Após 30 dias
+    					perderá o direito de retoque assim sendo considerado como novo
+    					serviço</p>
+    		</div>
+
+		</div>
+
+
+		<div class="blockLevel1">
+
+			<h2> COLORIMETRIA BÁSICA</h2>
+			<hr>
+
+			<div class="blockLevel2">
+        		<p>já conhecemos um pouco mais afundo sobre a colorimetria, e nem tudo
+    				conseguimos memorizar não é mesmo ?
+
+    				Para ajudar a refrescar a mente, vou deixar essas regrinhas básicas,
+    				para ficar sempre conosco, e para sanar dúvidas no momento do procedimento.</p>
+
+
+    			<h4>CORES:</h4>
+
+    			<p>Cores primárias - azul vermelho e amarelo.
+
+    				Cores secundárias - Roxas verdes e laranja - É o resultado das cores
+    				primárias. Preste atenção nas misturas.</p>
+
+    			<p>Roxo - Vermelho + Azul
+    				Verde- Azul + Amarelo
+    				Laranja - Vermelho + Amarelo
+    				Cores quentes - Vermelho, laranja e amarelo
+    				Cores frias - Roxo azul e verde.</p>
+
+    			<h4>MELANINA / BASE:</h4>
+    				<p><b>Pessoas de base quente = Normalmente brancas e loiras.</b>
+    				Aréola: Sua aréola normalmente é vermelha, ou rosa.
+    				Mucosa Labial: Possui sub-tom vermelho.
+    				Pele: Ao tomar sol, fica com a pele avermelhada.
+    				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do modificador frio.</p>
+
+
+    			<p><b>Pessoas de base fria= Normalmente negras e mulatas.</b>
+    				Aréola: Sua aréola normalmente é arroxeada.
+    				Mucosa Labial: Sua mucosa labial é roxa.
+    				Pele: Quando toma sol sua pele também fica arroxeada.
+    				Aplicação: Coloque 5 gotas da cor do pigmento correto + 1 do
+    				modificdor quente.</p>
+    			<p><b>Pessoas orientais =</b> Mesmo sendo de etnia branca, podem ter melanina fria.</p>
+
+    			<h4>PROCEDIMENTO INCORRETO:</h4>
+
+    			<p><b>pigmento frio + pele fria =</b> azul, cinza, verde ou grafite.</br>
+    				<b>pigmento quente + pele quente =</b> Vermelho, rosa, laranja.</p>
+
+    			<h4>PROCEDIMENTO CORRETO</h4>
+
+    			<p><b>pigmento frio + Pele quente =</b> Resultado correto.</br>
+    				<b>Pigmento quente + Pele fria =</b> Resultado correto.</p>
+
+    			<p>Lembre-se que o ideal é aplicar nas sobrancelhas pigmentos de tons
+    				castanhos, nos olhos tons de preto, e na boca tons vermelhos ou tons rosas.</p>
+            </div>
+		</div>
 	</form>
+</div>
 {% endblock %}
