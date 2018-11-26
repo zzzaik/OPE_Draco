@@ -392,12 +392,78 @@ function calcularOrcamento () {
 
 }
 
+function getBool (e) {
+    if (e=='on') {
+        return 1
+    } else {
+        return 0
+    }
+}
+
 function submitAnamnese () {
 
+    let data = {
+        	    'menor18Anos': getBool($('#souMenor').val()),
+            	'rgResponsavel': $('#rgResponsavel').val(),
+            	'cpfResponsavel': $('#cpfResponsavel').val(),
+            	'dataNascResponsavel': $('#dataNascResponsavel').val(),
+            	'nomeResponsavel': $('#nomeResponsavel').val(),
+            	'enderecoResponsavel': $('#enderecoResponsavel').val(),
+            	'cep': $('#cepRespon').val(),
+            	'profissao': $('#profissaoRespon').val(),
+            	'telefone': $('#telefoneRespon').val(),
+            	'email': $('#emailRespon').val(),
+        		'registroAcidentes': getBool($('#acidentesGraves').val()),
+            	'dataAcidente': $('#dataAcidente').val(),
+            	'localAcidente': $('#localAcidente').val(),
+            	'comLesao': getBool($('#comLesao').val()),
+            	'alergica': getBool($('#alergica').val()),
+            	'descricaoAcidente': $('#descricaoAcidente').val(),
+            	'nome': $('#nomeAnam').val(),
+        		'genero': $('#generoAnam option:selected').val(),
+            	'dataNasc': $('#dataNascAnam').val(),
+            	'rg': $('#RGAnam').val(),
+            	'cpf': $('#cpfAnam').val(),
+            	'endereco': $('#endAnam').val(),
+            	'foneResidencial': $('#foneAnam').val(),
+            	'celular': $('#celAnam').val(),
+            	'email': $('#emailAnam').val(),
+            	'peso': $('#pesoAnam').val(),
+            	'altura': $('#alturaAnam').val(),
+            	'aspirina': getBool($('#aspirina').val()),
+            	'herpes': getBool($('#Herpes').val()),
+            	'hipertensao': getBool($('#Hipertensao').val()),
+            	'hemofilia': getBool($('#Hemofilia').val()),
+            	'tontura': getBool($('#Tonturas').val()),
+            	'cancer': getBool($('#Cancer').val()),
+            	'cardiopatia': getBool($('#Cardiopatia').val()),
+            	'hiv': getBool($('#HIV').val()),
+            	'menstruacao': getBool($('#Menstruada').val()),
+            	'gravida': getBool($('#Gravida').val()),
+            	'amamentando': getBool($('#Amamentando').val()),
+            	'asma': getBool($('#Asma').val()),
+            	'colesterol': getBool($('#Colesterol').val()),
+            	'eplepsia': getBool($('#Epilepsia').val()),
+            	'problemaRenal': getBool($('#ProblemaRenal').val()),
+            	'diabetes': getBool($('#Diabetes').val()),
+            	'marcaPasso': getBool($('#MarcaPasso').val()),
+            	'lupus': getBool($('#Lupus').val()),
+            	'circulatorio': getBool($('#Circulatorio').val()),
+            	'glaucoma': getBool($('#Glaucoma').val()),
+            	'respiratorio': getBool($('#Respiratorio').val()),
+            	'psoriase': getBool($('#Psoriase').val()),
+            	'hepatite': getBool($('#Hepatite').val()),
+            	'coagulacao': getBool($('#Coagulacao').val()),
+            	'depressao': getBool($('#Depressao').val()),
+            	'gripeh1n1': getBool($('#GripeH1N1').val()),
+            	'alergia': $('#alergiaAnam').val(),
+            	'outrasTatuagens': $('#tatuagemAnam').val(),
+            }
 
+            console.log(data);
 
-    /*$.ajax({
-        url:'http://zzzaik.pythonanywhere.com/user/registrar_servico',
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/user/cadastraDados/cadastrar_cliente',
         method:'POST',
         contentType:'application/json; charset=utf-8',
         data: JSON.stringify(data),
@@ -412,7 +478,7 @@ function submitAnamnese () {
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status +"-"+thrownError);
         }
-    });*/
+    });
 
 }
 

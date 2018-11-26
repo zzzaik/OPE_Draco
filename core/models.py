@@ -124,7 +124,7 @@ class Imagem(models.Model):
         db_table = 'Imagem'
 
 
-class Promoimagem(models.Model):
+class PromoImagem(models.Model):
     idpromo = models.ForeignKey('Promocao', models.DO_NOTHING, db_column='idPromo', blank=True, null=True)  # Field name made lowercase.
     idimagem = models.ForeignKey(Imagem, models.DO_NOTHING, db_column='idImagem', blank=True, null=True)  # Field name made lowercase.
     validade = models.DateField(blank=True, null=True)

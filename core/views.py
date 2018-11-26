@@ -432,8 +432,9 @@ def registrarServico(request):
 def cadastrarCliente(request):
     if request.is_ajax():
         if request.method == 'POST':
-            package = json.loads(request.body)
-            res = cadastraCliente(package['login'],package['data'])
+            data = json.loads(request.body)
+            login = request.session['user']['login']
+            res = cadastraCliente(login, data)
             response = JsonResponse({'Status':'OK'})
         else:
             response = JsonResponse({"Status":"Not a POST request"})

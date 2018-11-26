@@ -1,32 +1,13 @@
 from core.models import Usuario, Cliente, Responsavel, Acidente
 
 def cadastraCliente(login, dados):
+    msg = ''
     user = Usuario.objects.get(loginusuario=login)
     client = Cliente.objects.filter(logincliente=user)
     if client:
-        return True
+        msg = 'Usuário já é cliente'
+        return msg
     else:
-        if dados['menor18Anos']:
-            cliMenor = Responsavel.objects.create(
-                loginmenor=user,
-                nomeresponsavel=dados['nomeResponsavel'],
-                rgresponsavel=dados['rgResponsavel'],
-                cpfresponsavel=dados['cpfResponsavel'],
-                datanasresponsavel=dados['dataNascResponsavel'],
-                enderecoresponsavel=dados['enderecoResponsavel'],
-                cepresponsavel=dados['cep'],
-                profissaoresponsavel=dados['profissao'],
-                telefoneresponsavel=dados['telefone'],
-                emailresponsavel=dados['email'])
-            cliMenor.save()
-        if dados['registoAcidentes']:
-            cliAcidente = Acidente.objects.create(
-                loginmenor=user,
-                dataacidente=dados['dataAcidente'],
-                localacidente=dados['localAcidente'],
-                lesaoacidente=dados['lesaoAcidente'],
-                alergiaacidente=dados['alergiaAcidente'])
-            cliAcidente.save()
         cli = Cliente.objects.create(
             logincliente=user,
             nomecliente=dados['nome'],
@@ -40,7 +21,7 @@ def cadastraCliente(login, dados):
             emailcliente=dados['email'],
             pesocliente=dados['peso'],
             alturacliente=dados['altura'],
-            aspirinacliente=dados['aspirina'],
+            aspitinacliente=dados['aspirina'],
             herpescliente=dados['herpes'],
             hipertensaocliente=dados['hipertensao'],
             hemofiliacliente=dados['hemofilia'],
@@ -48,9 +29,9 @@ def cadastraCliente(login, dados):
             cancercliente=dados['cancer'],
             cardiopatiacliente=dados['cardiopatia'],
             hivcliente=dados['hiv'],
-            menstruacaocliente=dados['menstruacao'],
+            menstruadacliente=dados['menstruacao'],
             gravidacliente=dados['gravida'],
-            amamentandocliente=dados['amamentando'],
+            amamentadocliente=dados['amamentando'],
             asmacliente=dados['asma'],
             colesterolcliente=dados['colesterol'],
             eplepsiacliente=dados['eplepsia'],
@@ -66,7 +47,34 @@ def cadastraCliente(login, dados):
             coagulacaocliente=dados['coagulacao'],
             depressaocliente=dados['depressao'],
             gripeh1n1cliente=dados['gripeh1n1'],
-            alergiaCliente=dados['alergia'],
+            alergiacliente=dados['alergia'],
             outrastatuagenscliente=dados['outrasTatuagens'])
+
+        msg = 'Cliente Registrado'
         cli.save()
-        return False
+
+        clientDB = Cliente.objects.get(logincliente=user)
+        if dados['menor18Anos']:
+
+            cliMenor = Responsavel.objects.create(
+                loginmenor=clientDB,
+                nomeresponsavel=dados['nomeResponsavel'],
+                rgresponsavel=dados['rgResponsavel'],
+                cpfresponsavel=dados['cpfResponsavel'],
+                datanascresponsavel=dados['dataNascResponsavel'],
+                enderecoresponsavel=dados['enderecoResponsavel'],
+                cepresponsavel=dados['cep'],
+                profissaoresponsavel=dados['profissao'],
+                telefoneresponsavel=dados['telefone'],
+                emailresponsavel=dados['email'])
+            cliMenor.save()
+
+        if dados['registoAcidentes']:
+            cliAcidente = Acidente.objects.create(
+                loginmenor=clientDB,
+                dataacidente=dados['dataAcidente'],
+                localacidente=dados['localAcidente'],
+                lesaoacidente=dados['lesaoAcidente'],
+                alergiaacidente=dados['alergiaAcidente'])
+            cliAcidente.save()
+    return msg

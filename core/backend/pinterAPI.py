@@ -39,9 +39,9 @@ def atualizarCatalogo():
 
 def selectPins():
     pins = {'classf':[],'noClassf':[]}
-    tag = Tag.objects.get(tag='catalogo')
-    imgClass = tag.imagem_set.exclude(idestilo=False)
-    imgNoClass = tag.imagem_set.filter(idestilo__isnull=True)
+    tag = Tag.objects.get(tag='catalogo').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False)
+    imgNoClass = Imagem.objects.all().filter(idtag=tag, idestilo__isnull=True)
 
     for foto in imgClass:
         imgId = foto.idimagem
@@ -58,8 +58,8 @@ def selectPins():
 
 def alocarPins():
     pins = []
-    tag = Tag.objects.get(tag='catalogo')
-    imgClass = tag.imagem_set.exclude(idestilo=False)
+    tag = Tag.objects.get(tag='catalogo').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False)
 
 
     for pin in imgClass:

@@ -24,9 +24,9 @@ def atualizarPortifolio():
 
 def selectFotos():
     fotos = {'classf':[],'noClassf':[]}
-    tag = Tag.objects.get(tag='portifolio')
-    imgClass = tag.imagem_set.exclude(idestilo=False)
-    imgNoClass = tag.imagem_set.filter(idestilo__isnull=True)
+    tag = Tag.objects.get(tag='portifolio').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False)
+    imgNoClass = Imagem.objects.all().filter(idtag=tag, idestilo__isnull=True)
 
     for foto in imgClass:
         imgId = foto.idimagem
@@ -43,8 +43,8 @@ def selectFotos():
 
 def alocarFotos():
     fotos = []
-    tag = Tag.objects.get(tag='portifolio')
-    imgClass = tag.imagem_set.exclude(idestilo=False)
+    tag = Tag.objects.get(tag='portifolio').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False)
 
     for foto in imgClass:
         imgId = foto.idimagem
@@ -56,8 +56,8 @@ def alocarFotos():
 
 def getRecentes():
     fotos = []
-    tag = Tag.objects.get(tag='portifolio')
-    imgClass = tag.imagem_set.exclude(idestilo=False).order_by('-idimagem')
+    tag = Tag.objects.get(tag='portifolio').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False).order_by('-idimagem')
 
     for x in range(0,8):
         imgId = imgClass[x].idimagem
@@ -67,8 +67,8 @@ def getRecentes():
 
 def getTop5():
     fotos = []
-    tag = Tag.objects.get(tag='portifolio')
-    imgClass = tag.imagem_set.exclude(idestilo=False).order_by('-ratins')
+    tag = Tag.objects.get(tag='portifolio').idtag
+    imgClass = Imagem.objects.all().filter(idtag=tag).exclude(idestilo=False).order_by('-ratins')
 
     for x in range(0,5):
         imgId = imgClass[x].idimagem
