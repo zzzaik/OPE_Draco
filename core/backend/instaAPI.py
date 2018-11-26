@@ -50,7 +50,7 @@ def alocarFotos():
         imgId = foto.idimagem
         urlImg = foto.urlimagem
         styleId = str(foto.idestilo)
-        fotos.append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
+        fotos.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId})
     return fotos
 
 def getRecentes():

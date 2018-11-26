@@ -319,14 +319,60 @@ function registrarPromocao () {
 
 }
 
+function contratarServico () {
+    let imageId = $('#input_idImagem').val();
+    let colorId = $('#select_cor option:selected');
+    let sizeId = $('#select_tamanho option:selected');
+    let localId = $('#select_regiao option:selected');
+    let clientId = $('#select_cor').val();
+    let promotion = false;
+
+    let data = {'imageId':imageId, 'colorId':colorId, 'sizeId':sizeId, 'localId':localId, 'clientId':clientId , 'promotion':promotion};
+
+    $.ajax({
+        url:'http://zzzaik.pythonanywhere.com/user/registrar_servico',
+        method:'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'text',
+        success: function(result){
+            alert(result['Status']);
+            let seletor = $('div.seletorServico');
+                if (seletor.css('display') != 'none') {
+                seletor.hide('fast');
+                }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status +"-"+thrownError);
+        }
+    });
+
+}
+
+
 function showSelector (promoId) {
     let width = $('div.container').css('width');
     $('div.seletorPromos').css('width',width);
     $('#containerHidden').attr('name',promoId);
     let seletor = $('div.seletorPromos');
     if (seletor.css('display') == 'none') {
-        seletor.show('fast');
+        seletor.show('slow');
     }
+}
+
+function showOrcamento (imageId,url) {
+    $('#input_idImagem').val(imageId);
+    $('#largeFoto').attr('src',url);
+    let seletor = $('div.seletorServico');
+    if (seletor.css('display') == 'none') {
+        seletor.show('slow');
+    };
+}
+
+function closeWindow (classe) {
+    if($('div.'+classe).css('display') != 'none'){
+        $('div.'+classe).hide('slow');
+    };
 }
 
 main();

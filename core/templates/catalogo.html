@@ -39,15 +39,50 @@
     <div class="gridContainer">
             {% for item in pins %}
             <div class="gridFoto" name="estilo_{{ item.estiloId }}">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ item.url }}" rel="prettyPhoto">
-                                <div class="hover-text"></div>
-                                <img src="{{ item.url }}" class="img-responsive">
-                            </a>
-                        </div>
+                <div class="portfolio-item">
+                    <div class="hover-bg">
+                        <a href="{{ item.url }}" rel="prettyPhoto">
+                            <div class="hover-text"></div>
+                            <img src="{{ item.url }}" class="img-responsive">
+                        </a>
                     </div>
                 </div>
+                <button class="addImgRound" onclick="showOrcamento({{ item.imageId }}, '{{ item.url }}')">$</button>
+            </div>
             {% endfor %}
+    </div>
+
+    <div class="seletorServico"><!-- Container Contratar Serviço - Hidden por padrão -->
+        <div class="containerContratarServico" id="containerHidden">
+            <div class="containerFoto">
+                <img src="" class="miniFoto" id="largeFoto">
+            </div>
+
+            <div class="gridOrcamento">
+                <label for="select_cor">Cor</label>
+                <select id="select_cor">
+                    <option value=""></option>
+                </select>
+                <label for="select_tamanho">Tamanho</label>
+                <select id="select_tamanho">
+                    <option value=""></option>
+                </select>
+                <label for="select_regiao">Região</label>
+                <select id="select_regiao">
+                    <option value=""></option>
+                </select>
+                <label for="input_show_valor">Preço Estimado</label>
+                <input id="input_show_valor" readonly>
+
+                <input type="hidden" id="input_idCliente" value="">
+                <input type="hidden" id="input_idImagem" value="">
+
+                {% if user.auth %}
+                <button class="btn btn-primary" onclick="contratarServico()">Contratar</button>
+                {% endif %}
+                <button class="addImgRound" onclick="closeWindow('seletorServico')">X</button>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

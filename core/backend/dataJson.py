@@ -1,6 +1,5 @@
 import json
-from django.http import HttpResponse
-from core.models import Imagem, Estilo, PromoImagem
+from core.models import Imagem, Estilo, Promocao, Servico, Regiao, Cor, Tamanho, Cliente
 
 def getEstilos():
     estilos = Estilo.objects.all()
@@ -27,3 +26,23 @@ def getAllImages():
         urlImg = item.urlimagem
         fotos.append({'id': idImg, 'url': urlImg})
     return fotos
+
+def registerService(data):
+    msg = ''
+    service = data
+    client = Cliente.objects.get(idcliente=service['clientId'])
+    image = Imagem.objects.get(idimagem=service['imageId'])
+    color = Cor.objects.get(idcor=service['colorId'])
+    size = Tamanho.objects.get(idtamanho=service['sizeId'])
+    local = Regiao.objects.get(idregiao=service['localId'])
+    valueOff = None
+    if service['promotion']:
+        valueOff = Promocao.objects.get(idpromo=service['promotionId']).desconto
+    try:
+        S = Servico.objects.create(idcliente=client, idimagem=image, idcor=color, idtamanho=size, idregiao=local, servicodesconto=valueOff, servicofinalizado=False)
+        S.save()
+        msg = 'Serviço Registrado'
+    except Exception as e:
+        msg = str(e)
+
+    return msg

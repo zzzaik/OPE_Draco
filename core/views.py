@@ -20,7 +20,7 @@ from core.backend.redefinicaoSenha import alterarSenha, verificarSenha
 from core.backend.token import enviarToken, verificarToken
 from core.backend.getUsuarios import getUsuarios
 from core.backend.confirmarEmail import tornarConfiavel
-from core.backend.dataJson import getEstilos, alterarEstilo, getAllImages
+from core.backend.dataJson import getEstilos, alterarEstilo, getAllImages, registerService
 from core.models import Usuario, Tatuador
 
 ############################### Admin ##########################################
@@ -345,6 +345,10 @@ def postarRedesSociais(request):
     #função para alimentar o json com as imagens do banco
     return render(request, 'tatuador/postarRedesSociais.html')
 
+################################################################################################
+
+######################################## Endpoints #############################################
+
 
 def saveGestaoCatalogo(request):
     if request.is_ajax():
@@ -352,17 +356,12 @@ def saveGestaoCatalogo(request):
             data = json.loads(request.body)
             for item in data:
                 alterarEstilo(item['imgId'],item['estiloId'])
-            response = JsonResponse({"success":"Database Updated"})
-            response.status_code = 200
-            return response
+            response = JsonResponse({"Status":"Database Updated"})
         else:
-            response = JsonResponse({"error":"Only POST method allowed"})
-            response.status_code = 403
-            return response
+            response = JsonResponse({"Status":"Not a POST request"})
     else:
-        response = JsonResponse({"error":"Request is not AJAX"})
-        response.status_code = 500
-        return response
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
 def saveGestaoPortifolio(request):
@@ -371,17 +370,12 @@ def saveGestaoPortifolio(request):
             data = json.loads(request.body)
             for item in data:
                 alterarEstilo(item['imgId'],item['estiloId'])
-            response = JsonResponse({"success":"Database Updated"})
-            response.status_code = 200
-            return response
+            response = JsonResponse({"Status":"Database Updated"})
         else:
-            response = JsonResponse({"error":"Only POST method allowed"})
-            response.status_code = 403
-            return response
+            response = JsonResponse({"Status":"Not a POST request"})
     else:
-        response = JsonResponse({"error":"Request is not AJAX"})
-        response.status_code = 500
-        return response
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
 def atualizarGestaoCatalogo(request):
@@ -389,15 +383,15 @@ def atualizarGestaoCatalogo(request):
         if request.method == 'POST':
             data = json.loads(request.body)
             if data['action'] == 'atualizar':
-                ret = atualizarCatalogo()
-                response = JsonResponse({"Status":ret})
-                return response
+                res = atualizarCatalogo()
+                response = JsonResponse({"Status":res})
             else:
-                response = JsonResponse({"Fail":"Something went wrong"})
-                return response
+                response = JsonResponse({"Status":res})
         else:
-            response = JsonResponse({"Error":"Not a POST request"})
-            return response
+            response = JsonResponse({"Status":"Not a POST request"})
+    else:
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
 def atualizarGestaoPortifolio(request):
@@ -405,18 +399,28 @@ def atualizarGestaoPortifolio(request):
         if request.method == 'POST':
             data = json.loads(request.body)
             if data['action'] == 'atualizar':
-                ret = atualizarPortifolio()
-                response = JsonResponse({"Status":ret})
-                return response
+                res = atualizarPortifolio()
+                response = JsonResponse({"Status":res})
             else:
-                response = JsonResponse({"Fail":"Something went wrong"})
-                return response
+                response = JsonResponse({"Status":"Wrong action value"})
         else:
-            response = JsonResponse({"Error":"Not a POST request"})
-            return response
+            response = JsonResponse({"Status":"Not a POST request"})
+    else:
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
-
+def registrarServico(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            res = registerService(data)
+            response = JsonResponse({'Status':res})
+        else:
+            response = JsonResponse({"Status":"Not a POST request"})
+    else:
+        response = JsonResponse({"Status":"Not a AJAX call"})
+    return response
 
 
 

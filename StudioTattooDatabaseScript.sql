@@ -42,6 +42,32 @@ create table Cliente (
 	CONSTRAINT fk_LoginCliente FOREIGN KEY (loginCliente) REFERENCES Usuario(idUsuario)
 );
 
+create table Responsavel (
+    idResponsavel INT AUTO_INCREMENT,
+    loginMenor INT,
+    rgResponsavel VARCHAR(12) NOT NULL,
+    cpfResponsavel VARCHAR(14) NOT NULL,
+    dataNascResponsavel DATE,
+    enderecoResponsavel VARCHAR(300) NOT NULL,
+    cepResponsavel VARCHAR(9) NOT NULL,
+    profissaoResponsavel VARCHAR(100),
+    telefoneResponsavel VARCHAR(9) NOT NULL,
+    emailResponsavel VARCHAR(100) NOT NULL,
+    CONSTRAINT pk_Responsavel PRIMARY KEY (idResponsavel),
+    CONSTRAINT fk_LoginResponsavel FOREIGN KEY (loginMenor) REFERENCES Cliente(idCliente)
+);
+
+create table Acidente(
+    idAcidente INT AUTO_INCREMENT NOT NULL,
+    loginMenor INT NOT NULL,
+    dataAcidente DATE NOT NULL,
+    localAcidente VARCHAR(100) NOT NULL,
+    descriacaoAcidente VARCHAR(500) NOT NULL,
+    lesaoAcidente BOOLEAN NOT NULL DEFAULT FALSE,
+    alergiaAcidente BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT pk_Acidente PRIMARY KEY (idAcidente),
+    CONSTRAINT fk_loginAcidente FOREIGN KEY (loginMenor) REFERENCES Cliente (idCliente)
+);
 
 create table Agenda (
 	idAgenda INT AUTO_INCREMENT,

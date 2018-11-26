@@ -2,8 +2,7 @@
 {% load static %}
 {% block unic_style %}{% static '/' %}css/index.css{% endblock %}
 {% block title %}Dados{% endblock %}
-
-{% block subnav %}
+{% block main %}
 {% if user.auth %}
 <div class="subnav">
     <a href="{% url 'sair' %}" class="subnavLink">Logout</a>
@@ -17,16 +16,12 @@
     {% endif %}
 </div>
 {% endif %}
-{% endblock %}
 
-{% block main %}
-
-<div class="container moveTop80">
     {{ resp }}
     <form action="/pagina-processa-dados-do-form" method="post">
-			<div class="section-title text-center center">  <!--Tudo que for classe menor não pode apacerer se o checkbox souMenor for false-->
+		<div class="container">
+			<div class="bloco1">  <!--Tudo que for classe menor não pode apacerer se o checkbox souMenor for false-->
 				<h2>TERMO DE AUTORIZAÇÃO PARA MICROPIGMENTAÇÃO</h2>
-				<hr>
 				<input type="checkbox" name="souMenor" id="souMenor"/><label for="souMenor">Sou menor de 18 anos</label><br>
 				<p class="maior">Eu, abaixo especificado, declaro que estou em perfeitas
 					condições físicas e mentais, pelo presente
@@ -89,16 +84,6 @@
 				</div>
 
 				<div class="bloco3 bloco-form">
-					<label for="bairroResponsavel">Bairro:</label>
-					<input type="text" id="bairroResponsavel" name="bairroResponsavel" />
-				</div>
-
-				<div class="bloco3 bloco-form">
-					<label for="responsavel">Cidade/Estado:</label>
-					<input type="text" id="cidadeResponsavel" name="cidadeResponsavel" />
-				</div>
-
-				<div class="bloco3 bloco-form">
 					<label for="cepRespon">Cep:</label>
 					<input type="text" id="cepRespon" name="cepRespon" />
 				</div>
@@ -130,391 +115,297 @@
 
 				<p>Sem mais, Firmo Verdade.</p>
 			</div>
+		</div>
 
-			<div class="section-title text-center center">
+        <input type="checkbox" name="acidentesGraves" id="acidentesGraves"/><label for="acidentesGraves">Já teve algum acidente?</label><br>
+			<div class="bloco1">
 				<h2>Registro de Acidentes</h2>
-				<hr>
-
-				<div class="bloco1 bloco-form">
-					<label for="nomeAci">Nome:</label>
-					<input type="text" id="nomeAci" name="nomeAci" />
-				</div>
-
-				<div class="bloco4 bloco-form">
-					<label for="rgAci">Rg:</label>
-					<input type="text" id="rgAci" name="rgAci" />
-				</div>
-
-				<div class="bloco4 bloco-form">
-					<label for="idadeAci">Idade:</label>
-					<input type="text" id="idadeAci" name="idadeAci" />
-				</div>
-
-				<div class="bloco4 bloco-form">
-					<label for="sexoAci">Sexo:</label>
-					<input type="text" id="sexoAci" name="sexoAci" />
-				</div>
-				<div class="bloco4 bloco-form">
-					<label for="EstadoCivilAci">Estado Civil:</label>
-					<input type="text" id="EstadoCivilAci" name="EstadoCivilAci" />
-				</div>
-				<div class="bloco1 bloco-form">
-					<label for="CargoAci">Cargo:</label>
-					<input type="text" id="CargoAci" name="CargoAci" />
-				</div>
-				<div class="bloco1 bloco-form">
-					<label for="FuncaoAci">Função Exercida:</label>
-					<input type="text" id="FuncaoAci" name="FuncaoAci" />
-				</div>
-
-				<table style="width:100%">
-  					<tr>
-    					<th>Categoria Funcional</th>
-  					</tr>
-    				    <td>
-    				        <input type="checkbox" id="tatuadorCategoriaFuncional" name="tatuadorCategoriaFuncional"/><label for="tatuadorCategoriaFuncional">Micropigmentador(a)</label><br>
-					        <input type="checkbox" id="clienteCategoriaFuncional" name="clienteCategoriaFuncional"><label for="clienteCategoriaFuncional">Cliente</label><br>
-					        <input type="checkbox" id="prestadorCategoriaFuncional" name="prestadorCategoriaFuncional"><label for="prestadorCategoriaFuncional">Prestador</label><br>
-					    </td>
-  					</tr>
-
-				</table>
-
-			</div>
-
-			<div class="section-title text-center center">
-
-				<h4>II - IDENTIFICAÇÃO DA EMPRESA</h4>
-				<hr>
-
-				<div class="bloco1 bloco-form">
-					<label for="empresaIdent">Empresa:</label>
-					<input type="text" id="empresaIdent" name="empresaIdent" />
-				</div>
-
-				<div class="bloco1 bloco-form">
-					<label for="municipioIdent">Municipio:</label>
-					<input type="text" id="municipioIdent" name="municipioIdent" />
-				</div>
-
-				<div class="bloco1 bloco-form">
-					<label for="telefoneIdent">Telefone:</label>
-					<input type="text" id="telefoneIdent" name="telefoneIdent" />
-				</div>
-
-				<h4>III - INFORMAÇÃO SOBRE O ACIDENTE</h4>
-
-				<div class="bloco3 bloco-form">
-					<label for="dataAci">Data do Acidente:</label>
+				<div>
+        			<div class="bloco3 bloco-form">
+			    	<label for="dataAci">Data do Acidente:</label>
 					<input type="date" id="dataAci" name="dataAci" />
 				</div>
-
-				<div class="bloco3 bloco-form">
-					<label for="horaAci">Hora:</label>
-					<input type="text" id="horaAci" name="horaAci" />
-				</div>
-
-				<div class="bloco3 bloco-form">
+				<div>
+				    <div class="bloco3 bloco-form">
 					<label for="localAci">Local do Acidente:</label>
 					<input type="text" id="localAci" name="localAci" />
 				</div>
-
-				<div class="bloco1 bloco-form">
-					<label for="numeroHoraAci">ºNumero de horas trabalhada até o acidente:</label>
-					<input type="text" id="numeroHoraAci" name="numeroHoraAci" />
-				</div>
-
-				<table style="width:100%">
-    				<td>
-    					<input type="checkbox" id="comAfastamento" name="comAfastamento"><label for="comAfastamento">1. Com afastamento</label><br>
-						<input type="checkbox" id="comLesao" name="comLesao"><label for="comLesao">2. Com lesão</label><br>
-					</td>
-					<td>
-    					<input type="checkbox" id="semAfastamento" name="semAfastamento"><label for="semAfastamento">1. Sem afastamento</label><br>
-						<input type="checkbox" id="semLesao" name="semLesao"><label for="semLesao">2. Sem lesão</label><br>
-					</td>
-
-					<td>
-						<input type="checkbox" id="alergica" name="alergica"><label for="alergica">3. Alérgica</label><br>
-					</td>
-
-				</table>
-
-				<div class="bloco1 bloco-form">
-					<label for="diasAci">Dias do afastamento:</label>
-					<input type="text" id="diasAci" name="diasAci" />
-				</div>
-
-				<div class="bloco1 bloco-form">
-					<label for="parteCorpoAci">Partes do corpo atingida:</label>
-					<input type="text" id="parteCorpoAci" name="parteCorpoAci" />
-				</div>
-
-				<div class="bloco1 bloco-form">
-					<label for="caudadorAci">Agente causador:</label>
-					<input type="text" id="caudadorAci" name="caudadorAci" />
-				</div>
-
-				<h4>IV - TIPO DE ACIDENTE/ REAÇÃO ALÉRGICA</h4>
-
-				<table style="width:100%">
-				    <td>
-    				    <input type="checkbox" id="acidenteTipico" name="acidenteTipico"><label for="acidenteTipico">1. Tipico (No trabalho)</label><br>
-    				    <input type="checkbox" id="acidenteTrajeto" name="acidenteTrajeto"><label for="acidenteTrajeto">2. Trajeto (Deslocamento: Trabalho p/ casa ou casa p/ trabalho</label><br>
-    				    <input type="checkbox" id="acidenteDoencaProfissional" name="acidenteDoencaProfissional"><label for="acidenteDoencaProfissional">3. Doença Profissional / Doença Alérgica do Cliente</label><br>
-    				</td>
-				</table>
-
-				<div class="section-title text-center center">
-  					<h4>V - DESCRIÇÃO DO ACIDENTE</h4>
+					<input type="checkbox" id="comLesao" name="comLesao"><label for="comLesao">Com lesão</label><br>
+					<input type="checkbox" id="alergica" name="alergica"><label for="alergica">Alérgica</label><br>
+				<div class="bloco1">
+  					<h4>DESCRIÇÃO DO ACIDENTE</h4>
   					<textarea class="bloco1" name="descricaoAcidente" id="descricaoAcidente"></textarea>
 				</div>
-
-				<div class="section-title text-center center">
-  					<h4>VI - PROCESSO DE CONDUTA</h4>
-  					<textarea class="bloco1" name="processoConduta" id="processoConduta"></textarea>
-				</div>
-
-				</br>
-				</br>
-
-				<div class="bloco1 bloco-form">
-					<label for="responAci">Resposavél:</label>
-					<input type="text" id="responAci" name="responAci" />
-				</div>
-
 			</div>
+			<div class="bloco1">
+				<P>
+				 <h2>FICHA DE ANAMNESE</h2>
+			    </P>
 
-
-			<div class="section-title text-center center">
-			    <h2>FICHA DE ANAMNESE</h2>
-			    <hr>
-
-			    <div class="bloco2 bloco-form">
+			    <div>
+					<div class="bloco2 bloco-form">
 					<label for="nomeAnam">Nome:</label>
 					<input type="text" id="nomeAnam" name="nomeAnam" />
 				</div>
+    			<select>
+    			    <option><--SELECIONE--></option>
+                    <option name="genero" value="homem">Homem</option>
+                    <option name="genero" value="mulher">Mulher</option>
+                    <option name="genero" value="outro">Outro</option>
+                </select>
 
-				<div class="bloco2 bloco-form">
-					<label for="dataAnam">Dat.Nasc:</label>
-					<input type="date" id="dataAnam" name="dataAnam" />
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="dataAnam">Dat.Nasc:</label>
+						<input type="date" id="dataAnam" name="dataAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="RGAnam">RG:</label>
-					<input type="text" id="RGAnam" name="RGAnam" />
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="RGAnam">RG:</label>
+						<input type="text" id="RGAnam" name="RGAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="cpfAnam">CPF:</label>
-					<input type="text" id="cpfAnam" name="cpfAnam" />
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="cpfAnam">CPF:</label>
+						<input type="text" id="cpfAnam" name="cpfAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="naturaAnam">Naturalidade:</label>
-					<input type="text" id="naturaAnam" name="naturaAnam" />
+				<div>
+						<div class="bloco1 bloco-form">
+						<label for="endAnam">Endereço:</label>
+						<input type="text" id="endAnam" name="endAnam" />
 				</div>
 
-				<div class="bloco1 bloco-form">
-					<label for="endAnam">Endereço:</label>
-					<input type="text" id="endAnam" name="endAnam" />
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="foneAnam">Fone(Res):</label>
+						<input type="text" id="foneAnam" name="foneAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="foneAnam">Fone(Res):</label>
-					<input type="text" id="foneAnam" name="foneAnam" />
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="celAnam">Cel:</label>
+						<input type="text" id="celAnam" name="celAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="celAnam">Cel:</label>
-					<input type="text" id="celAnam" name="celAnam" />
+				<div>
+						<div class="bloco3 bloco-form">
+						<label for="emailAnam">E-mail:</label>
+						<input type="text" id="emailAnam" name="emailAnam" />
 				</div>
 
-				<div class="bloco3 bloco-form">
-					<label for="emailAnam">E-mail:</label>
-					<input type="text" id="emailAnam" name="emailAnam" />
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="pesoAnam">Peso:</label>
+						<input type="text" id="pesoAnam" name="pesoAnam" />
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<label for="pesoAnam">Peso:</label>
-					<input type="text" id="pesoAnam" name="pesoAnam" />
-				</div>
-
-                <div class="bloco2 bloco-form">
-					<label for="estaturaAnam">Estatura:</label>
-					<input type="text" id="estaturaAnam" name="estaturaAnam" />
+				<div>
+						<div class="bloco2 bloco-form">
+						<label for="alturaAnam">Altura:</label>
+						<input type="text" id="alturaAnam" name="alturaAnam" />
 				</div>
 
 				<h4>Informações do Procedimento</h4>
-
-				<div class="bloco1 bloco-form">
-					<label for="prodAnam">Procedimento a ser realizado:</label>
-					<input type="text" id="prodAnam" name="prodAnam" />
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="aspirina">Aspirina 5 dias</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="aspirina" id="aspirina">
+							</div>
+						</div>
 				</div>
 
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Herpes">Herpes</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Herpes" id="Herpes">
+							</div>
 
-				<div class="bloco1 bloco-form">
-					<label for="profAnam">Profissional:</label>
-					<input type="text" id="profAnam" name="profAnam" />
+						</div>
 				</div>
 
-				<div class="bloco1 bloco-form">
-						<label for="tecPigAnam">Tecnica / Pigmento:</label>
-						<input type="text" id="tecPigAnam" name="tecPigAnam" />
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Hipertensao">Hipertensão</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Hipertensao" id="Hipertensao">
+							</div>
+						</div>
 				</div>
 
-			    <div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="aspirina">Aspirina 5 dias</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="aspirina" id="aspirina">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Hemofilia">Hemofilía</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Hemofilia" id="Hemofilia">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Herpes">Herpes</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Herpes" id="Herpes">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Tonturas">Tonturas</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Tonturas" id="Tonturas">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Hipertensao">Hipertensão</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Hipertensao" id="Hipertensao">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Cancer">Câncer</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Cancer" id="Cancer">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Hemofilia">Hemofilía</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Hemofilia" id="Hemofilia">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Cardiopatia">Cardiopatia</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Cardiopatia" id="Cardiopatia">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Tonturas">Tonturas</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Tonturas" id="Tonturas">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="HIV">HIV</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="HIV" id="HIV">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Cancer">Câncer</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Cancer" id="Cancer">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Menstruada">Menstruada</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Menstruada" id="Menstruada">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Cardiopatia">Cardiopatia</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Cardiopatia" id="Cardiopatia">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Gravida">Grávida</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Gravida" id="Gravida">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="HIV">HIV</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="HIV" id="HIV">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Amamentando">Amamentando</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Amamentando" id="Amamentando">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Menstruada">Menstruada</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Menstruada" id="Menstruada">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Asma">Asma</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Asma" id="Asma">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Gravida">Grávida</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Gravida" id="Gravida">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Colesterol">Colesterol</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Colesterol" id="Colesterol">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Amamentando">Amamentando</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Amamentando" id="Amamentando">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Epilepsia">Epilepsia</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Epilepsia" id="Epilepsia">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Asma">Asma</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Asma" id="Asma">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="ProblemaRenal">Problema Renal</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="ProblemaRenal" id="ProblemaRenal">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Colesterol">Colesterol</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Colesterol" id="Colesterol">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Diabetes">Diabetes</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Diabetes" id="Diabetes">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Epilepsia">Epilepsia</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Epilepsia" id="Epilepsia">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="MarcaPasso">Marca Passo</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="MarcaPasso" id="MarcaPasso">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="ProblemaRenal">Problema Renal</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="ProblemaRenal" id="ProblemaRenal">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Lupus">Lúpus</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Lupus" id="Lupus">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Diabetes">Diabetes</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Diabetes" id="Diabetes">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Circulatorio">Circulatório</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Circulatorio" id="Circulatorio">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="MarcaPasso">Marca Passo</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="MarcaPasso" id="MarcaPasso">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Glaucoma">Glaucoma</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Glaucoma" id="Glaucoma">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Lupus">Lúpus</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Lupus" id="Lupus">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Respiratorio">Respiratório</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Respiratorio" id="Respiratorio">
+							</div>
+						</div>
 				</div>
 
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Circulatorio">Circulatório</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Circulatorio" id="Circulatorio">
-					</div>
-				</div>
-
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Glaucoma">Glaucoma</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Glaucoma" id="Glaucoma">
-					</div>
-				</div>
-
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Respiratorio">Respiratório</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Respiratorio" id="Respiratorio">
-					</div>
-				</div>
-
-				<div class="bloco2 bloco-form">
-					<div class="bloco2 bloco-form">
-						<label for="Psoriase">Psoríase</label>
-						<input style="width: 15px; height: 15px;" type="checkbox" name="Psoriase" id="Psoriase">
-					</div>
+				<div>
+						<div class="bloco2 bloco-form">
+							<div class="bloco2 bloco-form">
+								<label for="Psoriase">Psoríase</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="Psoriase" id="Psoriase">
+							</div>
+						</div>
 				</div>
 
 				<div>
@@ -547,8 +438,8 @@
 				<div>
 						<div class="bloco2 bloco-form">
 							<div class="bloco2 bloco-form">
-								<label for="GripeHN1">Gripe HN1</label>
-								<input style="width: 15px; height: 15px;" type="checkbox" name="GripeHN1" id="GripeHN1">
+								<label for="GripeH1N1">Gripe H1N1</label>
+								<input style="width: 15px; height: 15px;" type="checkbox" name="GripeH1N1" id="GripeH1N1">
 							</div>
 						</div>
 				</div>
@@ -556,36 +447,17 @@
 
 				<div>
 						<div class="bloco1 bloco-form">
-						    <label for="alergiaAnam">Possui Alergia ? Quais ?:</label>
-						    <input type="text" id="alergiaAnam" name="alergiaAnam" />
-						</div>
+						<label for="alergiaAnam">Possui Alergia ? Quais ?:</label>
+						<input type="text" id="alergiaAnam" name="alergiaAnam" /></div>
 				</div>
 
 				<div>
 						<div class="bloco3 bloco-form">
-						    <label for="tatuagemAnam">Possui Tatuagem ?</label>
-						    <input type="text" id="tatuagemAnam" name="tatuagemAnam" />
-						</div>
+						<label for="tatuagemAnam">Possui Tatuagem ?</label>
+						<input type="text" id="tatuagemAnam" name="tatuagemAnam" /></div>
 				</div>
-
-				<div>
-						<div class="bloco3 bloco-form">
-						    <label for="localCorpoAnam">Local do corpo ?</label>
-						    <input type="text" id="localCorpoAnam" name="localCorpoAnam" />
-						</div>
-				</div>
-
-				<div>
-						<div class="bloco3 bloco-form">
-						    <label for="nomeTatuadorAnam">Nome do Tatuador ou Empresa:</label>
-						    <input type="text" id="nomeTatuadorAnam" name="nomeTatuadorAnam" />
-						</div>
-				</div>
-
 			</div>
-
-
-			<div class="section-title text-center center">
+			<div class="bloco1">
 
 				<p>1- Declaro que são verdadeiras as informações acima e independente das minhas
 				informações serem positivas eu negativas, confirmo o meu dejeso de executar o
@@ -614,10 +486,9 @@
 			</div>
 
 
-			<div class="section-title text-center center">
+			<div class="bloco1">
 
 				<h2>CUIDADOS PÓS-PROCEDIMENTOS</h2>
-				<hr>
 
 				<p>1. Não molhar por 48 horas no caso de sobrancelhas.</p>
 
@@ -649,10 +520,9 @@
 			</div>
 
 
-			<div class="section-title text-center center">
+			<div class="bloco1">
 
 				<h2> COLORIMETRIA BÁSICA</h2>
-				<hr>
 
 				<p>já conhecemos um pouco mais afundo sobre a colorimetria, e nem tudo
 				conseguimos memorizar não é mesmo ?
@@ -707,6 +577,7 @@
 
 
 			</div>
+		</div>
+
 	</form>
-</div>
 {% endblock %}

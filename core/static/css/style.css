@@ -961,12 +961,17 @@ input:checked + .slider:before {
 	display: inline-grid;
 	width:75%;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 280px 280px;
-	grid-auto-rows: 280px;
+    grid-template-rows: 320px 320px;
+	grid-auto-rows: 320px;
 	justify-content: center;
 	justify-items: center;
 	align-content: center;
 	margin-bottom: 15px;
+}
+
+.gridContainer .addImgRound {
+    width:30px;
+    height:30px;
 }
 
 .gridFoto {
@@ -979,7 +984,7 @@ input:checked + .slider:before {
 	width:23%;
 	height: auto;
 	position: sticky;
-	top: 72px;
+	top: 100px;
 	z-index: 9990;
 	margin-left:10px;
 	border: 1px solid #121d1f;
@@ -996,6 +1001,63 @@ input:checked + .slider:before {
 .whiteText {
 	color: #fff;
 }
+
+.seletorServico {
+    display: none;
+    width:900px;
+    position: absolute;
+    top: 90px;
+    left: 300px;
+    margin: 0;
+    padding:20px;
+    z-index: 9999;
+    background-color: #121d1f;
+
+}
+
+.containerContratarServico {
+    display: flex;
+    flex-flow: column;
+    width:90%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.containerFoto {
+    width:100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.gridOrcamento {
+    display: grid;
+    width: 60%;
+    margin-top: 10px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3,35px);
+}
+
+.gridOrcamento select, input {
+    height: 30px;
+    width: 150px;
+    margin-right: 5px;
+}
+
+.gridOrcamento label {
+    font-size:1.2em;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.gridOrcamento .addImgRound {
+    width:30px;
+    height:30px;
+    margin-left: 30px;
+}
+
 
 /* Promocoes.css */
 .gridPromos {

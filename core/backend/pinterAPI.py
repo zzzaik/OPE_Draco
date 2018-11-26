@@ -65,7 +65,7 @@ def alocarPins():
         imgId = pin.idimagem
         urlImg = pin.urlimagem
         styleId = str(pin.idestilo)
-        pins.append({'imgId':imgId, 'url':urlImg, 'estiloId':styleId})
+        pins.append({'imageId':imgId, 'url':urlImg, 'estiloId':styleId})
     return pins
 
 
